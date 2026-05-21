@@ -1,7 +1,8 @@
 # Maple Bear Bento Gonçalves
 
-> Escola bilíngue canadense em Bento Gonçalves, RS, Brasil. Abertura em 2027.
-> Atende crianças de 18 meses a 7 anos (Toddler, Pre-K, Kindergarten, Year 1).
+> Escola bilíngue canadense em Bento Gonçalves, RS, Brasil. Em funcionamento desde 2025.
+> Atende hoje do Toddler ao Kindergarten (18 meses a ~5 anos).
+> Em 2027, amplia para Year 1 (1º ano do Ensino Fundamental).
 
 ## Identidade
 
@@ -13,15 +14,23 @@
 - **Estado:** Rio Grande do Sul (RS)
 - **País:** Brasil
 - **Endereço:** [a confirmar — Bento Gonçalves, RS]
-- **Abertura prevista:** 2027
+- **Em Bento desde:** 2025
+- **Ampliação Year 1 (Ensino Fundamental):** 2027
 
-## Faixas etárias atendidas (2027)
+## Faixas etárias
+
+**Hoje (desde 2025):**
 
 | Estágio          | Idade            |
 |------------------|------------------|
 | Toddler          | 18 meses — 3 anos|
 | Pre-Kindergarten | 3 — 4 anos       |
 | Kindergarten     | 5 anos           |
+
+**A partir de 2027:**
+
+| Estágio          | Idade            |
+|------------------|------------------|
 | Year 1           | 6 — 7 anos       |
 
 Year 1 corresponde ao 1º ano do Ensino Fundamental brasileiro,

@@ -1,6 +1,6 @@
 # maplebearbg.com.br
 
-Site institucional da **Maple Bear Bento Gonçalves** — escola bilíngue canadense, abertura 2027.
+Site institucional da **Maple Bear Bento Gonçalves** — escola bilíngue canadense, em Bento desde 2025; Year 1 (Ensino Fundamental) chegando em 2027.
 
 Site estático puro (HTML + CSS + JS vanilla). Hospedado em **GitHub Pages**, DNS gerenciado pelo **Cloudflare**.
 

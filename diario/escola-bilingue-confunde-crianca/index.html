@@ -80,10 +80,11 @@
     border-bottom: 1px solid var(--paper-shade);
   }
   .brand { display: flex; align-items: center; gap: 0.7rem; color: var(--ink); }
-  .brand-mark { width: 38px; height: 38px; filter: drop-shadow(0 4px 8px rgba(200,16,46,0.18)); }
+  .brand-mark { width: auto; height: 38px; display: block; image-rendering: -webkit-optimize-contrast; filter: drop-shadow(0 4px 8px rgba(200,16,46,0.18)); }
+  .brand-divider { display: inline-block; width: 1px; height: 28px; background: var(--paper-shade); margin: 0 .2rem; }
   .brand-text { display: flex; flex-direction: column; line-height: 1.05; font-family: var(--font-display); }
-  .brand-line-1 { font-weight: 600; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--maple); }
-  .brand-line-2 { font-weight: 500; font-size: 1.15rem; font-style: italic; color: var(--ink); }
+  .brand-tagline { font-weight: 500; font-size: 1.05rem; font-style: italic; color: var(--ink); letter-spacing: -.01em; }
+  @media (max-width: 480px) { .brand-divider { display: none; } .brand-tagline { font-size: .95rem; } }
   .nav-links { display: flex; align-items: center; gap: 1.4rem; }
   .nav-links a { color: var(--ink-soft); font-family: var(--font-body); font-size: .95rem; font-weight: 500; }
   .nav-links a:hover { color: var(--maple); }
@@ -536,19 +537,16 @@
 
 <header class="site-nav">
   <a href="/" class="brand" aria-label="Maple Bear Bento Gonçalves">
-    <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
-      <circle cx="32" cy="32" r="30" fill="#C8102E"/>
-      <path d="M32 14 L34 22 L42 20 L38 27 L46 30 L38 33 L42 40 L34 38 L32 46 L30 38 L22 40 L26 33 L18 30 L26 27 L22 20 L30 22 Z" fill="#FBF7F0"/>
-    </svg>
+    <img class="brand-mark" src="/assets/logo-maple-bear.png" alt="Maple Bear Canadian School" width="58" height="41">
+    <span class="brand-divider" aria-hidden="true"></span>
     <span class="brand-text">
-      <span class="brand-line-1">Maple Bear</span>
-      <span class="brand-line-2">Bento Gonçalves</span>
+      <span class="brand-tagline">Bento Gonçalves</span>
     </span>
   </a>
   <nav class="nav-links">
     <a href="/#jornada">A Jornada</a>
     <a href="/diario/">Diário</a>
-    <a href="/#abertura">Abertura 2027</a>
+    <a href="/#abertura">Year 1 em 2027</a>
     <a href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Vim%20do%20artigo%20%22Escola%20Bil%C3%ADngue%20Confunde%20a%20Crian%C3%A7a%3F%20O%20Que%20a%20Neuroci%C3%AAncia%20Realmente%20Diz%22%20e%20gostaria%20de%20agendar%20uma%20visita." class="nav-cta" target="_blank" rel="noopener">Agendar visita</a>
   </nav>
 </header>
@@ -603,9 +601,9 @@
 
   <div class="cta-box">
     <h3>Conheça a Maple Bear <em>Bento Gonçalves</em>.</h3>
-    <p>Abrimos em 2027. Estamos recebendo famílias para conhecer o projeto pedagógico e reservar pré-matrícula.</p>
+    <p>Em Bento desde 2025 (Toddler ao Kindergarten); em 2027 abrimos o Year 1. Venha conhecer a escola e o projeto pedagógico pessoalmente.</p>
     <a href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Li%20o%20artigo%20%22Escola%20Bil%C3%ADngue%20Confunde%20a%20Crian%C3%A7a%3F%20O%20Que%20a%20Neuroci%C3%AAncia%20Realmente%20Diz%22%20e%20gostaria%20de%20agendar%20uma%20visita." target="_blank" rel="noopener">📅 Agendar minha visita pelo WhatsApp</a>
-    <p class="urgency">Vagas limitadas para a turma inaugural 2027</p>
+    <p class="urgency">Vagas limitadas · pré-matrícula 2027 (Year 1) aberta</p>
   </div>
 
   <div class="share-bar">
@@ -645,7 +643,7 @@
 
 <footer class="site-footer">
   <div class="footer-inner">
-    <p><strong>Maple Bear Bento Gonçalves</strong> — Escola Bilíngue Canadense · Abertura prevista 2027</p>
+    <p><strong>Maple Bear Bento Gonçalves</strong> — Escola Bilíngue Canadense · Em Bento desde 2025 · Year 1 em 2027</p>
     <p>WhatsApp <a href="https://wa.me/5554999315480" target="_blank" rel="noopener">+55 54 9 9931-5480</a> · <a href="mailto:contato@maplebearbg.com.br">contato@maplebearbg.com.br</a></p>
     <p class="footer-baseline">© 2026 Maple Bear Bento Gonçalves · Bento Gonçalves, RS, Brasil</p>
   </div>
