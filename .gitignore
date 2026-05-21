@@ -1,0 +1,21 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependencies (não usamos node, mas se algum dia)
+node_modules/
+
+# Local
+.env
+.env.local
+
+# Local dev artifacts
+preview-*.png
+screenshot.mjs
