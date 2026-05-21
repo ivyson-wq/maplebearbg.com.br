@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#C8102E">
+
+<title>Diário · Maple Bear Bento Gonçalves</title>
+<meta name="description" content="Textos para famílias que estão escolhendo o caminho do bilinguismo. Sobre idade certa, metodologia canadense, desenvolvimento socioemocional e mais.">
+<link rel="canonical" href="https://maplebearbg.com.br/diario/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Maple Bear Bento Gonçalves">
+<meta property="og:title" content="Diário · Maple Bear Bento Gonçalves">
+<meta property="og:description" content="Textos para famílias que estão escolhendo o caminho do bilinguismo.">
+<meta property="og:url" content="https://maplebearbg.com.br/diario/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Spectral:ital,wght@0,200..800;1,200..800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+<style>
+  :root {
+    --paper: #FBF7F0;
+    --paper-deep: #F4ECDF;
+    --paper-shade: #EBE0CC;
+    --ink: #2A2522;
+    --ink-soft: #5C544D;
+    --ink-faint: #8A7F75;
+    --maple: #C8102E;
+    --maple-deep: #8B0A1F;
+    --maple-soft: #E84A5F;
+    --honey: #C9923D;
+    --blush: #F4DBCB;
+    --shadow-soft: 0 14px 30px -18px rgba(42, 37, 34, 0.18);
+    --shadow: 0 30px 60px -25px rgba(42, 37, 34, 0.25);
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Spectral', Georgia, serif;
+    --font-script: 'Caveat', cursive;
+  }
+  *,*::before,*::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--font-body); font-size: 1.1rem; line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--maple); text-decoration: none; transition: color .2s; }
+  ::selection { background: var(--maple); color: var(--paper); }
+
+  .site-nav {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem; padding: 1.1rem clamp(1.25rem, 4vw, 2.5rem);
+    background: rgba(251,247,240,0.92);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--paper-shade);
+  }
+  .brand { display: flex; align-items: center; gap: 0.7rem; color: var(--ink); }
+  .brand-mark { width: 38px; height: 38px; filter: drop-shadow(0 4px 8px rgba(200,16,46,0.18)); }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.05; font-family: var(--font-display); }
+  .brand-line-1 { font-weight: 600; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--maple); }
+  .brand-line-2 { font-weight: 500; font-size: 1.15rem; font-style: italic; color: var(--ink); }
+  .nav-links { display: flex; align-items: center; gap: 1.4rem; }
+  .nav-links a { color: var(--ink-soft); font-family: var(--font-body); font-size: .95rem; font-weight: 500; }
+  .nav-links a:hover { color: var(--maple); }
+  .nav-cta { background: var(--maple); color: var(--paper) !important; padding: .6rem 1.1rem; border-radius: 999px; transition: background .2s, transform .2s; }
+  .nav-cta:hover { background: var(--maple-deep); transform: translateY(-1px); }
+  @media (max-width: 640px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+  .hero {
+    padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 4vw, 2.5rem) clamp(2rem, 5vw, 4rem);
+    text-align: center;
+    background: linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(200,16,46,0.06) 0%, transparent 70%);
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .6rem;
+    margin: 0 0 1.5rem;
+    font-family: var(--font-body);
+    font-size: .85rem; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .eyebrow-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--maple);
+    box-shadow: 0 0 0 4px rgba(200,16,46,0.18);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 50;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1; letter-spacing: -.025em;
+    margin: 0 0 1.5rem;
+    font-weight: 400;
+  }
+  h1 em {
+    font-style: italic; color: var(--maple);
+    font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 100;
+  }
+  .lead {
+    max-width: 56ch;
+    margin: 0 auto;
+    font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+    color: var(--ink-soft);
+    font-weight: 300;
+    line-height: 1.55;
+  }
+  .lead em { color: var(--maple); font-style: italic; font-weight: 400; }
+  .caveat {
+    font-family: var(--font-script);
+    font-size: 1.7rem;
+    color: var(--maple);
+    margin-top: 2rem;
+    transform: rotate(-2deg);
+    display: inline-block;
+  }
+
+  .grid {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 2.5rem);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .card {
+    background: var(--paper);
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid var(--paper-shade);
+    transition: box-shadow .3s, transform .3s;
+    display: flex; flex-direction: column;
+    color: inherit;
+  }
+  .card:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+  .card-cover {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--paper-deep);
+    position: relative;
+  }
+  .card-cover img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .5s;
+  }
+  .card:hover .card-cover img { transform: scale(1.04); }
+  .card-tag {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    background: rgba(251,247,240,.95);
+    color: var(--maple);
+    font-family: var(--font-body);
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .35rem .8rem;
+    border-radius: 999px;
+    backdrop-filter: blur(8px);
+  }
+  .card-body {
+    padding: 1.75rem;
+    display: flex; flex-direction: column; flex: 1;
+  }
+  .card-body h2 {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "wght" 500;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    margin: 0 0 .8rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .card-body p {
+    color: var(--ink-soft);
+    font-size: .98rem;
+    line-height: 1.55;
+    margin: 0 0 1.25rem;
+    font-weight: 300;
+    flex: 1;
+  }
+  .card-meta {
+    display: flex; gap: .85rem;
+    color: var(--ink-faint);
+    font-size: .82rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--paper-shade);
+    font-family: var(--font-body);
+  }
+  .card-meta .read-more {
+    margin-left: auto;
+    color: var(--maple);
+    font-weight: 500;
+  }
+  .card:hover .read-more { color: var(--maple-deep); }
+
+  .outro {
+    background: linear-gradient(180deg, var(--paper-deep) 0%, var(--blush) 100%);
+    padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 4vw, 2.5rem);
+    text-align: center;
+  }
+  .outro h3 {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 60;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    margin: 0 0 1rem;
+    font-weight: 400;
+    color: var(--ink);
+    max-width: 18ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .outro h3 em { color: var(--maple); font-style: italic; }
+  .outro p {
+    max-width: 50ch;
+    margin: 0 auto 2rem;
+    color: var(--ink-soft);
+    font-size: 1.1rem;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: .55rem;
+    padding: 1rem 1.8rem;
+    background: var(--maple);
+    color: var(--paper);
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 12px 26px -10px rgba(200,16,46,.55);
+    transition: transform .2s, background .2s;
+  }
+  .btn:hover { background: var(--maple-deep); color: var(--paper); transform: translateY(-2px); }
+
+  .wa-float {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 60;
+    width: 58px; height: 58px;
+    border-radius: 50%; background: #25D366; color: #fff;
+    display: grid; place-items: center;
+    box-shadow: 0 10px 30px -8px rgba(37,211,102,.55), 0 4px 12px -2px rgba(0,0,0,.18);
+    transition: transform .2s;
+  }
+  .wa-float:hover { color: #fff; transform: scale(1.08); }
+
+  .site-footer {
+    background: var(--ink); color: var(--paper);
+    padding: clamp(2rem, 4vw, 3rem) clamp(1.25rem, 4vw, 2.5rem);
+    text-align: center;
+  }
+  .site-footer p { margin: .25rem 0; font-size: .9rem; color: rgba(251,247,240,.7); }
+  .site-footer a { color: var(--maple-soft); }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <a href="/" class="brand" aria-label="Maple Bear Bento Gonçalves">
+    <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r="30" fill="#C8102E"/>
+      <path d="M32 14 L34 22 L42 20 L38 27 L46 30 L38 33 L42 40 L34 38 L32 46 L30 38 L22 40 L26 33 L18 30 L26 27 L22 20 L30 22 Z" fill="#FBF7F0"/>
+    </svg>
+    <span class="brand-text">
+      <span class="brand-line-1">Maple Bear</span>
+      <span class="brand-line-2">Bento Gonçalves</span>
+    </span>
+  </a>
+  <nav class="nav-links">
+    <a href="/#jornada">A Jornada</a>
+    <a href="/diario/">Diário</a>
+    <a href="/#abertura">Abertura 2027</a>
+    <a href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20visita%20%C3%A0%20Maple%20Bear%20Bento%20Gon%C3%A7alves." class="nav-cta" target="_blank" rel="noopener">Agendar visita</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <p class="eyebrow"><span class="eyebrow-dot"></span> Diário · Conteúdo para famílias</p>
+  <h1>Conversas <em>sobre infância,</em><br>bilinguismo e <em>aprender.</em></h1>
+  <p class="lead">
+    Textos para famílias que estão escolhendo o caminho do bilinguismo.
+    Sobre idade certa, metodologia canadense, desenvolvimento socioemocional —
+    o que a neurociência diz e <em>o que vemos todos os dias na sala de aula.</em>
+  </p>
+  <p class="caveat">leitura para pais curiosos</p>
+</section>
+
+<main class="grid">
+
+  <a href="idade-certa-escola-bilingue/" class="card">
+    <div class="card-cover">
+      <span class="card-tag">01 · Decisão</span>
+      <img src="/assets/diario/idade-certa-escola-bilingue/cover.jpg" alt="Qual a idade certa pra começar escola bilíngue" loading="lazy">
+    </div>
+    <div class="card-body">
+      <h2>Qual a idade certa para colocar meu filho em escola bilíngue?</h2>
+      <p>Neurociência, desenvolvimento infantil e janelas de oportunidade — quando começar faz diferença, e por quê.</p>
+      <div class="card-meta">
+        <span>11 min de leitura</span>
+        <span class="read-more">Ler →</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="educacao-bilingue-beneficios-criancas/" class="card">
+    <div class="card-cover">
+      <span class="card-tag">02 · Por quê</span>
+      <img src="/assets/diario/educacao-bilingue-beneficios-criancas/cover.jpg" alt="Benefícios da educação bilíngue para crianças" loading="lazy">
+    </div>
+    <div class="card-body">
+      <h2>Educação bilíngue: os benefícios que vão muito além do idioma</h2>
+      <p>O que a literatura científica documenta sobre crianças bilíngues — função executiva, criatividade, empatia.</p>
+      <div class="card-meta">
+        <span>10 min de leitura</span>
+        <span class="read-more">Ler →</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="metodologia-canadense-maple-bear/" class="card">
+    <div class="card-cover">
+      <span class="card-tag">03 · Como</span>
+      <img src="/assets/diario/metodologia-canadense-maple-bear/cover.jpg" alt="Metodologia canadense Maple Bear" loading="lazy">
+    </div>
+    <div class="card-body">
+      <h2>Metodologia canadense Maple Bear: o que faz ela diferente</h2>
+      <p>Aprendizagem por investigação, avaliação por evidências e por que o Canadá lidera os rankings internacionais de educação.</p>
+      <div class="card-meta">
+        <span>12 min de leitura</span>
+        <span class="read-more">Ler →</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="desenvolvimento-socioemocional-bilingue/" class="card">
+    <div class="card-cover">
+      <span class="card-tag">04 · Além do idioma</span>
+      <img src="/assets/diario/desenvolvimento-socioemocional-bilingue/cover.jpg" alt="Desenvolvimento socioemocional bilíngue" loading="lazy">
+    </div>
+    <div class="card-body">
+      <h2>Desenvolvimento socioemocional bilíngue: como formar crianças mais completas</h2>
+      <p>Empatia, autorregulação, abertura cultural. Por que aprender duas línguas modifica também o jeito de se relacionar.</p>
+      <div class="card-meta">
+        <span>10 min de leitura</span>
+        <span class="read-more">Ler →</span>
+      </div>
+    </div>
+  </a>
+
+</main>
+
+<section class="outro">
+  <h3>Quer conversar <em>pessoalmente</em>?</h3>
+  <p>Estamos recebendo famílias para conhecer o projeto pedagógico da Maple Bear Bento Gonçalves antes da abertura em 2027.</p>
+  <a href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Estava%20lendo%20o%20Di%C3%A1rio%20e%20gostaria%20de%20agendar%20uma%20visita." class="btn" target="_blank" rel="noopener">
+    Agendar visita pelo WhatsApp
+  </a>
+</section>
+
+<a class="wa-float" href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Tenho%20interesse%20na%20Maple%20Bear%20Bento%20Gon%C3%A7alves." target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 3C9.4 3 4 8.4 4 15c0 2.4.7 4.7 2 6.7L4 29l7.5-2c1.9 1 4.1 1.6 6.5 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3zm5.6 15.5c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.7-1.7c-.2-.5-.4-.4-.6-.4h-.4c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.7 4.3 3.8.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3z"/></svg>
+</a>
+
+<footer class="site-footer">
+  <p><strong>Maple Bear Bento Gonçalves</strong> — Escola Bilíngue Canadense · Abertura 2027</p>
+  <p><a href="https://wa.me/5554999315480">WhatsApp +55 54 9 9931-5480</a> · <a href="mailto:contato@maplebearbg.com.br">contato@maplebearbg.com.br</a></p>
+  <p style="margin-top:1rem;font-size:.78rem;opacity:.5">© <span id="year">2026</span> · Bento Gonçalves, RS, Brasil</p>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
