@@ -7,7 +7,7 @@
 
 <title>Educação Bilíngue: 12 Benefícios Comprovados para Crianças e Por Que Começar Cedo | Maple Bear Bento Gonçalves</title>
 <meta name="description" content="Descubra os 12 benefícios comprovados da educação bilíngue para crianças. Saiba como a imersão precoce no inglês transforma o desenvolvimento cognitivo e social.">
-<link rel="canonical" href="https://maplebearcaxiasdosul.com.br/blog/educacao-bilingue-beneficios-criancas">
+<link rel="canonical" href="https://maplebearbg.com.br/diario/educacao-bilingue-beneficios-criancas/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 
 <meta property="og:type" content="article">
@@ -143,9 +143,21 @@
     overflow: hidden;
     box-shadow: var(--shadow-soft);
     aspect-ratio: 16 / 10;
-    background: var(--paper-deep);
+    background: linear-gradient(135deg, var(--blush) 0%, var(--maple-soft) 100%);
+    position: relative;
   }
   .cover-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cover-placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(251,247,240,.95);
+    font-family: var(--font-script);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    text-shadow: 0 4px 24px rgba(0,0,0,.25);
+    padding: 1.5rem;
+    text-align: center;
+    line-height: 1.1;
+  }
 
   /* Article body styles */
   article.main h2 {
@@ -312,8 +324,86 @@
     color: var(--paper);
   }
 
-  /* Lead form — hidden (no backend on BG yet) */
-  .lead-form { display: none; }
+  /* Lead form — abre WhatsApp BG (sem backend) */
+  .lead-form {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 22px;
+    padding: clamp(2rem, 5vw, 3rem);
+    margin: 3.5rem 0 1rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .lead-form::before {
+    content: ""; position: absolute;
+    top: -120px; right: -120px;
+    width: 380px; height: 380px;
+    background: radial-gradient(circle, rgba(200,16,46,.25), transparent 70%);
+    pointer-events: none;
+  }
+  .lead-form h3 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 60;
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    color: var(--paper);
+    margin: 0 0 .5rem;
+    font-weight: 400;
+    position: relative;
+  }
+  .lead-form > p {
+    color: rgba(251,247,240,.7);
+    font-size: 1rem;
+    margin: 0 0 1.5rem;
+    position: relative;
+  }
+  .lead-form form {
+    display: flex; gap: .6rem;
+    max-width: 460px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+  }
+  .lead-form input {
+    flex: 1; min-width: 180px;
+    padding: .9rem 1.1rem;
+    border: 1.5px solid rgba(251,247,240,.18);
+    border-radius: 999px;
+    background: rgba(251,247,240,.08);
+    color: var(--paper);
+    font-family: var(--font-body);
+    font-size: .98rem;
+    outline: none;
+    transition: border-color .2s, background .2s;
+  }
+  .lead-form input::placeholder { color: rgba(251,247,240,.45); }
+  .lead-form input:focus {
+    border-color: var(--maple-soft);
+    background: rgba(251,247,240,.12);
+  }
+  .lead-form button {
+    background: var(--maple);
+    color: var(--paper);
+    border: none;
+    padding: .9rem 1.6rem;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background .2s, transform .2s;
+    box-shadow: 0 10px 24px -10px rgba(200,16,46,.55);
+  }
+  .lead-form button:hover { background: var(--maple-deep); transform: translateY(-2px); }
+  .lead-form .trust {
+    color: rgba(251,247,240,.4);
+    font-size: .78rem;
+    margin: 1rem 0 0;
+    position: relative;
+  }
 
   /* Bottom CTA */
   .cta-box {
@@ -655,6 +745,17 @@
 
   <p>Se você deseja conhecer mais sobre como a metodologia canadense pode beneficiar o desenvolvimento do seu filho, a Maple Bear Bento Gonçalves está pronta para recebê-lo. Conheça os programas, converse com nossa equipe e veja de perto como a educação bilíngue transforma vidas todos os dias.</p>
 
+  <div class="lead-form" id="leadForm">
+    <h3>Quer receber conteúdo como esse?</h3>
+    <p>Deixe seu nome e WhatsApp — abrimos uma conversa direta com você sobre a Maple Bear Bento Gonçalves.</p>
+    <form id="leadFormEl" novalidate>
+      <input type="text" name="nome" placeholder="Seu nome" required minlength="2">
+      <input type="tel" name="telefone" placeholder="WhatsApp com DDD (ex: 54 9 9999-9999)" required>
+      <button type="submit">Falar pelo WhatsApp →</button>
+    </form>
+    <p class="trust">🔒 Não armazenamos nada. Abre direto no WhatsApp da escola.</p>
+  </div>
+
   <div class="cta-box">
     <h3>Conheça a Maple Bear <em>Bento Gonçalves</em>.</h3>
     <p>Abrimos em 2027. Estamos recebendo famílias para conhecer o projeto pedagógico e reservar pré-matrícula.</p>
@@ -678,15 +779,15 @@
         </div>
       </a>
       <a href="/diario/metodologia-canadense-maple-bear/" class="related-card">
-        <img src="/assets/diario/metodologia-canadense-maple-bear/cover.jpg" alt="" loading="lazy">
+        <div style="aspect-ratio:16/10;background:linear-gradient(135deg,var(--blush),var(--maple-soft));display:flex;align-items:center;justify-content:center;font-family:var(--font-script);font-size:1.3rem;color:#fff;">03 · Como</div>
         <div class="related-card-body">
           <h4>03 · Como</h4>
         </div>
       </a>
-      <a href="/diario/desenvolvimento-socioemocional-bilingue/" class="related-card">
-        <img src="/assets/diario/desenvolvimento-socioemocional-bilingue/cover.jpg" alt="" loading="lazy">
+      <a href="/diario/imersao-ingles-vs-aulas-ingles/" class="related-card">
+        <div style="aspect-ratio:16/10;background:linear-gradient(135deg,var(--blush),var(--maple-soft));display:flex;align-items:center;justify-content:center;font-family:var(--font-script);font-size:1.3rem;color:#fff;">04 · Diferença real</div>
         <div class="related-card-body">
-          <h4>04 · Além do idioma</h4>
+          <h4>04 · Diferença real</h4>
         </div>
       </a>
     </div>
@@ -704,6 +805,23 @@
     <p class="footer-baseline">© 2026 Maple Bear Bento Gonçalves · Bento Gonçalves, RS, Brasil</p>
   </div>
 </footer>
+
+<script>
+  // Lead form → abre WhatsApp BG com mensagem pré-preenchida (sem backend)
+  (function () {
+    var form = document.getElementById('leadFormEl');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nome = (form.nome.value || '').trim();
+      var tel  = (form.telefone.value || '').trim();
+      if (nome.length < 2) { form.nome.focus(); return; }
+      var msg = 'Olá! Sou ' + nome + ' (' + tel + '). ' +
+                'Li o artigo "Educação Bilíngue: 12 Benefícios Comprovados para Crianças e Por Que Começar Cedo" no Diário e gostaria de saber mais sobre a Maple Bear Bento Gonçalves.';
+      window.open('https://wa.me/5554999315480?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    });
+  })();
+</script>
 
 </body>
 </html>

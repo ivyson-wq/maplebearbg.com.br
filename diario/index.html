@@ -156,6 +156,21 @@
     transition: transform .5s;
   }
   .card:hover .card-cover img { transform: scale(1.04); }
+
+  .card-cover-placeholder {
+    background: linear-gradient(135deg, var(--blush) 0%, var(--maple-soft) 100%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 1.5rem;
+  }
+  .card-cover-placeholder .placeholder-text {
+    font-family: var(--font-script);
+    font-size: 1.7rem;
+    color: var(--paper);
+    text-align: center;
+    line-height: 1.1;
+    text-shadow: 0 4px 16px rgba(0,0,0,.2);
+  }
+
   .card-tag {
     position: absolute;
     top: 1rem; left: 1rem;
@@ -169,6 +184,7 @@
     padding: .35rem .8rem;
     border-radius: 999px;
     backdrop-filter: blur(8px);
+    z-index: 1;
   }
   .card-body {
     padding: 1.75rem;
@@ -341,14 +357,59 @@
     </div>
   </a>
 
+  <a href="imersao-ingles-vs-aulas-ingles/" class="card">
+    <div class="card-cover">
+      <span class="card-tag">04 · Diferença real</span>
+      <img src="/assets/diario/imersao-ingles-vs-aulas-ingles/cover.jpg" alt="Imersão em inglês versus aulas de inglês" loading="lazy">
+    </div>
+    <div class="card-body">
+      <h2>Imersão em inglês vs aulas de inglês: qual a diferença real?</h2>
+      <p>Por que viver o idioma é diferente de estudá-lo. O que muda na cabeça da criança em cada caso.</p>
+      <div class="card-meta">
+        <span>9 min de leitura</span>
+        <span class="read-more">Ler →</span>
+      </div>
+    </div>
+  </a>
+
   <a href="desenvolvimento-socioemocional-bilingue/" class="card">
     <div class="card-cover">
-      <span class="card-tag">04 · Além do idioma</span>
+      <span class="card-tag">05 · Além do idioma</span>
       <img src="/assets/diario/desenvolvimento-socioemocional-bilingue/cover.jpg" alt="Desenvolvimento socioemocional bilíngue" loading="lazy">
     </div>
     <div class="card-body">
       <h2>Desenvolvimento socioemocional bilíngue: como formar crianças mais completas</h2>
       <p>Empatia, autorregulação, abertura cultural. Por que aprender duas línguas modifica também o jeito de se relacionar.</p>
+      <div class="card-meta">
+        <span>10 min de leitura</span>
+        <span class="read-more">Ler →</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="escola-bilingue-confunde-crianca/" class="card">
+    <div class="card-cover card-cover-placeholder">
+      <span class="card-tag">06 · Dúvida comum</span>
+      <span class="placeholder-text">Escola bilíngue<br>confunde a criança?</span>
+    </div>
+    <div class="card-body">
+      <h2>Escola bilíngue confunde a criança? O que a ciência diz</h2>
+      <p>O mito mais comum entre pais — e a evidência científica que mostra exatamente o oposto.</p>
+      <div class="card-meta">
+        <span>9 min de leitura</span>
+        <span class="read-more">Ler →</span>
+      </div>
+    </div>
+  </a>
+
+  <a href="primeiro-dia-escola-bilingue-pais/" class="card">
+    <div class="card-cover">
+      <span class="card-tag">07 · Adaptação</span>
+      <img src="/assets/diario/primeiro-dia-escola-bilingue-pais/cover.jpg" alt="Primeiro dia na escola bilíngue" loading="lazy">
+    </div>
+    <div class="card-body">
+      <h2>Primeiro dia na escola bilíngue: como preparar seu filho (e você)</h2>
+      <p>O que esperar da semana de adaptação, o que evitar dizer, e como tornar a transição mais leve pra todos.</p>
       <div class="card-meta">
         <span>10 min de leitura</span>
         <span class="read-more">Ler →</span>

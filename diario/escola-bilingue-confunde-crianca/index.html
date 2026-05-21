@@ -1,173 +1,23 @@
-// Porta artigos do blog Maple Bear Caxias do Sul para a Maple Bear Bento Gonçalves.
-// - Extrai corpo do artigo + meta + cover.
-// - Baixa cover do Supabase Storage pra assets/diario/<slug>/cover.jpg.
-// - Aplica estética storybook (Fraunces + Spectral + paleta cream/maple) do site BG.
-// - Troca refs Caxias→BG, WhatsApp, lead endpoint.
-// - Adiciona <link rel="canonical"> apontando pra versão Caxias (proteção SEO duplicate).
-
-import fs from 'node:fs';
-import path from 'node:path';
-import https from 'node:https';
-import { fileURLToPath } from 'node:url';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const CAXIAS_BLOG_ROOT = 'C:/Users/ivyson.longoni/maple-bear-rs/maple-bear-blog';
-const BG_ROOT = __dirname;
-const OUT_ROOT = path.join(BG_ROOT, 'diario');
-const ASSETS_ROOT = path.join(BG_ROOT, 'assets', 'diario');
-
-// ── seleção: 5 artigos atemporais alta-conversão pro funil BG ──────────────
-const ARTICLES = [
-  { slug: 'idade-certa-escola-bilingue', tag: '01 · Decisão' },
-  { slug: 'educacao-bilingue-beneficios-criancas', tag: '02 · Por quê' },
-  { slug: 'metodologia-canadense-maple-bear', tag: '03 · Como' },
-  { slug: 'imersao-ingles-vs-aulas-ingles', tag: '04 · Diferença real' },
-  { slug: 'desenvolvimento-socioemocional-bilingue', tag: '05 · Além do idioma' },
-  { slug: 'escola-bilingue-confunde-crianca', tag: '06 · Dúvida comum' },
-  { slug: 'primeiro-dia-escola-bilingue-pais', tag: '07 · Adaptação' },
-];
-
-const WA_BG = '5554999315480';
-const CANONICAL_BG = 'https://maplebearbg.com.br';
-const CANONICAL_CAXIAS = 'https://maplebearcaxiasdosul.com.br';
-
-// ── HTTP get with redirects ─────────────────────────────────────────────────
-function download(url, dest) {
-  return new Promise((resolve, reject) => {
-    const file = fs.createWriteStream(dest);
-    const get = (u) => {
-      https.get(u, (res) => {
-        if ([301, 302, 307, 308].includes(res.statusCode)) {
-          return get(res.headers.location);
-        }
-        if (res.statusCode !== 200) {
-          file.close(); fs.unlinkSync(dest);
-          return reject(new Error(`HTTP ${res.statusCode} ${u}`));
-        }
-        res.pipe(file);
-        file.on('finish', () => file.close(resolve));
-      }).on('error', (e) => { file.close(); fs.unlink(dest, () => {}); reject(e); });
-    };
-    get(url);
-  });
-}
-
-// ── extract content from caxias source ──────────────────────────────────────
-// Robusto para 3 formatos vistos:
-//   A) <article> wrapper -> H1 + meta + cover-img + <article> CORPO </article> </article> ... <!-- Lead Capture
-//   B) <article> wrapper -> H1 + meta + cover-img + CORPO + <!-- Lead Capture --> ... </article>
-//   C) <article> wrapper -> H1 + meta (sem cover) + CORPO + <!-- Lead Capture --> ... </article>
-function extract(html, slug) {
-  const meta = {};
-
-  // <title>
-  meta.title = (html.match(/<title>([^|]+?)\s*\|/) || [, ''])[1].trim();
-
-  // description
-  meta.description = (html.match(/<meta name="description" content="([^"]+)"/) || [, ''])[1];
-
-  // published date
-  meta.publishedISO = (html.match(/<meta property="article:published_time" content="([^"]+)"/) || [, ''])[1];
-
-  // word count
-  meta.wordCount = parseInt((html.match(/"wordCount":\s*(\d+)/) || [, '0'])[1], 10);
-  meta.readingMin = Math.max(2, Math.round(meta.wordCount / 200));
-
-  // cover url (1ª img.cover-img) — attrs em qualquer ordem; fallback og:image
-  const coverImgMatch = html.match(/<img\b[^>]*class="cover-img"[^>]*>/);
-  const coverImgTag = coverImgMatch ? coverImgMatch[0] : '';
-  const coverInImg = coverImgTag ? (coverImgTag.match(/src="([^"]+)"/) || [, ''])[1] : '';
-  const coverInOg = (html.match(/<meta property="og:image" content="([^"]+)"/) || [, ''])[1];
-  // og:image fallback é usado SÓ se aponta pro CDN do Lumied/Supabase (cover real), não o logo genérico
-  const isRealOgCover = coverInOg && /(supabase|cloudfront).*\/blog\//i.test(coverInOg);
-  meta.coverUrl = coverInImg || (isRealOgCover ? coverInOg : '');
-
-  // body — pega do primeiro <article ...> até o primeiro de:
-  //   <!-- Lead Capture, <!-- Bottom CTA, <div class="lead-form, <div class="cta-box, <div class="related, <div class="share-bar
-  const startIdx = html.search(/<article\b[^>]*>/);
-  if (startIdx < 0) throw new Error(`não achei <article> em ${slug}`);
-  const tail = html.slice(startIdx + html.slice(startIdx).match(/<article\b[^>]*>/)[0].length);
-
-  const endMarkers = [
-    /<!--\s*Lead Capture/,
-    /<!--\s*Bottom CTA/,
-    /<!--\s*Related/,
-    /<div class="lead-form/,
-    /<div class="cta-box/,
-    /<div class="related"/,
-    /<div class="share-bar/,
-  ];
-  let endIdx = tail.length;
-  for (const m of endMarkers) {
-    const i = tail.search(m);
-    if (i >= 0 && i < endIdx) endIdx = i;
-  }
-  let body = tail.slice(0, endIdx).trim();
-
-  // Remove header (H1 + meta-row + cover img + possível <article> aninhado)
-  // Estratégia: remove tudo antes do primeiro <p>, <h2>, <hr> ou <ul> (= primeiro elemento real do corpo).
-  // Se a estrutura tiver <article> aninhado, abre ele primeiro.
-  body = body
-    .replace(/<h1\b[^>]*>[\s\S]*?<\/h1>\s*/, '')
-    .replace(/<div class="article-meta"[\s\S]*?<\/div>\s*/, '')
-    .replace(/<img\b[^>]*class="cover-img"[^>]*>\s*/, '')
-    .replace(/^\s*<article\b[^>]*>\s*/, '') // <article> aninhado de abertura
-    .replace(/\s*<\/article>\s*$/, '')       // </article> de fechamento da última
-    .trim();
-
-  // Sanity check — body precisa ter pelo menos 500 chars
-  if (body.length < 500) throw new Error(`corpo muito curto em ${slug} (${body.length} chars)`);
-
-  meta.bodyHTML = body;
-  return meta;
-}
-
-// ── rewrite text ────────────────────────────────────────────────────────────
-function rewriteCaxiasToBG(text, slug) {
-  return text
-    // names
-    .replace(/Maple Bear Caxias do Sul/g, 'Maple Bear Bento Gonçalves')
-    .replace(/Maple Bear de Caxias do Sul/g, 'Maple Bear Bento Gonçalves')
-    .replace(/Caxias do Sul/g, 'Bento Gonçalves')
-    .replace(/Caxias/g, 'Bento Gonçalves')
-    .replace(/Serra Gaúcha/g, 'Serra Gaúcha') // mantém — região é a mesma
-    // urls
-    .replace(/https:\/\/(www\.)?maplebearcaxiasdosul\.com\.br\b/g, CANONICAL_BG)
-    // whatsapp numbers
-    .replace(/5554999396742/g, WA_BG)
-    .replace(/54\s*99939[-\s]?6742/g, '54 99931-5480')
-    // lead endpoint — desativa por enquanto (BG não tem backend de captura)
-    .replace(/https:\/\/insta-publisher\.vercel\.app\/api\/blog\/lead/g, '#lead-disabled')
-    // strings duras
-    .replace(/Família de Caxias/g, 'Família de Bento Gonçalves')
-    .replace(/em Caxias do Sul/gi, 'em Bento Gonçalves');
-}
-
-// ── template BG-styled article wrapper ──────────────────────────────────────
-function template({ slug, meta, tag, hasCover }) {
-  const url = `${CANONICAL_BG}/diario/${slug}/`;
-  const dateBR = meta.publishedISO ? new Date(meta.publishedISO).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
-
-  return `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#C8102E">
 
-<title>${meta.title} | Maple Bear Bento Gonçalves</title>
-<meta name="description" content="${meta.description}">
-<link rel="canonical" href="${url}">
+<title>Escola Bilíngue Confunde a Criança? O Que a Neurociência Realmente Diz | Maple Bear Bento Gonçalves</title>
+<meta name="description" content="Desvende o mito: 'escola bilíngue confunde a criança'? A neurociência mostra os benefícios do bilinguismo para o desenvolvimento cognitivo e emocional dos pequenos. Conheça!">
+<link rel="canonical" href="https://maplebearbg.com.br/diario/escola-bilingue-confunde-crianca/">
 <meta name="robots" content="index, follow, max-image-preview:large">
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Maple Bear Bento Gonçalves">
-<meta property="og:title" content="${meta.title}">
-<meta property="og:description" content="${meta.description}">
-<meta property="og:url" content="${url}">
-<meta property="og:image" content="${url}cover.jpg">
-${meta.publishedISO ? `<meta property="article:published_time" content="${meta.publishedISO}">` : ''}
+<meta property="og:title" content="Escola Bilíngue Confunde a Criança? O Que a Neurociência Realmente Diz">
+<meta property="og:description" content="Desvende o mito: 'escola bilíngue confunde a criança'? A neurociência mostra os benefícios do bilinguismo para o desenvolvimento cognitivo e emocional dos pequenos. Conheça!">
+<meta property="og:url" content="https://maplebearbg.com.br/diario/escola-bilingue-confunde-crianca/">
+<meta property="og:image" content="https://maplebearbg.com.br/diario/escola-bilingue-confunde-crianca/cover.jpg">
+<meta property="article:published_time" content="2026-05-21T17:41:52.537Z">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -178,13 +28,13 @@ ${meta.publishedISO ? `<meta property="article:published_time" content="${meta.p
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "${meta.title.replace(/"/g, '\\"')}",
-  "description": "${meta.description.replace(/"/g, '\\"')}",
-  ${meta.publishedISO ? `"datePublished": "${meta.publishedISO}",` : ''}
-  "author": { "@type": "EducationalOrganization", "name": "Maple Bear Bento Gonçalves", "url": "${CANONICAL_BG}/" },
-  "publisher": { "@type": "EducationalOrganization", "name": "Maple Bear Bento Gonçalves", "url": "${CANONICAL_BG}/" },
-  "mainEntityOfPage": { "@type": "WebPage", "@id": "${url}" },
-  "image": "${url}cover.jpg"
+  "headline": "Escola Bilíngue Confunde a Criança? O Que a Neurociência Realmente Diz",
+  "description": "Desvende o mito: 'escola bilíngue confunde a criança'? A neurociência mostra os benefícios do bilinguismo para o desenvolvimento cognitivo e emocional dos pequenos. Conheça!",
+  "datePublished": "2026-05-21T17:41:52.537Z",
+  "author": { "@type": "EducationalOrganization", "name": "Maple Bear Bento Gonçalves", "url": "https://maplebearbg.com.br/" },
+  "publisher": { "@type": "EducationalOrganization", "name": "Maple Bear Bento Gonçalves", "url": "https://maplebearbg.com.br/" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://maplebearbg.com.br/diario/escola-bilingue-confunde-crianca/" },
+  "image": "https://maplebearbg.com.br/diario/escola-bilingue-confunde-crianca/cover.jpg"
 }
 </script>
 
@@ -699,29 +549,46 @@ ${meta.publishedISO ? `<meta property="article:published_time" content="${meta.p
     <a href="/#jornada">A Jornada</a>
     <a href="/diario/">Diário</a>
     <a href="/#abertura">Abertura 2027</a>
-    <a href="https://wa.me/${WA_BG}?text=Ol%C3%A1!%20Vim%20do%20artigo%20%22${encodeURIComponent(meta.title)}%22%20e%20gostaria%20de%20agendar%20uma%20visita." class="nav-cta" target="_blank" rel="noopener">Agendar visita</a>
+    <a href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Vim%20do%20artigo%20%22Escola%20Bil%C3%ADngue%20Confunde%20a%20Crian%C3%A7a%3F%20O%20Que%20a%20Neuroci%C3%AAncia%20Realmente%20Diz%22%20e%20gostaria%20de%20agendar%20uma%20visita." class="nav-cta" target="_blank" rel="noopener">Agendar visita</a>
   </nav>
 </header>
 
 <nav class="breadcrumbs" aria-label="Breadcrumb">
   <a href="/">Início</a><span>›</span>
   <a href="/diario/">Diário</a><span>›</span>
-  <span>${meta.title}</span>
+  <span>Escola Bilíngue Confunde a Criança? O Que a Neurociência Realmente Diz</span>
 </nav>
 
 <article class="main">
-  <p class="chapter-tag">${tag}</p>
-  <h1 class="title">${meta.title}</h1>
+  <p class="chapter-tag">06 · Dúvida comum</p>
+  <h1 class="title">Escola Bilíngue Confunde a Criança? O Que a Neurociência Realmente Diz</h1>
   <div class="meta-row">
-    ${dateBR ? `<time datetime="${meta.publishedISO}">${dateBR}</time>` : ''}
-    <span class="pill">⏱ ${meta.readingMin} min de leitura</span>
-    <span class="pill">${meta.wordCount.toLocaleString('pt-BR')} palavras</span>
+    <time datetime="2026-05-21T17:41:52.537Z">21 de maio de 2026</time>
+    <span class="pill">⏱ 9 min de leitura</span>
+    <span class="pill">1.711 palavras</span>
   </div>
   <div class="cover-frame">
-    ${hasCover ? `<img src="cover.jpg" alt="${meta.title.replace(/"/g, '&quot;')}" loading="lazy">` : `<span class="cover-placeholder">${tag}</span>`}
+    <span class="cover-placeholder">06 · Dúvida comum</span>
   </div>
 
-  ${meta.bodyHTML}
+  <details class="toc" open>
+    <summary>Neste artigo</summary>
+    <ol>
+      <li><a href="#escola-bilingue-confunde-a-crianca-desvendando-mitos-com-a-n">Escola Bilíngue Confunde a Criança? Desvendando Mitos com a Neurociência</a></li>
+      <li><a href="#bilinguismo-na-infancia-um-superpoder-cognitivo-nao-uma-conf">Bilinguismo na Infância: Um Superpoder Cognitivo, Não uma Confusão</a></li>
+      <li><a href="#como-o-bilinguismo-impacta-o-desenvolvimento-da-linguagem">Como o Bilinguismo Impacta o Desenvolvimento da Linguagem?</a></li>
+      <li><a href="#beneficios-alem-da-linguagem-desenvolvimento-socioemocional-">Benefícios Além da Linguagem: Desenvolvimento Socioemocional e Cultural</a></li>
+      <li><a href="#metodologia-canadense-imersao-natural-e-sem-confusao">Metodologia Canadense: Imersão Natural e Sem Confusão</a></li>
+      <li><a href="#faq-perguntas-frequentes-sobre-bilinguismo-e-confusao">FAQ: Perguntas Frequentes sobre Bilinguismo e Confusão</a></li>
+      <li><a href="#conclusao-o-bilinguismo-e-um-presente-nao-uma-preocupacao">Conclusão: O Bilinguismo é um Presente, Não uma Preocupação</a></li>
+    </ol>
+  </details>
+  <article><h2 id="escola-bilingue-confunde-a-crianca-desvendando-mitos-com-a-n">Escola Bilíngue Confunde a Criança? Desvendando Mitos com a Neurociência</h2><p>Quando pais consideram uma escola bilíngue para seus filhos, é natural que surjam dúvidas e preocupações. Uma das mais comuns é: “Será que a escola bilíngue confunde a criança?” Essa questão, embora compreensível, é frequentemente baseada em concepções antigas e desatualizadas sobre o desenvolvimento infantil e o processo de aquisição de linguagem. Felizmente, a neurociência e a vasta pesquisa educacional nos últimos anos têm oferecido respostas claras e encorajadoras sobre o tema.</p><p>Na Maple Bear Bento Gonçalves, compreendemos essas apreensões e estamos aqui para esclarecer. Nosso objetivo é apresentar o que a ciência moderna diz sobre o bilinguismo na infância, desmistificando a ideia de que duas línguas confundem, e destacando os inúmeros benefícios de uma educação bilíngue de imersão para o desenvolvimento integral do seu filho.</p><h2 id="bilinguismo-na-infancia-um-superpoder-cognitivo-nao-uma-conf">Bilinguismo na Infância: Um Superpoder Cognitivo, Não uma Confusão</h2><p>A crença de que a escola bilíngue confunde a criança é um mito persistente. Durante muito tempo, pensava-se que expor crianças a duas línguas simultaneamente poderia atrasar o desenvolvimento da fala ou sobrecarregar o cérebro. Contudo, pesquisas em neurociência cognitiva, linguística e psicologia infantil demonstram exatamente o oposto.</p><h3>O Cérebro Bilíngue: Mais Flexível e Adaptável</h3><p>Estudos liderados por cientistas como Ellen Bialystok, da Universidade York no Canadá, e Patricia Kuhl, da Universidade de Washington, mostram que o cérebro de crianças bilíngues não apenas se adapta, mas se aprimora ao gerenciar dois sistemas linguísticos. Essa 'ginástica cerebral' constante para alternar entre idiomas, inibir um enquanto usa o outro e processar diferentes estruturas gramaticais, fortalece as funções executivas.</p><ul><li><strong>Flexibilidade Cognitiva:</strong> Crianças bilíngues demonstram maior facilidade para alternar entre tarefas e perspectivas.</li><li><strong>Resolução de Problemas:</strong> Tendem a ser mais criativas e eficientes na busca por soluções para problemas complexos.</li><li><strong>Atenção Focada:</strong> Possuem melhor capacidade de concentração e de filtrar distrações.</li><li><strong>Metacognição:</strong> Desenvolvem uma maior consciência sobre o próprio processo de pensamento e aprendizado.</li></ul><p>Longe de confundir, o bilinguismo na infância é um poderoso impulsionador do desenvolvimento cognitivo. O cérebro da criança é incrivelmente maleável e capaz de absorver múltiplas línguas com naturalidade, especialmente nos primeiros anos de vida, período conhecido como a “janela de ouro” para a aquisição de linguagem.</p><div class="highlight-box"><h3>Você Sabia?</h3><p>O cérebro de uma criança bilíngue exibe maior densidade de massa cinzenta em áreas associadas à linguagem, memória e atenção executiva. Isso significa que a exposição a duas línguas não apenas não confunde, mas pode literalmente remodelar o cérebro para melhor!</p></div><h2 id="como-o-bilinguismo-impacta-o-desenvolvimento-da-linguagem">Como o Bilinguismo Impacta o Desenvolvimento da Linguagem?</h2><p>Outra preocupação comum é sobre o desenvolvimento da fala. "Duas línguas confundem a criança e atrasam o seu falar?" A resposta curta é: não. Embora uma criança bilíngue possa, em alguns casos, começar a falar as primeiras palavras um pouco mais tarde do que uma monolíngue (uma diferença geralmente mínima, de alguns meses), o vocabulário combinado das duas línguas geralmente excede o de uma criança monolíngue.</p><h3>Mistura de Códigos (Code-Switching): Um Sinal de Inteligência, Não de Confusão</h3><p>É comum que crianças bilíngues misturem palavras ou frases de uma língua com a outra (fenômeno conhecido como <em>code-switching</em>). Por exemplo, dizer “quero a <em>ball</em>” em vez de “quero a bola”. Isso não é um sinal de que a escola bilíngue confunde a criança, mas sim uma demonstração da sua habilidade em navegar entre os dois sistemas linguísticos. É uma estratégia natural e temporária enquanto a criança solidifica o domínio de cada idioma.</p><p>Com o tempo e a exposição consistente em ambientes como a Maple Bear Bento Gonçalves, onde a imersão em inglês é natural e constante, a criança aprende a separar os idiomas e a usá-los apropriadamente em diferentes contextos.</p><h3>Tabela Comparativa: Mitos vs. Fatos sobre Bilinguismo</h3><table><thead><tr><th>Mito Comum</th><th>O Que a Neurociência e a Pesquisa Dizem</th></tr></thead><tbody><tr><td>Escola bilíngue confunde a criança.</td><td>O cérebro bilíngue desenvolve maior flexibilidade cognitiva e habilidades de multitarefas.</td></tr><tr><td>Duas línguas atrasam o desenvolvimento da fala.</td><td>Pode haver um pequeno atraso inicial nas primeiras palavras, mas o vocabulário combinado é maior e a fluência se estabelece.</td></tr><tr><td>Misturar idiomas é sinal de que a criança está confusa.</td><td>É uma estratégia natural (code-switching) que demonstra a habilidade da criança em usar múltiplos sistemas linguísticos.</td></tr><tr><td>Crianças bilíngues terão sotaque em ambas as línguas.</td><td>Crianças expostas a línguas desde cedo em ambientes imersivos geralmente desenvolvem pronúncia nativa ou próxima da nativa.</td></tr><tr><td>É preciso ter um pai que fala uma língua e outro que fala a outra.</td><td>Não é necessário. Exposição consistente e de qualidade em casa e na escola é o mais importante.</td></tr></tbody>lo</table>
+<div class="inline-cta">
+  <h3>💡 Quer ver isso na prática?</h3>
+  <p>Agende uma visita à Maple Bear Bento Gonçalves e conheça nossa metodologia pessoalmente.</p>
+  <a href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Estou%20lendo%20o%20blog%20e%20gostaria%20de%20agendar%20uma%20visita." class="cta-btn" target="_blank">Agendar Visita Gratuita</a>
+</div><h2 id="beneficios-alem-da-linguagem-desenvolvimento-socioemocional-">Benefícios Além da Linguagem: Desenvolvimento Socioemocional e Cultural</h2><p>Os ganhos de frequentar uma escola bilíngue, onde a ideia de que duas línguas confundem é desfeita, vão muito além do aspecto puramente linguístico e cognitivo. O bilinguismo contribui significativamente para o desenvolvimento socioemocional e a formação de cidadãos mais globais.</p><ul><li><strong>Empatia e Perspectiva:</strong> Ao navegar entre diferentes línguas e culturas (como a metodologia canadense da Maple Bear), as crianças desenvolvem uma maior capacidade de compreender diferentes pontos de vista e demonstram maior empatia.</li><li><strong>Confiança e Autoestima:</strong> O domínio de dois idiomas e a capacidade de se comunicar com pessoas de diferentes origens culturais impulsiona a confiança e a autoestima.</li><li><strong>Abertura Cultural:</strong> A imersão em um ambiente bilíngue e multicultural desde cedo prepara as crianças para um mundo globalizado, tornando-as mais abertas, tolerantes e curiosas sobre outras culturas. Isso é um pilar fundamental da educação Maple Bear.</li><li><strong>Oportunidades Futuras:</strong> A fluência em inglês, a língua franca global, abre portas para oportunidades acadêmicas, profissionais e de viagens inigualáveis no futuro.</li></ul><p>Em uma escola como a Maple Bear Bento Gonçalves, onde a educação infantil, fundamental e média é permeada por essa filosofia, a preocupação "escola bilíngue confunde a criança" se dissolve rapidamente, dando lugar à percepção de um crescimento holístico e enriquecedor.</p><h2 id="metodologia-canadense-imersao-natural-e-sem-confusao">Metodologia Canadense: Imersão Natural e Sem Confusão</h2><p>A metodologia canadense, adotada pela Maple Bear Bento Gonçalves, é projetada para promover a aquisição de linguagem de forma natural e eficaz, sem que a criança sinta que as duas línguas confundem ou que está sendo sobrecarregada. Diferente de um curso de inglês tradicional, a Maple Bear utiliza a imersão total.</p><p>Desde a Educação Infantil (Bear Care, Toddler, Nursery, JK, SK), as crianças são expostas ao inglês em um contexto significativo e lúdico. As aulas são ministradas por professores fluentes, e o inglês é a língua de instrução para todas as atividades, disciplinas e interações. Isso simula a forma como uma criança aprende sua língua materna: através da vivência e da necessidade de se comunicar.</p><p>A transição para o Ensino Fundamental e Ensino Médio mantém essa imersão, com um currículo que integra o melhor das práticas canadenses e brasileiras. O foco no pensamento crítico, na metacognição e no desenvolvimento de habilidades socioemocionais, aliados à imersão bilíngue, garante que o aprendizado seja profundo e significativo, sem espaço para a ideia de que a escola bilíngue confunde a criança. Veja mais sobre nossa <a href="https://maplebearbg.com.br/metodologia-canadense/">metodologia canadense</a>.</p><h2 id="faq-perguntas-frequentes-sobre-bilinguismo-e-confusao">FAQ: Perguntas Frequentes sobre Bilinguismo e Confusão</h2><details><summary>Uma escola bilíngue vai atrasar meu filho no desenvolvimento da fala?</summary><p>Não, a neurociência mostra que crianças bilíngues podem ter um início da fala um pouco diferente, mas geralmente alcançam e até superam o vocabulário de crianças monolíngues em um curto espaço de tempo, e sem prejuízo. Qualquer pequena diferença é temporária.</p></details><details><summary>É verdade que duas línguas confundem a criança e a deixam indecisa?</summary><p>Pelo contrário! Longe de confundir, a exposição a duas línguas desde cedo aprimora a flexibilidade cognitiva, a capacidade de resolver problemas e a atenção. Crianças bilíngues não ficam indecisas, mas sim mais adaptáveis e com um repertório maior de pensamento.</p></details><details><summary>Meu filho vai misturar as línguas? Isso é um problema?</summary><p>Misturar línguas (code-switching) é uma fase normal e saudável no desenvolvimento bilíngue. É uma estratégia inteligente da criança para se comunicar enquanto solidifica o domínio de cada idioma. Com o tempo e a exposição consistente, ela aprende a separar os idiomas. Não é um problema, mas um sinal de um cérebro que se adapta.</p></details><details><summary>Qual a melhor idade para iniciar o bilinguismo e evitar que a escola bilíngue confunda a criança?</summary><p>Quanto mais cedo, melhor! O período da primeira infância (até os 7 anos) é considerado o mais propício para a aquisição natural de uma segunda língua, pois o cérebro tem uma plasticidade incrível. Iniciar na Educação Infantil, como na Maple Bear Bento Gonçalves, permite uma imersão orgânica e minimiza qualquer percepção de que a escola bilíngue confunde a criança. Saiba mais sobre nossa <a href="https://maplebearbg.com.br/educacao-infantil-bilingue-caxias-do-sul/">Educação Infantil bilíngue</a>.</p></details><details><summary>Como a Maple Bear Bento Gonçalves garante que a criança não se sinta confusa com o inglês?</summary><p>Na Maple Bear Bento Gonçalves, utilizamos a metodologia de imersão total canadense, onde o inglês é a língua de instrução para todas as atividades e disciplinas desde os 18 meses de idade. Os professores são fluentes e o ambiente é planejado para que a criança absorva o idioma de forma natural, através de brincadeiras, projetos e interações diárias, replicando o processo de aquisição da língua materna. O aprendizado é significativo e orgânico, sem que as duas línguas confundam.</p></details><h2 id="conclusao-o-bilinguismo-e-um-presente-nao-uma-preocupacao">Conclusão: O Bilinguismo é um Presente, Não uma Preocupação</h2><p>A pergunta “escola bilíngue confunde a criança?” é um receio legítimo que a ciência já respondeu de forma contundente: não, o bilinguismo não confunde. Pelo contrário, é um presente valioso que impulsiona o desenvolvimento cognitivo, socioemocional e cultural dos pequenos. A pesquisa mostra consistentemente que crianças bilíngues desenvolvem mentes mais flexíveis, habilidades de resolução de problemas aprimoradas e uma visão de mundo mais ampla.</p><p>Na Maple Bear Bento Gonçalves, estamos comprometidos em oferecer uma educação bilíngue de excelência, baseada na renomada metodologia canadense. Nosso ambiente de imersão total em inglês, desde a Educação Infantil até o Ensino Médio, garante que seu filho desenvolva a fluência em um segundo idioma de forma natural e prazerosa, sem sobrecarga ou confusão, mas com todos os benefícios de uma mente bilíngue.</p><p>Se você busca uma educação que prepare seu filho para os desafios do futuro global, que nutra a curiosidade, o pensamento crítico e a criatividade, e que ainda por cima o torne fluente em inglês, a Maple Bear Bento Gonçalves é a escolha certa. Venha nos visitar e descubra como transformamos cada criança em um cidadão do mundo. Agende sua visita e conheça nossa <a href="https://maplebearbg.com.br/nossa-escola/">escola</a>.</p>
 
   <div class="lead-form" id="leadForm">
     <h3>Quer receber conteúdo como esse?</h3>
@@ -737,44 +604,50 @@ ${meta.publishedISO ? `<meta property="article:published_time" content="${meta.p
   <div class="cta-box">
     <h3>Conheça a Maple Bear <em>Bento Gonçalves</em>.</h3>
     <p>Abrimos em 2027. Estamos recebendo famílias para conhecer o projeto pedagógico e reservar pré-matrícula.</p>
-    <a href="https://wa.me/${WA_BG}?text=Ol%C3%A1!%20Li%20o%20artigo%20%22${encodeURIComponent(meta.title)}%22%20e%20gostaria%20de%20agendar%20uma%20visita." target="_blank" rel="noopener">📅 Agendar minha visita pelo WhatsApp</a>
+    <a href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Li%20o%20artigo%20%22Escola%20Bil%C3%ADngue%20Confunde%20a%20Crian%C3%A7a%3F%20O%20Que%20a%20Neuroci%C3%AAncia%20Realmente%20Diz%22%20e%20gostaria%20de%20agendar%20uma%20visita." target="_blank" rel="noopener">📅 Agendar minha visita pelo WhatsApp</a>
     <p class="urgency">Vagas limitadas para a turma inaugural 2027</p>
   </div>
 
   <div class="share-bar">
-    <a class="share-wa" href="https://wa.me/?text=${encodeURIComponent(meta.title + ' ' + url)}" target="_blank" rel="noopener">Compartilhar no WhatsApp</a>
-    <a class="share-li" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="share-wa" href="https://wa.me/?text=Escola%20Bil%C3%ADngue%20Confunde%20a%20Crian%C3%A7a%3F%20O%20Que%20a%20Neuroci%C3%AAncia%20Realmente%20Diz%20https%3A%2F%2Fmaplebearbg.com.br%2Fdiario%2Fescola-bilingue-confunde-crianca%2F" target="_blank" rel="noopener">Compartilhar no WhatsApp</a>
+    <a class="share-li" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fmaplebearbg.com.br%2Fdiario%2Fescola-bilingue-confunde-crianca%2F" target="_blank" rel="noopener">LinkedIn</a>
   </div>
 
   <div class="related">
     <h3>Leia também</h3>
     <div class="related-grid">
-      ${ARTICLES.filter(a => a.slug !== slug).slice(0, 3).map(a => {
-        const hasCoverOther = fs.existsSync(path.join(ASSETS_ROOT, a.slug, 'cover.jpg'));
-        const imgHTML = hasCoverOther
-          ? `<img src="/assets/diario/${a.slug}/cover.jpg" alt="" loading="lazy">`
-          : `<div style="aspect-ratio:16/10;background:linear-gradient(135deg,var(--blush),var(--maple-soft));display:flex;align-items:center;justify-content:center;font-family:var(--font-script);font-size:1.3rem;color:#fff;">${a.tag}</div>`;
-        return `
-      <a href="/diario/${a.slug}/" class="related-card">
-        ${imgHTML}
+      
+      <a href="/diario/idade-certa-escola-bilingue/" class="related-card">
+        <img src="/assets/diario/idade-certa-escola-bilingue/cover.jpg" alt="" loading="lazy">
         <div class="related-card-body">
-          <h4>${a.tag}</h4>
+          <h4>01 · Decisão</h4>
         </div>
-      </a>`;
-      }).join('')}
+      </a>
+      <a href="/diario/educacao-bilingue-beneficios-criancas/" class="related-card">
+        <img src="/assets/diario/educacao-bilingue-beneficios-criancas/cover.jpg" alt="" loading="lazy">
+        <div class="related-card-body">
+          <h4>02 · Por quê</h4>
+        </div>
+      </a>
+      <a href="/diario/metodologia-canadense-maple-bear/" class="related-card">
+        <img src="/assets/diario/metodologia-canadense-maple-bear/cover.jpg" alt="" loading="lazy">
+        <div class="related-card-body">
+          <h4>03 · Como</h4>
+        </div>
+      </a>
     </div>
   </div>
 </article>
 
-<a class="wa-float" href="https://wa.me/${WA_BG}?text=Ol%C3%A1!%20Tenho%20interesse%20na%20Maple%20Bear%20Bento%20Gon%C3%A7alves." target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+<a class="wa-float" href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Tenho%20interesse%20na%20Maple%20Bear%20Bento%20Gon%C3%A7alves." target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
   <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 3C9.4 3 4 8.4 4 15c0 2.4.7 4.7 2 6.7L4 29l7.5-2c1.9 1 4.1 1.6 6.5 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3zm5.6 15.5c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.7-1.7c-.2-.5-.4-.4-.6-.4h-.4c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.7 4.3 3.8.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3z"/></svg>
 </a>
 
 <footer class="site-footer">
   <div class="footer-inner">
     <p><strong>Maple Bear Bento Gonçalves</strong> — Escola Bilíngue Canadense · Abertura prevista 2027</p>
-    <p>WhatsApp <a href="https://wa.me/${WA_BG}" target="_blank" rel="noopener">+55 54 9 9931-5480</a> · <a href="mailto:contato@maplebearbg.com.br">contato@maplebearbg.com.br</a></p>
-    <p class="footer-baseline">© ${new Date().getFullYear()} Maple Bear Bento Gonçalves · Bento Gonçalves, RS, Brasil</p>
+    <p>WhatsApp <a href="https://wa.me/5554999315480" target="_blank" rel="noopener">+55 54 9 9931-5480</a> · <a href="mailto:contato@maplebearbg.com.br">contato@maplebearbg.com.br</a></p>
+    <p class="footer-baseline">© 2026 Maple Bear Bento Gonçalves · Bento Gonçalves, RS, Brasil</p>
   </div>
 </footer>
 
@@ -789,65 +662,11 @@ ${meta.publishedISO ? `<meta property="article:published_time" content="${meta.p
       var tel  = (form.telefone.value || '').trim();
       if (nome.length < 2) { form.nome.focus(); return; }
       var msg = 'Olá! Sou ' + nome + ' (' + tel + '). ' +
-                'Li o artigo "${meta.title.replace(/"/g, '\\"').replace(/'/g, "\\'")}" no Diário e gostaria de saber mais sobre a Maple Bear Bento Gonçalves.';
-      window.open('https://wa.me/${WA_BG}?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+                'Li o artigo "Escola Bilíngue Confunde a Criança? O Que a Neurociência Realmente Diz" no Diário e gostaria de saber mais sobre a Maple Bear Bento Gonçalves.';
+      window.open('https://wa.me/5554999315480?text=' + encodeURIComponent(msg), '_blank', 'noopener');
     });
   })();
 </script>
 
 </body>
 </html>
-`;
-}
-
-// ── main ────────────────────────────────────────────────────────────────────
-async function main() {
-  fs.mkdirSync(OUT_ROOT, { recursive: true });
-  fs.mkdirSync(ASSETS_ROOT, { recursive: true });
-
-  for (const art of ARTICLES) {
-    const srcPath = path.join(CAXIAS_BLOG_ROOT, art.slug, 'index.html');
-    if (!fs.existsSync(srcPath)) { console.log('✗ não achei:', srcPath); continue; }
-
-    const raw = fs.readFileSync(srcPath, 'utf8');
-    let meta;
-    try { meta = extract(raw, art.slug); }
-    catch (e) { console.log('✗ extract falhou:', art.slug, e.message); continue; }
-
-    // Rewrite Caxias → BG no corpo
-    meta.bodyHTML = rewriteCaxiasToBG(meta.bodyHTML, art.slug);
-    meta.title = rewriteCaxiasToBG(meta.title, art.slug);
-    meta.description = rewriteCaxiasToBG(meta.description, art.slug);
-
-    // Download cover
-    const coverDir = path.join(ASSETS_ROOT, art.slug);
-    fs.mkdirSync(coverDir, { recursive: true });
-    const coverDest = path.join(coverDir, 'cover.jpg');
-    if (meta.coverUrl && !fs.existsSync(coverDest)) {
-      try {
-        await download(meta.coverUrl, coverDest);
-        console.log('✓ cover baixada:', art.slug);
-      } catch (e) {
-        console.log('✗ cover falhou:', art.slug, e.message);
-      }
-    }
-
-    // Copy cover to article directory too (relative ./cover.jpg)
-    const outDir = path.join(OUT_ROOT, art.slug);
-    fs.mkdirSync(outDir, { recursive: true });
-    if (fs.existsSync(coverDest)) {
-      fs.copyFileSync(coverDest, path.join(outDir, 'cover.jpg'));
-    }
-
-    const hasCover = fs.existsSync(path.join(outDir, 'cover.jpg'));
-
-    // Render HTML
-    const html = template({ slug: art.slug, meta, tag: art.tag, hasCover });
-    fs.writeFileSync(path.join(outDir, 'index.html'), html, 'utf8');
-    console.log('✓ artigo gerado:', art.slug, hasCover ? '' : '(sem cover — placeholder)');
-  }
-
-  console.log('\n✅ porte concluído. Arquivos em /diario/<slug>/index.html + /assets/diario/<slug>/cover.jpg');
-}
-
-main().catch(e => { console.error(e); process.exit(1); });
