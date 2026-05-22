@@ -20,9 +20,11 @@ node_modules/
 preview-*.png
 screenshot.mjs
 screenshot-rebrand.mjs
+screenshot-final.mjs
 favicon-preview.mjs
 gbp-qa-helper.mjs
 icon-test-*.png
 extract-brand.mjs
+rebrand-all.mjs
 node_modules/
 assets/brand-raw/
