@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#C8102E">
+
+<title>Faixas etárias · Maple Bear Bento Gonçalves</title>
+<meta name="description" content="6 estágios da educação infantil ao 1º ano do Fundamental: Bear Care (18m), Toddler (2a), Nursery (3a), JK (4a), SK (5a), Year 1 (6-7a, 2027).">
+<link rel="canonical" href="https://maplebearbg.com.br/estagios/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Spectral:ital,wght@0,200..800;1,200..800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+<style>
+  :root { --paper:#FBF7F0; --paper-deep:#F4ECDF; --paper-shade:#EBE0CC; --ink:#2A2522; --ink-soft:#5C544D; --ink-faint:#8A7F75; --maple:#C8102E; --maple-deep:#8B0A1F; --maple-soft:#E84A5F; --blush:#F4DBCB; --shadow-soft:0 14px 30px -18px rgba(42,37,34,.18); --shadow:0 30px 60px -25px rgba(42,37,34,.25); --font-display:'Fraunces',Georgia,serif; --font-body:'Spectral',Georgia,serif; --font-script:'Caveat',cursive; }
+  *,*::before,*::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 1.1rem; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { color: var(--maple); text-decoration: none; transition: color .2s; }
+
+  .site-nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1.1rem clamp(1.25rem, 4vw, 2.5rem); background: rgba(251,247,240,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--paper-shade); }
+  .brand { display: flex; align-items: center; gap: 0.7rem; color: var(--ink); }
+  .brand-mark { width: 44px; height: 44px; flex-shrink: 0; filter: drop-shadow(0 4px 8px rgba(200,16,46,0.18)); }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.05; }
+  .brand-line-1 { font-weight: 600; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--maple); }
+  .brand-line-2 { font-weight: 500; font-size: 1.15rem; font-style: italic; color: var(--ink); font-family: var(--font-display); margin-top: 1px; }
+  .nav-links { display: flex; gap: 1.4rem; }
+  .nav-links a { color: var(--ink-soft); font-size: .95rem; font-weight: 500; }
+  .nav-cta { background: var(--maple); color: var(--paper) !important; padding: .6rem 1.1rem; border-radius: 999px; }
+  @media (max-width: 640px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+  .hero { padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 4vw, 2.5rem) clamp(2rem, 5vw, 4rem); text-align: center; background: linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%); }
+  .eyebrow { display: inline-flex; align-items: center; gap: .6rem; margin: 0 0 1.5rem; font-size: .85rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+  .eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--maple); box-shadow: 0 0 0 4px rgba(200,16,46,0.18); }
+  h1 { font-family: var(--font-display); font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 50; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; letter-spacing: -.025em; margin: 0 0 1.5rem; font-weight: 400; }
+  h1 em { font-style: italic; color: var(--maple); }
+  .lead { max-width: 56ch; margin: 0 auto; font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--ink-soft); font-weight: 300; line-height: 1.55; }
+
+  main { max-width: 1180px; margin: 0 auto; padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 2.5rem); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(1.5rem, 3vw, 2rem); }
+  .stage-card { background: var(--paper); border: 1px solid var(--paper-shade); border-radius: 22px; overflow: hidden; transition: box-shadow .3s, transform .3s; color: inherit; display: flex; flex-direction: column; }
+  .stage-card:hover { box-shadow: var(--shadow); transform: translateY(-4px); }
+  .stage-card .photo { aspect-ratio: 5/4; position: relative; overflow: hidden; }
+  .stage-card .photo::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.25), transparent 60%); }
+  .stage-card .photo span { position: absolute; top: 1rem; left: 1rem; background: rgba(251,247,240,.95); color: var(--maple); padding: .35rem .8rem; border-radius: 999px; font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; z-index: 1; }
+  .stage-card .body { padding: 1.75rem; display: flex; flex-direction: column; flex: 1; }
+  .stage-card h2 { font-family: var(--font-display); font-size: 1.5rem; margin: 0 0 .25rem; color: var(--ink); font-weight: 500; }
+  .stage-card .age { font-family: var(--font-script); font-size: 1.3rem; color: var(--maple); margin: 0 0 .75rem; }
+  .stage-card p { color: var(--ink-soft); font-size: .98rem; line-height: 1.55; margin: 0 0 1rem; font-weight: 300; flex: 1; }
+  .stage-card .more { color: var(--maple); font-weight: 500; font-size: .95rem; }
+  .stage-card.featured { border-color: var(--maple); }
+  .stage-card.featured .body { background: var(--paper-deep); }
+  .badge { display: inline-block; background: var(--maple); color: var(--paper); padding: .2rem .6rem; border-radius: 999px; font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem; }
+
+  .site-footer { background: var(--ink); color: var(--paper); padding: 2.5rem clamp(1.25rem, 4vw, 2.5rem); text-align: center; }
+  .site-footer p { margin: .25rem 0; font-size: .9rem; color: rgba(251,247,240,.7); }
+  .site-footer a { color: var(--maple-soft); }
+</style>
+
+<script src="/assets/consent.js" defer></script>
+</head>
+<body>
+
+<header class="site-nav">
+  <a href="/" class="brand" aria-label="Maple Bear Bento Gonçalves">
+    <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+      <rect width="64" height="64" rx="14" fill="#C8102E"/>
+      <circle cx="32" cy="37" r="16" fill="#FBF7F0"/>
+      <circle cx="20" cy="23" r="7" fill="#FBF7F0"/>
+      <circle cx="44" cy="23" r="7" fill="#FBF7F0"/>
+      <circle cx="20" cy="23" r="3" fill="#C8102E"/>
+      <circle cx="44" cy="23" r="3" fill="#C8102E"/>
+      <circle cx="26" cy="34" r="2" fill="#2A2522"/>
+      <circle cx="38" cy="34" r="2" fill="#2A2522"/>
+      <ellipse cx="32" cy="44" rx="5" ry="3.5" fill="#F4DBCB"/>
+      <ellipse cx="32" cy="42" rx="1.8" ry="1.3" fill="#2A2522"/>
+    </svg>
+    <span class="brand-text">
+      <span class="brand-line-1">Maple Bear</span>
+      <span class="brand-line-2">Bento Gonçalves</span>
+    </span>
+  </a>
+  <nav class="nav-links">
+    <a href="/sobre/">Sobre</a>
+    <a href="/estagios/">Estágios</a>
+    <a href="/diario/">Diário</a>
+    <a href="/faq/">FAQ</a>
+    <a href="https://wa.me/5554999315480" class="nav-cta" target="_blank" rel="noopener">Agendar visita</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <p class="eyebrow"><span class="eyebrow-dot"></span> Faixas etárias · 18 meses ao Year 1</p>
+  <h1>Seis estágios <em>de uma infância</em>.</h1>
+  <p class="lead">Do <em>Bear Care</em> (18 meses) ao <em>Senior Kindergarten</em> (5 anos) — em funcionamento desde 2025. Em 2027, abrimos o <em>Year 1</em>. Conheça cada estágio em detalhe.</p>
+</section>
+
+<main>
+  
+  <a href="/estagios/bear-care/" class="stage-card">
+    <div class="photo" style="background: linear-gradient(135deg, #F4DBCB, #E84A5F);">
+      <span>01 · Bear Care</span>
+    </div>
+    <div class="body">
+      
+      <h2>Bear Care</h2>
+      <p class="age">18 meses</p>
+      <p>O Bear Care é o primeiro contato do bebê com um ambiente bilíngue.</p>
+      <span class="more">Conhecer este estágio →</span>
+    </div>
+  </a>
+  <a href="/estagios/toddler/" class="stage-card">
+    <div class="photo" style="background: linear-gradient(135deg, #FBE6C5, #C9923D);">
+      <span>02 · Toddler</span>
+    </div>
+    <div class="body">
+      
+      <h2>Toddler</h2>
+      <p class="age">2 anos</p>
+      <p>Aos 2 anos, o vocabulário explode.</p>
+      <span class="more">Conhecer este estágio →</span>
+    </div>
+  </a>
+  <a href="/estagios/nursery/" class="stage-card">
+    <div class="photo" style="background: linear-gradient(135deg, #C8E6D0, #2D4A3E);">
+      <span>03 · Nursery</span>
+    </div>
+    <div class="body">
+      
+      <h2>Nursery</h2>
+      <p class="age">3 anos</p>
+      <p>Aos 3 anos, o "porquê" entra em cena.</p>
+      <span class="more">Conhecer este estágio →</span>
+    </div>
+  </a>
+  <a href="/estagios/junior-kindergarten/" class="stage-card">
+    <div class="photo" style="background: linear-gradient(135deg, #E8B4BC, #8B0A1F);">
+      <span>04 · JK</span>
+    </div>
+    <div class="body">
+      
+      <h2>Junior Kindergarten</h2>
+      <p class="age">4 anos</p>
+      <p>O Junior Kindergarten é onde a criança começa a pensar sobre como pensa.</p>
+      <span class="more">Conhecer este estágio →</span>
+    </div>
+  </a>
+  <a href="/estagios/senior-kindergarten/" class="stage-card">
+    <div class="photo" style="background: linear-gradient(135deg, #F4DBCB, #C8102E);">
+      <span>05 · SK</span>
+    </div>
+    <div class="body">
+      
+      <h2>Senior Kindergarten</h2>
+      <p class="age">5 anos</p>
+      <p>Aos 5 anos, o Senior Kindergarten Maple Bear forma o leitor.</p>
+      <span class="more">Conhecer este estágio →</span>
+    </div>
+  </a>
+  <a href="/estagios/year-1/" class="stage-card featured">
+    <div class="photo" style="background: linear-gradient(135deg, #2A2522, #C8102E);">
+      <span>06 · Y1</span>
+    </div>
+    <div class="body">
+      <span class="badge">Novidade 2027</span>
+      <h2>Year 1</h2>
+      <p class="age">6 — 7 anos</p>
+      <p>Em 2027, abrimos o Year 1 — primeiro ano do Ensino Fundamental brasileiro, em duas línguas, no mesmo lugar.</p>
+      <span class="more">Conhecer este estágio →</span>
+    </div>
+  </a>
+</main>
+
+<footer class="site-footer">
+  <p><strong>Maple Bear Bento Gonçalves</strong> — Em Bento desde 2025 · Year 1 em 2027</p>
+  <p><a href="https://wa.me/5554999315480">WhatsApp +55 54 9 9931-5480</a> · <a href="mailto:contato@maplebearbg.com.br">contato@maplebearbg.com.br</a></p>
+  <p style="margin-top:.5rem"><a href="/sobre/">Sobre</a> · <a href="/diario/">Diário</a> · <a href="/faq/">FAQ</a> · <a href="/privacidade/">Privacidade</a> · <a href="/termos/">Termos</a></p>
+</footer>
+
+</body>
+</html>

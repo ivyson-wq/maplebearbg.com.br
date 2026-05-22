@@ -770,10 +770,28 @@ a:hover { color: var(--maple-deep); }
   box-shadow: var(--shadow-soft);
   position: relative;
   transition: transform 0.3s, box-shadow 0.3s;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 .age-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow);
+  color: inherit;
+}
+.age-card::after {
+  content: "→";
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  color: var(--maple);
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.age-card:hover::after {
+  opacity: 1;
+  transform: translateX(4px);
 }
 .age-num {
   font-family: var(--font-display);

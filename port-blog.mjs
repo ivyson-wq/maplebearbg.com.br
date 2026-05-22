@@ -709,6 +709,7 @@ ${meta.publishedISO ? `<meta property="article:published_time" content="${meta.p
   </a>
   <nav class="nav-links">
     <a href="/sobre/">Sobre</a>
+    <a href="/estagios/">Estágios</a>
     <a href="/diario/">Diário</a>
     <a href="/faq/">FAQ</a>
     <a href="https://wa.me/${WA_BG}?text=Ol%C3%A1!%20Vim%20do%20artigo%20%22${encodeURIComponent(meta.title)}%22%20e%20gostaria%20de%20agendar%20uma%20visita." class="nav-cta" target="_blank" rel="noopener">Agendar visita</a>
