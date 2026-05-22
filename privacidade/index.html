@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#C8102E">
+
+<title>Política de Privacidade · Maple Bear Bento Gonçalves</title>
+<meta name="description" content="Como a Maple Bear Bento Gonçalves coleta, usa e protege seus dados pessoais. Conformidade LGPD (Lei 13.709/2018).">
+<link rel="canonical" href="https://maplebearbg.com.br/privacidade/">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700&family=Spectral:ital,wght@0,300..700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+<style>
+  :root {
+    --paper: #FBF7F0; --paper-deep: #F4ECDF; --paper-shade: #EBE0CC;
+    --ink: #2A2522; --ink-soft: #5C544D; --ink-faint: #8A7F75;
+    --maple: #C8102E; --maple-deep: #8B0A1F; --maple-soft: #E84A5F;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Spectral', Georgia, serif;
+  }
+  *,*::before,*::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 1.05rem; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { color: var(--maple); }
+  ::selection { background: var(--maple); color: var(--paper); }
+
+  .site-nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1.1rem clamp(1.25rem, 4vw, 2.5rem); background: rgba(251,247,240,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--paper-shade); }
+  .brand { display: flex; align-items: center; gap: 0.7rem; color: var(--ink); text-decoration: none; }
+  .brand-mark { width: 44px; height: 44px; }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.05; }
+  .brand-line-1 { font-weight: 600; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--maple); }
+  .brand-line-2 { font-weight: 500; font-size: 1.15rem; font-style: italic; color: var(--ink); font-family: var(--font-display); margin-top: 1px; }
+  .nav-links { display: flex; gap: 1.4rem; }
+  .nav-links a { color: var(--ink-soft); font-size: .95rem; font-weight: 500; text-decoration: none; }
+  .nav-cta { background: var(--maple); color: var(--paper) !important; padding: .6rem 1.1rem; border-radius: 999px; }
+  @media (max-width: 640px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+  main { max-width: 760px; margin: 0 auto; padding: clamp(2rem, 5vw, 3rem) clamp(1.25rem, 4vw, 2rem) 4rem; }
+  h1 { font-family: var(--font-display); font-variation-settings: "opsz" 144, "wght" 500; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; margin: 0 0 1rem; }
+  h1 em { color: var(--maple); font-style: italic; }
+  .updated { color: var(--ink-faint); font-size: .9rem; margin-bottom: 2.5rem; font-style: italic; }
+  h2 { font-family: var(--font-display); font-size: clamp(1.4rem, 2.5vw, 1.8rem); margin: 2.5rem 0 .75rem; color: var(--ink); }
+  h3 { font-family: var(--font-display); font-style: italic; font-size: 1.2rem; margin: 1.5rem 0 .5rem; color: var(--ink); font-weight: 500; }
+  p { margin: 0 0 1rem; color: var(--ink-soft); font-weight: 300; }
+  p strong { color: var(--ink); font-weight: 500; }
+  ul, ol { margin: .75rem 0 1.5rem 1.5rem; }
+  li { margin-bottom: .4rem; color: var(--ink-soft); font-weight: 300; }
+  li::marker { color: var(--maple); }
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: .95rem; }
+  th, td { padding: .8rem 1rem; text-align: left; border-bottom: 1px solid var(--paper-shade); }
+  th { background: var(--paper-deep); font-family: var(--font-display); font-weight: 500; }
+  td { color: var(--ink-soft); }
+
+  .revoke-box { background: var(--paper-deep); border-left: 4px solid var(--maple); padding: 1.25rem 1.5rem; margin: 2rem 0; border-radius: 0 12px 12px 0; }
+  .revoke-box button { background: var(--maple); color: var(--paper); border: 0; border-radius: 999px; padding: .6rem 1.2rem; font: inherit; font-weight: 600; cursor: pointer; transition: background .2s; }
+  .revoke-box button:hover { background: var(--maple-deep); }
+
+  .site-footer { background: var(--ink); color: var(--paper); padding: 2rem clamp(1.25rem, 4vw, 2.5rem); text-align: center; }
+  .site-footer p { margin: .25rem 0; font-size: .9rem; color: rgba(251,247,240,.7); }
+  .site-footer a { color: var(--maple-soft); }
+</style>
+
+<script src="/assets/consent.js" defer></script>
+</head>
+<body>
+
+<header class="site-nav">
+  <a href="/" class="brand">
+    <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+      <rect width="64" height="64" rx="14" fill="#C8102E"/>
+      <circle cx="32" cy="37" r="16" fill="#FBF7F0"/>
+      <circle cx="20" cy="23" r="7" fill="#FBF7F0"/>
+      <circle cx="44" cy="23" r="7" fill="#FBF7F0"/>
+      <circle cx="20" cy="23" r="3" fill="#C8102E"/>
+      <circle cx="44" cy="23" r="3" fill="#C8102E"/>
+      <circle cx="26" cy="34" r="2" fill="#2A2522"/>
+      <circle cx="38" cy="34" r="2" fill="#2A2522"/>
+      <ellipse cx="32" cy="44" rx="5" ry="3.5" fill="#F4DBCB"/>
+      <ellipse cx="32" cy="42" rx="1.8" ry="1.3" fill="#2A2522"/>
+    </svg>
+    <span class="brand-text">
+      <span class="brand-line-1">Maple Bear</span>
+      <span class="brand-line-2">Bento Gonçalves</span>
+    </span>
+  </a>
+  <nav class="nav-links">
+    <a href="/sobre/">Sobre</a>
+    <a href="/diario/">Diário</a>
+    <a href="/faq/">FAQ</a>
+    <a href="https://wa.me/5554999315480" class="nav-cta" target="_blank" rel="noopener">Agendar visita</a>
+  </nav>
+</header>
+
+<main>
+
+<h1>Política de <em>Privacidade</em></h1>
+<p class="updated">Última atualização: 22 de maio de 2026 · Conformidade com a LGPD (Lei 13.709/2018)</p>
+
+<h2>1. Quem somos</h2>
+<p>
+A <strong>Maple Bear Bento Gonçalves</strong> ("nós", "nossa escola") é uma escola bilíngue
+canadense localizada em Bento Gonçalves, Rio Grande do Sul, Brasil. Este site
+(<strong>maplebearbg.com.br</strong>) é mantido por nós como canal institucional.
+</p>
+<p>
+Como <strong>Controlador de Dados</strong> nos termos da LGPD, somos responsáveis por
+decisões sobre o tratamento dos seus dados pessoais coletados por este site.
+</p>
+<p>
+<strong>Contato do Encarregado (DPO):</strong><br>
+E-mail: <a href="mailto:contato@maplebearbg.com.br">contato@maplebearbg.com.br</a><br>
+WhatsApp: <a href="https://wa.me/5554999315480">+55 54 9 9931-5480</a>
+</p>
+
+<h2>2. Que dados coletamos</h2>
+
+<h3>2.1 Dados que você fornece ativamente</h3>
+<p>Quando você usa o formulário de contato ou clica em algum link de WhatsApp, podemos receber:</p>
+<ul>
+  <li>Nome</li>
+  <li>Telefone (WhatsApp)</li>
+  <li>Mensagem livre que você escolher enviar</li>
+  <li>E-mail (se preenchido)</li>
+</ul>
+
+<h3>2.2 Dados coletados automaticamente (cookies analíticos)</h3>
+<p>
+Com seu consentimento explícito (banner de cookies), usamos o <strong>Google Analytics 4</strong>
+pra entender como o site é usado. Isso pode incluir:
+</p>
+<ul>
+  <li>Páginas visitadas e tempo de permanência</li>
+  <li>Origem do tráfego (Google, redes sociais, link direto)</li>
+  <li>Tipo de dispositivo e navegador</li>
+  <li>Localização aproximada (cidade, não endereço)</li>
+  <li>Endereço IP (anonimizado — últimos dígitos removidos)</li>
+</ul>
+<p>
+Se você <strong>recusar</strong> os cookies analíticos no banner, nenhum desses dados é
+coletado. Apenas cookies estritamente necessários ao funcionamento do site são utilizados.
+</p>
+
+<h2>3. Pra que usamos seus dados</h2>
+<table>
+  <thead>
+    <tr><th>Finalidade</th><th>Base legal (LGPD)</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Responder seu contato e agendar visita</td><td>Art. 7º, V (execução de procedimentos preliminares)</td></tr>
+    <tr><td>Enviar informações sobre a escola que você solicitou</td><td>Art. 7º, IX (legítimo interesse)</td></tr>
+    <tr><td>Analisar tráfego e melhorar o site</td><td>Art. 7º, I (consentimento)</td></tr>
+    <tr><td>Cumprir obrigações legais e regulatórias</td><td>Art. 7º, II (obrigação legal)</td></tr>
+  </tbody>
+</table>
+
+<h2>4. Com quem compartilhamos</h2>
+<p>Não vendemos seus dados. Compartilhamos somente com prestadores de serviço necessários:</p>
+<ul>
+  <li><strong>Google</strong> (Analytics, Fonts) — para análise e renderização de fontes</li>
+  <li><strong>Cloudflare</strong> — para entrega e proteção do site (CDN)</li>
+  <li><strong>GitHub</strong> — onde o site está hospedado (GitHub Pages)</li>
+  <li><strong>Meta/WhatsApp</strong> — quando você clica no botão WhatsApp e conversa conosco</li>
+</ul>
+<p>
+Esses parceiros têm suas próprias políticas de privacidade. Eles podem armazenar dados
+fora do Brasil (transferência internacional). Garantimos que todos cumprem padrões
+internacionais de proteção de dados (GDPR, frameworks de proteção).
+</p>
+
+<h2>5. Por quanto tempo guardamos</h2>
+<ul>
+  <li>Dados de contato (WhatsApp, e-mail enviado): até 2 anos após o último contato, ou enquanto necessário pra atender você</li>
+  <li>Dados analíticos do GA4: 14 meses (configuração padrão)</li>
+  <li>Cookies essenciais: máximo 12 meses</li>
+</ul>
+
+<h2>6. Seus direitos (LGPD Art. 18)</h2>
+<p>Como titular de dados, você pode a qualquer momento:</p>
+<ul>
+  <li><strong>Confirmar</strong> se tratamos seus dados</li>
+  <li><strong>Acessar</strong> os dados que temos sobre você</li>
+  <li><strong>Corrigir</strong> dados incompletos ou desatualizados</li>
+  <li><strong>Anonimizar, bloquear ou eliminar</strong> dados desnecessários</li>
+  <li><strong>Portabilidade</strong> dos dados</li>
+  <li><strong>Eliminar</strong> dados tratados com base no consentimento</li>
+  <li><strong>Revogar o consentimento</strong> a qualquer momento</li>
+  <li><strong>Reclamar à ANPD</strong> (Autoridade Nacional de Proteção de Dados)</li>
+</ul>
+
+<p>
+Pra exercer qualquer um desses direitos, envie um e-mail pra
+<a href="mailto:contato@maplebearbg.com.br">contato@maplebearbg.com.br</a> com o assunto
+<strong>"LGPD — exercício de direitos"</strong>. Atendemos em até <strong>15 dias úteis</strong>.
+</p>
+
+<h2>7. Cookies — controle</h2>
+<p>
+Você pode revogar seu consentimento a qualquer momento clicando no botão abaixo. Isso vai
+recarregar a página e mostrar o banner de cookies novamente, permitindo nova escolha.
+</p>
+<div class="revoke-box">
+  <p style="margin-bottom: 1rem;"><strong>Revisar minha preferência de cookies</strong> — limpa a escolha anterior e mostra o banner de novo.</p>
+  <button onclick="window.mbbgRevoke && window.mbbgRevoke()">Revogar e revisar</button>
+</div>
+
+<h2>8. Segurança</h2>
+<p>
+Tomamos medidas técnicas e administrativas razoáveis pra proteger seus dados contra acesso
+não autorizado, perda, alteração ou divulgação indevida. O site usa HTTPS (criptografia em
+trânsito), hospedagem em infraestrutura segura (GitHub Pages + Cloudflare) e acesso restrito.
+</p>
+
+<h2>9. Crianças</h2>
+<p>
+Este site é direcionado a pais e responsáveis adultos. Não coletamos intencionalmente dados
+de crianças. Caso uma criança envie dados, peça que um responsável entre em contato pra
+solicitar a exclusão.
+</p>
+
+<h2>10. Alterações nesta política</h2>
+<p>
+Esta política pode ser atualizada. Quando houver mudanças relevantes, atualizamos a data no
+topo. Recomendamos revisitar esta página periodicamente.
+</p>
+
+<h2>11. Contato</h2>
+<p>
+Dúvidas sobre esta política ou sobre o tratamento dos seus dados?
+</p>
+<ul>
+  <li>E-mail: <a href="mailto:contato@maplebearbg.com.br">contato@maplebearbg.com.br</a></li>
+  <li>WhatsApp: <a href="https://wa.me/5554999315480">+55 54 9 9931-5480</a></li>
+  <li>Endereço: Bento Gonçalves, RS (endereço completo disponível em visita)</li>
+</ul>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Maple Bear Bento Gonçalves</strong> — Em Bento desde 2025 · Year 1 em 2027</p>
+  <p><a href="/sobre/">Sobre</a> · <a href="/diario/">Diário</a> · <a href="/faq/">FAQ</a> · <a href="/privacidade/">Privacidade</a> · <a href="/termos/">Termos</a></p>
+</footer>
+
+</body>
+</html>

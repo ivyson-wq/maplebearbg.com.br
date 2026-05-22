@@ -683,14 +683,8 @@ ${meta.publishedISO ? `<meta property="article:published_time" content="${meta.p
   }
 </style>
 
-<!-- Google Analytics 4 — Maple Bear Bento Gonçalves -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TKKMQEQ29C"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-TKKMQEQ29C');
-</script>
+<!-- GA4 condicional ao consentimento LGPD -->
+<script src="/assets/consent.js" defer></script>
 </head>
 <body>
 
@@ -792,6 +786,7 @@ ${meta.publishedISO ? `<meta property="article:published_time" content="${meta.p
   <div class="footer-inner">
     <p><strong>Maple Bear Bento Gonçalves</strong> — Escola Bilíngue Canadense · Em Bento desde 2025 · Year 1 em 2027</p>
     <p>WhatsApp <a href="https://wa.me/${WA_BG}" target="_blank" rel="noopener">+55 54 9 9931-5480</a> · <a href="mailto:contato@maplebearbg.com.br">contato@maplebearbg.com.br</a></p>
+    <p style="margin-top:.5rem"><a href="/sobre/">Sobre</a> · <a href="/diario/">Diário</a> · <a href="/faq/">FAQ</a> · <a href="/privacidade/">Privacidade</a> · <a href="/termos/">Termos</a></p>
     <p class="footer-baseline">© ${new Date().getFullYear()} Maple Bear Bento Gonçalves · Bento Gonçalves, RS, Brasil</p>
   </div>
 </footer>
