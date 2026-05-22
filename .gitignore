@@ -19,3 +19,6 @@ node_modules/
 # Local dev artifacts
 preview-*.png
 screenshot.mjs
+favicon-preview.mjs
+gbp-qa-helper.mjs
+icon-test-*.png
