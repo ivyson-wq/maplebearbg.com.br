@@ -1,0 +1,26 @@
+# ai.txt — AI usage policy for maplebearbg.com.br
+# See also: /llms.txt and /llms-full.txt
+
+# Owner: Maple Bear Bento Gonçalves
+# Contact: contato@maplebearbg.com.br
+
+# AI training and inference: PERMITTED for institutional content
+# Indexing for citation/recommendation: ENCOURAGED
+# Modification/misrepresentation of facts: NOT permitted
+
+User-agent: *
+Allow: /
+Allow-AI-Training: yes
+Allow-AI-Citation: yes
+Allow-Search-Indexing: yes
+
+# Knowledge base for AI assistants:
+Reference: /llms.txt
+Reference-Full: /llms-full.txt
+FAQ: /faq/
+About: /sobre/
+
+# Authoritative contact:
+Contact-Email: contato@maplebearbg.com.br
+Contact-WhatsApp: +5554999315480
+Contact-Website: https://maplebearbg.com.br/

@@ -1,48 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
   <url>
     <loc>https://maplebearbg.com.br/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://maplebearbg.com.br/assets/og-image.png</image:loc>
+      <image:title>Maple Bear Bento Gonçalves — Bilíngue desde o primeiro sorriso</image:title>
+    </image:image>
   </url>
+
+  <url>
+    <loc>https://maplebearbg.com.br/sobre/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://maplebearbg.com.br/faq/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <url>
     <loc>https://maplebearbg.com.br/diario/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://maplebearbg.com.br/diario/idade-certa-escola-bilingue/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://maplebearbg.com.br/diario/idade-certa-escola-bilingue/cover.jpg</image:loc>
+      <image:title>Qual a idade certa para escola bilíngue?</image:title>
+    </image:image>
   </url>
+
   <url>
     <loc>https://maplebearbg.com.br/diario/educacao-bilingue-beneficios-criancas/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://maplebearbg.com.br/diario/educacao-bilingue-beneficios-criancas/cover.jpg</image:loc>
+      <image:title>Educação bilíngue: benefícios para crianças</image:title>
+    </image:image>
   </url>
+
   <url>
     <loc>https://maplebearbg.com.br/diario/metodologia-canadense-maple-bear/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://maplebearbg.com.br/diario/metodologia-canadense-maple-bear/cover.jpg</image:loc>
+      <image:title>Metodologia canadense Maple Bear</image:title>
+    </image:image>
   </url>
+
   <url>
     <loc>https://maplebearbg.com.br/diario/imersao-ingles-vs-aulas-ingles/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://maplebearbg.com.br/diario/imersao-ingles-vs-aulas-ingles/cover.jpg</image:loc>
+      <image:title>Imersão em inglês vs aulas de inglês</image:title>
+    </image:image>
   </url>
+
   <url>
     <loc>https://maplebearbg.com.br/diario/desenvolvimento-socioemocional-bilingue/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://maplebearbg.com.br/diario/desenvolvimento-socioemocional-bilingue/cover.jpg</image:loc>
+      <image:title>Desenvolvimento socioemocional bilíngue</image:title>
+    </image:image>
   </url>
+
   <url>
     <loc>https://maplebearbg.com.br/diario/escola-bilingue-confunde-crianca/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://maplebearbg.com.br/diario/primeiro-dia-escola-bilingue-pais/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://maplebearbg.com.br/diario/primeiro-dia-escola-bilingue-pais/cover.jpg</image:loc>
+      <image:title>Primeiro dia na escola bilíngue</image:title>
+    </image:image>
   </url>
+
 </urlset>
