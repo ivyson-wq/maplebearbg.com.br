@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#C8102E">
+
+<title>Imprensa · Maple Bear Bento Gonçalves</title>
+<meta name="description" content="Maple Bear Bento Gonçalves na imprensa: artigos, entrevistas, press kit pra jornalistas.">
+<link rel="canonical" href="https://maplebearbg.com.br/imprensa/">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Spectral:ital,wght@0,200..800;1,200..800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+<style>
+  :root {
+    --paper:#FBF7F0; --paper-deep:#F4ECDF; --paper-shade:#EBE0CC;
+    --ink:#2A2522; --ink-soft:#5C544D; --ink-faint:#8A7F75;
+    --maple:#C8102E; --maple-deep:#8B0A1F; --maple-soft:#E84A5F; --blush:#F4DBCB;
+    --shadow-soft:0 14px 30px -18px rgba(42,37,34,.18);
+    --font-display:'Fraunces',Georgia,serif;
+    --font-body:'Spectral',Georgia,serif;
+    --font-script:'Caveat',cursive;
+  }
+  *,*::before,*::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 1.1rem; line-height: 1.7; }
+  a { color: var(--maple); text-decoration: none; }
+
+  .site-nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1.1rem clamp(1.25rem, 4vw, 2.5rem); background: rgba(251,247,240,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--paper-shade); }
+  .brand { display: flex; align-items: center; gap: 0.7rem; color: var(--ink); }
+  .brand-mark { width: 44px; height: 44px; flex-shrink: 0; filter: drop-shadow(0 4px 8px rgba(200,16,46,0.18)); }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.05; }
+  .brand-line-1 { font-weight: 600; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; color: var(--maple); }
+  .brand-line-2 { font-weight: 500; font-size: 1.15rem; font-style: italic; color: var(--ink); font-family: var(--font-display); margin-top: 1px; }
+  .nav-links { display: flex; gap: 1.4rem; }
+  .nav-links a { color: var(--ink-soft); font-size: .95rem; font-weight: 500; }
+  .nav-cta { background: var(--maple); color: var(--paper) !important; padding: .6rem 1.1rem; border-radius: 999px; }
+  @media (max-width: 640px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+  .hero { padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 4vw, 2.5rem) clamp(2rem, 5vw, 4rem); background: linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%); text-align: center; }
+  .eyebrow { display: inline-flex; align-items: center; gap: .6rem; margin: 0 0 1.5rem; font-size: .85rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+  .eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--maple); box-shadow: 0 0 0 4px rgba(200,16,46,0.18); }
+  h1 { font-family: var(--font-display); font-variation-settings: "opsz" 144, "wght" 400, "SOFT" 50; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; margin: 0 0 1rem; font-weight: 400; }
+  h1 em { font-style: italic; color: var(--maple); }
+  .lead { max-width: 56ch; margin: 0 auto; font-size: 1.2rem; color: var(--ink-soft); font-weight: 300; }
+
+  main { max-width: 880px; margin: 0 auto; padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 2rem); }
+  section { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  h2 { font-family: var(--font-display); font-variation-settings: "opsz" 144, "wght" 500, "SOFT" 40; font-size: clamp(1.7rem, 3vw, 2.2rem); color: var(--ink); margin: 0 0 1.25rem; }
+  h2 em { font-style: italic; color: var(--maple); }
+
+  .press-card { display: grid; grid-template-columns: auto 1fr; gap: 1.25rem; background: var(--paper); border: 1px solid var(--paper-shade); border-radius: 16px; padding: 1.5rem; margin: 1rem 0; transition: box-shadow .2s, transform .2s; }
+  .press-card:hover { box-shadow: var(--shadow-soft); transform: translateY(-2px); }
+  .press-card .badge { background: var(--paper-deep); color: var(--ink); padding: .5rem .8rem; border-radius: 12px; font-family: var(--font-display); font-weight: 500; font-size: .95rem; text-align: center; min-width: 100px; line-height: 1.2; height: fit-content; }
+  .press-card .badge small { display: block; color: var(--ink-faint); font-size: .7rem; margin-top: .2rem; font-weight: 400; letter-spacing: .05em; text-transform: uppercase; }
+  .press-card h3 { font-family: var(--font-display); font-size: 1.2rem; margin: 0 0 .5rem; color: var(--ink); font-weight: 500; }
+  .press-card p { color: var(--ink-soft); font-size: .95rem; margin: 0 0 .75rem; font-weight: 300; }
+  .press-card .more { color: var(--maple); font-size: .9rem; font-weight: 500; }
+  @media (max-width: 600px) { .press-card { grid-template-columns: 1fr; } }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 2rem 0; padding: 2rem; background: var(--ink); color: var(--paper); border-radius: 18px; text-align: center; position: relative; overflow: hidden; }
+  .stats-grid::before { content: ""; position: absolute; top: -50%; right: -10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(200,16,46,0.18) 0%, transparent 65%); }
+  .stat { position: relative; z-index: 1; }
+  .stat-num { display: block; font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; line-height: 1; }
+  .stat-num em { color: var(--maple-soft); font-style: italic; }
+  .stat-label { display: block; margin-top: .4rem; font-size: .85rem; color: rgba(251,247,240,.7); font-weight: 300; }
+  @media (max-width: 600px) { .stats-grid { grid-template-columns: 1fr; } }
+
+  .press-kit { background: var(--blush); border-left: 4px solid var(--maple); padding: 1.5rem 1.75rem; margin: 2rem 0; border-radius: 0 14px 14px 0; }
+  .press-kit h3 { font-family: var(--font-display); font-style: italic; margin: 0 0 .5rem; color: var(--ink); }
+  .press-kit p { margin: 0 0 .75rem; color: var(--ink-soft); font-size: .95rem; }
+
+  .site-footer { background: var(--ink); color: var(--paper); padding: 2.5rem clamp(1.25rem, 4vw, 2.5rem); text-align: center; }
+  .site-footer p { margin: .25rem 0; font-size: .9rem; color: rgba(251,247,240,.7); }
+  .site-footer a { color: var(--maple-soft); }
+</style>
+
+<script src="/assets/consent.js" defer></script>
+</head>
+<body>
+
+<header class="site-nav">
+  <a href="/" class="brand">
+    <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#C8102E"/><circle cx="32" cy="37" r="16" fill="#FBF7F0"/><circle cx="20" cy="23" r="7" fill="#FBF7F0"/><circle cx="44" cy="23" r="7" fill="#FBF7F0"/><circle cx="20" cy="23" r="3" fill="#C8102E"/><circle cx="44" cy="23" r="3" fill="#C8102E"/><circle cx="26" cy="34" r="2" fill="#2A2522"/><circle cx="38" cy="34" r="2" fill="#2A2522"/><ellipse cx="32" cy="44" rx="5" ry="3.5" fill="#F4DBCB"/><ellipse cx="32" cy="42" rx="1.8" ry="1.3" fill="#2A2522"/></svg>
+    <span class="brand-text"><span class="brand-line-1">Maple Bear</span><span class="brand-line-2">Bento Gonçalves</span></span>
+  </a>
+  <nav class="nav-links">
+    <a href="/sobre/">Sobre</a>
+    <a href="/estagios/">Estágios</a>
+    <a href="/diario/">Diário</a>
+    <a href="/faq/">FAQ</a>
+    <a href="https://wa.me/5554999315480" class="nav-cta" target="_blank" rel="noopener">Agendar visita</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <p class="eyebrow"><span class="eyebrow-dot"></span> Imprensa</p>
+  <h1>Maple Bear <em>na imprensa</em>.</h1>
+  <p class="lead">Cobertura midiática, reconhecimentos da rede internacional, press kit pra jornalistas. Pra quem cobre educação, infância ou Bento Gonçalves.</p>
+</section>
+
+<main>
+
+<section>
+  <h2>Cobertura <em>local</em>.</h2>
+
+  <a href="https://jornalsemanario.com.br/escola-canadense-completa-um-ano-de-atuacao-em-bento-goncalves/" class="press-card" target="_blank" rel="noopener">
+    <div class="badge">Jornal Semanário<small>2026</small></div>
+    <div>
+      <h3>"Escola canadense completa um ano de atuação em Bento Gonçalves"</h3>
+      <p>O Jornal Semanário cobre o aniversário de 1 ano da Maple Bear em Bento Gonçalves, destacando a metodologia canadense de imersão bilíngue e o impacto na comunidade local.</p>
+      <span class="more">Ler matéria completa ↗</span>
+    </div>
+  </a>
+</section>
+
+<section>
+  <h2>A rede <em>Maple Bear</em> em números.</h2>
+  <div class="stats-grid">
+    <div class="stat"><span class="stat-num">+1.100<em></em></span><span class="stat-label">escolas no Brasil</span></div>
+    <div class="stat"><span class="stat-num">+30</span><span class="stat-label">países com Maple Bear</span></div>
+    <div class="stat"><span class="stat-num">25</span><span class="stat-label">anos de operação no Brasil</span></div>
+  </div>
+  <p>A Maple Bear Canadian Schools é a maior rede de escolas bilíngues canadenses fora do Canadá. Currículo desenvolvido por educadores canadenses, padronizado internacionalmente, alinhado à legislação brasileira (BNCC).</p>
+  <p>Site oficial da rede: <a href="https://www.maplebear.com.br/" target="_blank" rel="noopener">maplebear.com.br ↗</a></p>
+</section>
+
+<section>
+  <h2>Sobre a <em>unidade</em> Bento Gonçalves.</h2>
+  <p>A Maple Bear Bento Gonçalves chegou em 2025, trazendo pra Serra Gaúcha a metodologia bilíngue canadense reconhecida em mais de 30 países. Atende cinco estágios da educação infantil (Bear Care a Senior Kindergarten) e abre em 2027 o Year 1 — primeiro ano do Ensino Fundamental.</p>
+  <p>Endereço: Alameda Fenavinho, 168 · Bento Gonçalves/RS · CEP 95703-364</p>
+  <p>Atende famílias de Bento Gonçalves, Garibaldi, Monte Belo do Sul, Pinto Bandeira, Farroupilha e outras cidades próximas da Serra Gaúcha.</p>
+</section>
+
+<div class="press-kit">
+  <h3>📄 Press kit pra jornalistas</h3>
+  <p><strong>Para entrevistas, declarações ou material institucional</strong>, entre em contato:</p>
+  <p>📧 <a href="mailto:contato@maplebearbg.com.br?subject=Imprensa%20-%20Maple%20Bear%20Bento%20Gon%C3%A7alves">contato@maplebearbg.com.br</a> (assunto: "Imprensa")</p>
+  <p>📱 WhatsApp <a href="https://wa.me/5554999315480">+55 54 9 9931-5480</a></p>
+  <p><strong>Material disponível:</strong> bio institucional, logo em alta resolução, fotos da escola sob autorização, dados da rede Maple Bear Brasil.</p>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <p><strong>Maple Bear Bento Gonçalves</strong> — Em Bento desde 2025 · Year 1 em 2027</p>
+  <p><a href="https://wa.me/5554999315480">WhatsApp +55 54 9 9931-5480</a> · <a href="mailto:contato@maplebearbg.com.br">contato@maplebearbg.com.br</a></p>
+  <p style="margin-top:.5rem"><a href="/sobre/">Sobre</a> · <a href="/diario/">Diário</a> · <a href="/faq/">FAQ</a> · <a href="/privacidade/">Privacidade</a> · <a href="/termos/">Termos</a></p>
+</footer>
+
+</body>
+</html>
