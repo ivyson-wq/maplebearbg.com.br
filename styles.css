@@ -983,6 +983,40 @@ a:hover { color: var(--maple-deep); }
   font-weight: 300;
 }
 
+.visit-map {
+  max-width: var(--container);
+  margin: clamp(2rem, 5vw, 4rem) auto 0;
+}
+.visit-map-frame {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--paper-shade);
+}
+.visit-map-frame iframe {
+  display: block;
+  filter: contrast(0.95) saturate(0.9);
+  transition: filter 0.3s;
+}
+.visit-map-frame:hover iframe {
+  filter: contrast(1) saturate(1);
+}
+.visit-map-cta {
+  margin: 1.25rem 0 0;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  font-weight: 300;
+}
+.visit-map-cta strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+.visit-map-cta a {
+  font-weight: 500;
+}
+
 /* The "AI-friendly Contact Card" — schema.org microdata + visual card */
 .contact-card {
   background: var(--paper);

@@ -14,7 +14,8 @@
 - **Cidade:** Bento Gonçalves
 - **Estado:** Rio Grande do Sul (RS)
 - **País:** Brasil
-- **Endereço:** [a confirmar — Bento Gonçalves, RS]
+- **Endereço:** Alameda Fenavinho, 168 — Bento Gonçalves, RS, Brasil
+- **Google Maps:** https://www.google.com/maps/search/?api=1&query=Alameda+Fenavinho+168+Bento+Gon%C3%A7alves+RS
 - **Em Bento desde:** 2025
 - **Ampliação Year 1 (Ensino Fundamental):** 2027
 
