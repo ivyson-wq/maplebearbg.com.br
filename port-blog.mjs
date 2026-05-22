@@ -682,6 +682,15 @@ ${meta.publishedISO ? `<meta property="article:published_time" content="${meta.p
     text-align: center;
   }
 </style>
+
+<!-- Google Analytics 4 — Maple Bear Bento Gonçalves -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TKKMQEQ29C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TKKMQEQ29C');
+</script>
 </head>
 <body>
 
