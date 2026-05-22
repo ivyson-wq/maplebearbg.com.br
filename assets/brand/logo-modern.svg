@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120" aria-label="Maple Bear">
+  <!-- Logo moderna: folha vermelha + MAPLE BEAR wordmark (referência: brand kit pag 60, 62) -->
+  <g transform="translate(5, 18)">
+    <!-- Folha de bordo vermelha -->
+    <path d="M45 4 L48 26 L60 22 L55 35 L70 32 L62 45 L75 48 L62 56 L78 70 L60 67 L66 80 L48 73 L45 96 L45 102 L42 96 L42 73 L24 80 L30 67 L12 70 L28 56 L15 48 L28 45 L20 32 L35 35 L30 22 L42 26 Z" fill="#C8131A"/>
+  </g>
+  <!-- Wordmark "MAPLE BEAR" bold sans -->
+  <text x="105" y="56" font-family="Sora, Arial Black, sans-serif" font-weight="900" font-size="40" fill="#111" letter-spacing="-0.5">MAPLE</text>
+  <text x="105" y="98" font-family="Sora, Arial Black, sans-serif" font-weight="900" font-size="40" fill="#111" letter-spacing="-0.5">BEAR</text>
+</svg>

@@ -19,6 +19,10 @@ node_modules/
 # Local dev artifacts
 preview-*.png
 screenshot.mjs
+screenshot-rebrand.mjs
 favicon-preview.mjs
 gbp-qa-helper.mjs
 icon-test-*.png
+extract-brand.mjs
+node_modules/
+assets/brand-raw/

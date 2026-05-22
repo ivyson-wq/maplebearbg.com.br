@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 130" aria-label="Maple Bear mascote">
+  <!-- Mascote bear amarelo com touca canadense (referência: brand kit pag 33, 70-73) -->
+  <!-- Orelhas -->
+  <ellipse cx="28" cy="42" rx="14" ry="15" fill="#C99440" stroke="#000" stroke-width="2"/>
+  <ellipse cx="92" cy="42" rx="14" ry="15" fill="#C99440" stroke="#000" stroke-width="2"/>
+  <!-- Orelhas internas -->
+  <ellipse cx="28" cy="46" rx="7" ry="8" fill="#A87D34"/>
+  <ellipse cx="92" cy="46" rx="7" ry="8" fill="#A87D34"/>
+  <!-- Cabeça -->
+  <ellipse cx="60" cy="70" rx="38" ry="36" fill="#D4A24A" stroke="#000" stroke-width="2"/>
+  <!-- Touca canadense (red) -->
+  <path d="M28 38 Q36 22 60 22 Q84 22 92 38 Q88 44 60 44 Q32 44 28 38 Z" fill="#C8131A" stroke="#000" stroke-width="2"/>
+  <!-- Pompom da touca -->
+  <circle cx="60" cy="18" r="5" fill="#C8131A" stroke="#000" stroke-width="2"/>
+  <!-- Sombra/destaque da touca -->
+  <path d="M30 39 Q40 36 60 36 Q80 36 90 39 L90 42 Q60 45 30 42 Z" fill="#A50211" opacity="0.4"/>
+  <!-- Olhos (felizes/fechados) -->
+  <path d="M40 65 Q46 60 52 65" stroke="#000" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M68 65 Q74 60 80 65" stroke="#000" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Bochechas -->
+  <ellipse cx="34" cy="80" rx="7" ry="5" fill="#E89B9B" opacity="0.65"/>
+  <ellipse cx="86" cy="80" rx="7" ry="5" fill="#E89B9B" opacity="0.65"/>
+  <!-- Focinho -->
+  <ellipse cx="60" cy="84" rx="4" ry="3" fill="#000"/>
+  <!-- Boca sorrindo -->
+  <path d="M54 88 Q60 95 66 88" stroke="#000" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Língua pequena -->
+  <path d="M58 91 Q60 94 62 91" stroke="#C8131A" stroke-width="1.5" fill="#E89B9B" stroke-linecap="round"/>
+</svg>

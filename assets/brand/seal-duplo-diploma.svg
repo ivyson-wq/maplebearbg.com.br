@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" aria-label="Selo Duplo Diploma Brasil e Canadá">
+  <!-- Selo Duplo Diploma (referência: brand kit pag 59) -->
+  <defs>
+    <path id="topArc" d="M 30 100 A 70 70 0 0 1 170 100" fill="none"/>
+    <path id="bottomArc" d="M 30 100 A 70 70 0 0 0 170 100" fill="none"/>
+  </defs>
+  <!-- Fitas/ribbons embaixo -->
+  <polygon points="60,160 60,210 80,195 95,210 95,160" fill="#C8131A"/>
+  <polygon points="105,160 105,210 120,195 140,210 140,160" fill="#C8131A"/>
+  <!-- Borda externa dentada (rosette) -->
+  <g fill="#C8131A">
+    <circle cx="100" cy="100" r="78"/>
+  </g>
+  <!-- Pontos da rosette -->
+  <g fill="#C8131A">
+    <circle cx="100" cy="22" r="6"/>
+    <circle cx="135" cy="32" r="6"/>
+    <circle cx="160" cy="58" r="6"/>
+    <circle cx="172" cy="93" r="6"/>
+    <circle cx="170" cy="125" r="6"/>
+    <circle cx="155" cy="155" r="6"/>
+    <circle cx="125" cy="172" r="6"/>
+    <circle cx="100" cy="178" r="6"/>
+    <circle cx="75" cy="172" r="6"/>
+    <circle cx="45" cy="155" r="6"/>
+    <circle cx="30" cy="125" r="6"/>
+    <circle cx="28" cy="93" r="6"/>
+    <circle cx="40" cy="58" r="6"/>
+    <circle cx="65" cy="32" r="6"/>
+  </g>
+  <!-- Círculo branco interno -->
+  <circle cx="100" cy="100" r="68" fill="#FFFFFF"/>
+  <!-- Texto curvo "DUPLO DIPLOMA" no topo -->
+  <text font-family="Sora, Arial Black, sans-serif" font-weight="800" font-size="14" fill="#000" letter-spacing="1.5">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">DUPLO DIPLOMA</textPath>
+  </text>
+  <!-- Texto curvo "BRASIL E CANADÁ" embaixo -->
+  <text font-family="Sora, Arial Black, sans-serif" font-weight="800" font-size="14" fill="#000" letter-spacing="1.5">
+    <textPath href="#bottomArc" startOffset="50%" text-anchor="middle">BRASIL E CANADÁ</textPath>
+  </text>
+  <!-- Pontos separadores entre os textos -->
+  <circle cx="36" cy="100" r="3" fill="#C8131A"/>
+  <circle cx="164" cy="100" r="3" fill="#C8131A"/>
+  <!-- Círculo vermelho central -->
+  <circle cx="100" cy="100" r="38" fill="#C8131A"/>
+  <!-- Folha de bordo branca no centro -->
+  <g transform="translate(100, 100) scale(0.45)" fill="#FFFFFF">
+    <path d="M0 -55 L4 -33 L20 -38 L13 -22 L33 -25 L20 -10 L40 -3 L20 6 L42 24 L18 18 L25 36 L4 25 L0 50 L0 56 L-4 50 L-4 25 L-25 36 L-18 18 L-42 24 L-20 6 L-40 -3 L-20 -10 L-33 -25 L-13 -22 L-20 -38 L-4 -33 Z"/>
+  </g>
+</svg>
