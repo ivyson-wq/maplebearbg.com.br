@@ -1,0 +1,76 @@
+name: IndexNow Submit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - 'sitemap.xml'
+      - 'llms.txt'
+      - 'llms-full.txt'
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Collect changed URLs and submit to IndexNow
+        run: |
+          set -euo pipefail
+
+          KEY="72af6ee89ae349fa9ade23afce72dcc7"
+          HOST="maplebearbg.com.br"
+          KEY_LOCATION="https://${HOST}/${KEY}.txt"
+
+          # Pega arquivos HTML modificados no último commit
+          CHANGED=$(git diff --name-only HEAD^ HEAD | grep -E '\.(html|xml|txt)$' || true)
+
+          # Sempre inclui home + sitemap
+          URLS=()
+          URLS+=("https://${HOST}/")
+          URLS+=("https://${HOST}/sitemap.xml")
+
+          for f in $CHANGED; do
+            # Skip arquivos não-publicos
+            case "$f" in
+              .github/*|.git*|README.md|TUTORIAL.md|EXTERNAL-SIGNALS.md|port-blog.mjs|screenshot.mjs|package.json|*.local.*) continue ;;
+            esac
+
+            # index.html → diretório
+            url="https://${HOST}/$f"
+            url="${url%index.html}"
+            URLS+=("$url")
+          done
+
+          # Dedupe
+          UNIQUE_URLS=$(printf '%s\n' "${URLS[@]}" | sort -u)
+          echo "URLs to submit:"
+          echo "$UNIQUE_URLS"
+
+          # Monta JSON body
+          URL_JSON=$(echo "$UNIQUE_URLS" | python3 -c "import sys,json; print(json.dumps([l.strip() for l in sys.stdin if l.strip()]))")
+
+          BODY=$(python3 -c "
+          import json
+          import sys
+          print(json.dumps({
+            'host': '$HOST',
+            'key': '$KEY',
+            'keyLocation': '$KEY_LOCATION',
+            'urlList': $URL_JSON
+          }))
+          ")
+
+          echo "Body: $BODY"
+
+          # Submit pro IndexNow (Bing/Yandex/etc lêem)
+          curl -sS -X POST "https://api.indexnow.org/IndexNow" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            -d "$BODY" \
+            -w "\nHTTP %{http_code}\n"
+
+          echo "✅ IndexNow submission done"
