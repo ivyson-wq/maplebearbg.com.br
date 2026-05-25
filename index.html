@@ -34,6 +34,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Spectral:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/assets/instagram-gallery.css">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/x-icon" href="/assets/brand/favicon.ico?v=3">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png?v=3">
@@ -238,6 +239,17 @@
 
   <!-- GA4 condicional ao consentimento LGPD -->
   <script src="/assets/consent.js" defer></script>
+
+  <!-- Instagram feed (hospedado em Caxias com unit=bg via CORS) -->
+  <script>
+    window.MB_INSTAGRAM_CONFIG = {
+      endpoint: 'https://maplebearcaxiasdosul.com.br/api/instagram-feed',
+      unit: 'bg',
+      cacheKey: 'mb_ig_feed_bg_v1',
+      igHandleUrl: 'https://www.instagram.com/maplebear.bentogoncalves/'
+    };
+  </script>
+  <script src="/assets/instagram-gallery.js" defer></script>
 </head>
 
 <body>
@@ -310,6 +322,9 @@
     <span class="hero-mark-label">Capa</span>
   </div>
 </section>
+
+<!-- ──────────────────────────── HERO VIDEO (Instagram) ──────────────────────────── -->
+<div class="ig-hero-video" id="ig-hero-video" data-ig-section aria-label="Vídeo do Instagram"></div>
 
 <!-- ──────────────────────────── TRUST BAR ──────────────────────────── -->
 <aside class="trust-bar" aria-label="Credenciais Maple Bear">
@@ -703,52 +718,21 @@
   </div>
 </section>
 
-<!-- ──────────────────────────── VIDEOS ──────────────────────────── -->
-<section class="videos" id="videos" aria-labelledby="videos-title">
-  <header class="section-head">
-    <p class="chapter-num">↳ Em movimento</p>
-    <h2 id="videos-title" class="section-title">Veja como é<br>um dia <em>Maple Bear</em>.</h2>
-    <p class="section-sub">Vídeos da metodologia, do método bilíngue e da rotina das escolas Maple Bear pelo Brasil. Em breve, com cenas da nossa unidade em Bento Gonçalves.</p>
-  </header>
-
-  <div class="video-grid">
-    <article class="video-card">
-      <div class="video-thumb" data-video="dQw4w9WgXcQ">
-        <span class="video-label">Metodologia</span>
-        <span class="video-duration">2:18</span>
-        <button class="video-play" aria-label="Reproduzir vídeo sobre metodologia">
-          <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-        </button>
-      </div>
-      <h3>A metodologia canadense, em 2 minutos.</h3>
-      <p>Como ensinamos duas línguas ao mesmo tempo, sem traduzir.</p>
-    </article>
-
-    <article class="video-card">
-      <div class="video-thumb video-thumb-2" data-video="dQw4w9WgXcQ">
-        <span class="video-label">Toddler</span>
-        <span class="video-duration">1:42</span>
-        <button class="video-play" aria-label="Reproduzir vídeo sobre Toddler">
-          <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-        </button>
-      </div>
-      <h3>Um dia no Toddler.</h3>
-      <p>O acolhimento, a rotina e os primeiros vínculos em ambiente bilíngue.</p>
-    </article>
-
-    <article class="video-card">
-      <div class="video-thumb video-thumb-3" data-video="dQw4w9WgXcQ">
-        <span class="video-label">Famílias</span>
-        <span class="video-duration">3:05</span>
-        <button class="video-play" aria-label="Reproduzir vídeo de depoimentos de famílias">
-          <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-        </button>
-      </div>
-      <h3>Famílias Maple Bear.</h3>
-      <p>Pais e mães contam o que mudou na vida das suas crianças.</p>
-    </article>
+<!-- ──────────────────────────── INSTAGRAM LIVE FEED ──────────────────────────── -->
+<section class="ig-section" id="ig-instagram-section" data-ig-section aria-labelledby="ig-title">
+  <div class="ig-section__inner">
+    <header class="ig-section__head">
+      <p class="ig-section__eyebrow">↳ ao vivo do nosso Instagram</p>
+      <span class="ig-section__handwritten">o que acontece hoje</span>
+      <h2 id="ig-title" class="ig-section__title">A escola em <em>tempo real</em>.</h2>
+      <p class="ig-section__lede">
+        Cada dia tem história. Aqui você vê os bastidores, os projetos, as celebrações
+        e o crescimento das crianças — direto do nosso Instagram, atualizado automaticamente.
+      </p>
+      <span class="ig-stats" id="ig-stats"></span>
+    </header>
+    <div class="ig-gallery" id="ig-gallery"></div>
   </div>
-  <p class="videos-note">Vídeos placeholder — serão substituídos progressivamente por cenas originais da unidade Bento Gonçalves.</p>
 </section>
 
 <!-- ──────────────────────────── VISIT / CONTACT ──────────────────────────── -->
@@ -931,6 +915,7 @@
           <li><a href="mailto:contato@maplebearbg.com.br">contato@maplebearbg.com.br</a></li>
           <li><a href="https://wa.me/5554999315480" target="_blank" rel="noopener">WhatsApp · 54 9 9931-5480</a></li>
           <li><a href="tel:+5554999315480">+55 54 9 9931-5480</a></li>
+          <li><a href="https://www.instagram.com/maplebear.bentogoncalves/" target="_blank" rel="noopener">Instagram · @maplebear.bentogoncalves</a></li>
         </ul>
       </div>
       <div>
