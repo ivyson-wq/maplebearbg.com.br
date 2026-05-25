@@ -19,6 +19,9 @@
   <meta property="og:description" content="Educação canadense em Bento Gonçalves desde 2025. Year 1 do Ensino Fundamental chega em 2027.">
   <meta property="og:url" content="https://maplebearbg.com.br/">
   <meta property="og:image" content="https://maplebearbg.com.br/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Maple Bear Bento Gonçalves — Escola Bilíngue Canadense">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
@@ -31,6 +34,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Spectral:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/x-icon" href="/assets/brand/favicon.ico?v=3">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png?v=3">
   <link rel="icon" type="image/png" sizes="64x64" href="/assets/brand/favicon-64.png?v=3">
@@ -242,7 +246,7 @@
 
 <header class="site-nav" id="topo">
   <a href="#topo" class="brand" aria-label="Maple Bear Bento Gonçalves">
-    <img class="brand-mark" src="/assets/brand/logo-lockup-compact.png" alt="Maple Bear" width="120" height="60">
+    <img class="brand-mark" src="/assets/brand/logo-lockup-compact.png" alt="Maple Bear" width="120" height="60" loading="lazy" decoding="async">
     <span class="brand-divider" aria-hidden="true"></span>
     <span class="brand-text">
       <span class="brand-line-2">Bento Gonçalves</span>
@@ -446,7 +450,7 @@
     <li class="chapter chapter-left">
       <div class="chapter-photo" aria-hidden="true">
         <div class="photo-frame">
-          <img src="/assets/photos/toddler-swing.jpg" alt="Criança Maple Bear Bento Gonçalves brincando no balanço" loading="lazy" decoding="async">
+          <picture><source srcset="/assets/photos/toddler-swing.webp" type="image/webp"><img src="/assets/photos/toddler-swing.jpg" alt="Criança Maple Bear Bento Gonçalves brincando no balanço" loading="lazy" decoding="async"></picture>
           <span class="photo-caption">18 meses · Bear Care</span>
         </div>
       </div>
@@ -470,7 +474,7 @@
     <li class="chapter chapter-right">
       <div class="chapter-photo" aria-hidden="true">
         <div class="photo-frame">
-          <img src="/assets/photos/easter-event.jpg" alt="Crianças do Toddler Maple Bear em atividade lúdica" loading="lazy" decoding="async">
+          <picture><source srcset="/assets/photos/easter-event.webp" type="image/webp"><img src="/assets/photos/easter-event.jpg" alt="Crianças do Toddler Maple Bear em atividade lúdica" loading="lazy" decoding="async"></picture>
           <span class="photo-caption">2 anos · Toddler</span>
         </div>
       </div>
@@ -493,7 +497,7 @@
     <li class="chapter chapter-left">
       <div class="chapter-photo" aria-hidden="true">
         <div class="photo-frame">
-          <img src="/assets/photos/nursery-drawing.jpg" alt="Criança do Nursery Maple Bear desenhando no chão" loading="lazy" decoding="async">
+          <picture><source srcset="/assets/photos/nursery-drawing.webp" type="image/webp"><img src="/assets/photos/nursery-drawing.jpg" alt="Criança do Nursery Maple Bear desenhando no chão" loading="lazy" decoding="async"></picture>
           <span class="photo-caption">3 anos · Nursery</span>
         </div>
       </div>
@@ -516,7 +520,7 @@
     <li class="chapter chapter-right">
       <div class="chapter-photo" aria-hidden="true">
         <div class="photo-frame">
-          <img src="/assets/photos/hug-trio.jpg" alt="Crianças Maple Bear Bento Gonçalves se abraçando" loading="lazy" decoding="async">
+          <picture><source srcset="/assets/photos/hug-trio.webp" type="image/webp"><img src="/assets/photos/hug-trio.jpg" alt="Crianças Maple Bear Bento Gonçalves se abraçando" loading="lazy" decoding="async"></picture>
           <span class="photo-caption">4 anos · Junior Kindergarten</span>
         </div>
       </div>
@@ -539,7 +543,7 @@
     <li class="chapter chapter-left">
       <div class="chapter-photo" aria-hidden="true">
         <div class="photo-frame">
-          <img src="/assets/photos/welcome-entrance.jpg" alt="Crianças do Senior Kindergarten Maple Bear na entrada da escola" loading="lazy" decoding="async">
+          <picture><source srcset="/assets/photos/welcome-entrance.webp" type="image/webp"><img src="/assets/photos/welcome-entrance.jpg" alt="Crianças do Senior Kindergarten Maple Bear na entrada da escola" loading="lazy" decoding="async"></picture>
           <span class="photo-caption">5 anos · Senior Kindergarten</span>
         </div>
       </div>
@@ -773,7 +777,7 @@
       <meta itemprop="url" content="https://maplebearbg.com.br/">
 
       <header class="contact-card-head">
-        <img class="brand-mark" src="/assets/brand/logo-lockup-compact.png" alt="Maple Bear" width="120" height="60">
+        <img class="brand-mark" src="/assets/brand/logo-lockup-compact.png" alt="Maple Bear" width="120" height="60" loading="lazy" decoding="async">
         <div>
           <h3 id="contact-card-title">Maple Bear Bento Gonçalves</h3>
           <p class="contact-card-sub">Escola Bilíngue Canadense · Em Bento desde 2025</p>
@@ -878,18 +882,34 @@
   </div>
 </section>
 
+<!-- ──────────────────────────── NEWSLETTER ──────────────────────────── -->
+<section class="newsletter-block" aria-labelledby="newsletter-title">
+  <div class="newsletter-inner">
+    <h2 id="newsletter-title">Receba nosso guia <em>"22 perguntas pra fazer numa escola bilíngue"</em></h2>
+    <p>Material gratuito da coordenação pedagógica Maple Bear Bento Gonçalves. Entregue no seu WhatsApp em até 1h.</p>
+    <form id="newsletter-form" data-origem="newsletter-bg" novalidate>
+      <input type="text" name="nome" placeholder="Seu nome" required autocomplete="name" aria-label="Nome">
+      <input type="tel" name="telefone" placeholder="WhatsApp com DDD" required autocomplete="tel" inputmode="numeric" aria-label="WhatsApp">
+      <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+      <button type="submit">Receber o guia</button>
+    </form>
+    <p class="newsletter-fb" role="status" aria-live="polite"></p>
+    <p class="newsletter-hint">Sem spam. Veja nossa <a href="/privacidade/" style="color: var(--maple-bright);">política de privacidade</a>.</p>
+  </div>
+</section>
+
 </main>
 
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <img class="brand-mark" src="/assets/brand/logo-lockup-compact.png" alt="Maple Bear" width="120" height="60" style="filter: brightness(0) invert(1);">
+      <img class="brand-mark" src="/assets/brand/logo-lockup-compact.png" alt="Maple Bear" width="120" height="60" style="filter: brightness(0) invert(1);" loading="lazy" decoding="async">
       <p>
         <strong>Maple Bear Bento Gonçalves</strong><br>
         Escola Bilíngue Canadense<br>
         <span class="footer-soft">Em Bento desde 2025 · Year 1 em 2027</span>
       </p>
-      <img src="/assets/brand/chinook-face-love.png" alt="" class="footer-mascot" width="72" height="70" aria-hidden="true">
+      <img src="/assets/brand/chinook-face-love.png" alt="" class="footer-mascot" width="72" height="70" aria-hidden="true" loading="lazy" decoding="async">
     </div>
     <div class="footer-cols">
       <div>
@@ -959,6 +979,8 @@
   </defs>
 </svg>
 
+<script src="/assets/tracking.js" defer></script>
+<script src="/assets/lead-capture.js" defer></script>
 <script src="script.js" defer></script>
 </body>
 </html>

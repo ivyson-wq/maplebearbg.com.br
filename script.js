@@ -6,6 +6,13 @@
 (function () {
   'use strict';
 
+  // ── Service Worker registration (PWA) ──────────────────────────────
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+
   // ── Reveal on scroll (IntersectionObserver) ────────────────────────
   const reveals = document.querySelectorAll('.reveal');
   if (reveals.length && 'IntersectionObserver' in window) {

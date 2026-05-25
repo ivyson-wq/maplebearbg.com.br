@@ -1,0 +1,32 @@
+{
+  "name": "Maple Bear Bento Gonçalves",
+  "short_name": "Maple Bear BG",
+  "description": "Escola bilíngue canadense em Bento Gonçalves, RS. Em Bento desde 2025. Year 1 (Ensino Fundamental) em 2027.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F6E9E1",
+  "theme_color": "#CC1216",
+  "orientation": "portrait-primary",
+  "lang": "pt-BR",
+  "categories": ["education"],
+  "icons": [
+    { "src": "/assets/brand/favicon-32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/assets/brand/favicon-64.png", "sizes": "64x64", "type": "image/png" },
+    { "src": "/assets/brand/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/assets/brand/favicon-256.png", "sizes": "256x256", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Agendar visita",
+      "short_name": "Visitar",
+      "url": "https://wa.me/5554999315480?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20visita.",
+      "icons": [{ "src": "/assets/brand/favicon-64.png", "sizes": "64x64" }]
+    },
+    {
+      "name": "Conhecer estágios",
+      "short_name": "Estágios",
+      "url": "/estagios/"
+    }
+  ]
+}
