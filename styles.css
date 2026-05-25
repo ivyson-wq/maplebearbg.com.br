@@ -1455,7 +1455,9 @@ a:hover { color: var(--maple-deep); }
   border-bottom: 1px solid var(--paper-shade);
 }
 .contact-card-head .brand-mark {
-  width: 52px; height: 52px;
+  width: auto;
+  height: 44px;
+  flex-shrink: 0;
 }
 .contact-card-head h3 {
   font-family: var(--font-display);
