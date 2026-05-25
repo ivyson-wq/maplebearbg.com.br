@@ -11,9 +11,9 @@
   'use strict';
 
   // ── Configuração ──────────────────────────────────────────────────
-  // PROVISORIO: usando ID do Caxias com custom dimension "school".
-  // Quando criar property GA4 dedicada BG, trocar aqui.
-  var GA_ID = 'G-7KN8ZP8NMF';
+  // GA4 property dedicada Maple Bear Bento Gonçalves
+  // Stream ID: 14928841427 — https://www.maplebearbg.com.br
+  var GA_ID = 'G-TKKMQEQ29C';
   var PIXEL_ID = ''; // PREENCHER quando criar Pixel BG no Meta Business
 
   // ── Google Analytics 4 ────────────────────────────────────────────
@@ -31,10 +31,8 @@
     gtag('config', GA_ID, {
       anonymize_ip: true,
       send_page_view: true,
-      transport_type: 'beacon',
-      custom_map: { dimension1: 'school' }
+      transport_type: 'beacon'
     });
-    gtag('set', { school: 'bento-goncalves' });
   }
 
   // ── Meta Pixel ────────────────────────────────────────────────────
@@ -54,8 +52,7 @@
     if (window.gtag) {
       gtag('event', 'generate_lead', {
         method: data.canal || 'whatsapp',
-        origem: data.origem || 'unknown',
-        school: 'bento-goncalves'
+        origem: data.origem || 'unknown'
       });
     }
     if (window.fbq) {
