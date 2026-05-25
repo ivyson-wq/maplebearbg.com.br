@@ -14,7 +14,7 @@
   // GA4 property dedicada Maple Bear Bento Gonçalves
   // Stream ID: 14928841427 — https://www.maplebearbg.com.br
   var GA_ID = 'G-TKKMQEQ29C';
-  var PIXEL_ID = ''; // PREENCHER quando criar Pixel BG no Meta Business
+  var PIXEL_ID = '1540259814325653'; // Meta Pixel Maple Bear Bento Gonçalves
 
   // ── Google Analytics 4 ────────────────────────────────────────────
   if (GA_ID) {
