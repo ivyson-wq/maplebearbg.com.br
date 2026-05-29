@@ -140,8 +140,8 @@
     </div>
 
     <div class="field">
-      <label for="cv">Currículo (PDF, DOC ou DOCX — até 3 MB)</label>
-      <input type="file" name="cv" id="cv" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+      <label for="cv">Currículo (PDF, DOC, DOCX, JPG ou PNG — até 3 MB)</label>
+      <input type="file" name="cv" id="cv" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png">
       <span class="hint">Não tem o arquivo agora? Pode enviar só seus dados e a mensagem — a gente entra em contato.</span>
     </div>
 
@@ -235,7 +235,8 @@
         const json = await r.json();
         if (r.ok && json.ok) {
           form.style.display = 'none';
-          showFeedback('success', '<strong class="title">Currículo recebido. ✦</strong>Obrigado pelo interesse em fazer parte da Maple Bear Bento Gonçalves. Guardamos seu cadastro no banco de talentos e vamos te procurar quando abrir uma vaga compatível com o seu perfil.<br><br>Enquanto isso, conheça mais a escola no <a href="/sobre/" style="text-decoration:underline;">Sobre</a>.');
+          var avisoEmail = data.email ? ('Enviamos uma confirmação para <strong>' + data.email + '</strong> — confira sua caixa de entrada (e o spam, por garantia). ') : 'Guardamos seu cadastro no banco de talentos. ';
+          showFeedback('success', '<strong class="title">Currículo enviado com sucesso! ✦</strong>Obrigado pelo interesse em fazer parte da Maple Bear Bento Gonçalves. ' + avisoEmail + 'Vamos te procurar quando abrir uma vaga compatível com o seu perfil.<br><br>Enquanto isso, conheça mais a escola no <a href="/sobre/" style="text-decoration:underline;">Sobre</a>.');
           if (window.gtag) gtag('event', 'curriculo_enviado', { event_category: 'rh', event_label: data.cargo || '' });
         } else {
           throw new Error((json.errors && json.errors.join(', ')) || json.error || 'erro desconhecido');
