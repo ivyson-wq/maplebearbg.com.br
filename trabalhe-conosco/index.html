@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#C8102E">
+
+<title>Trabalhe Conosco · Maple Bear Bento Gonçalves</title>
+<meta name="description" content="Faça parte da equipe Maple Bear Bento Gonçalves. Cadastre seu currículo no nosso banco de talentos e seja avisado(a) quando abrir uma vaga para o seu perfil.">
+<link rel="canonical" href="https://maplebearbg.com.br/trabalhe-conosco/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Spectral:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="/assets/brand/favicon.ico?v=3">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png?v=3">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/brand/apple-touch-icon.png?v=3">
+
+<style>
+  :root { --paper: #FFFFFF; --paper-deep: #F7EBE0; --paper-shade: #EAE0D2; --ink: #111111; --ink-soft: #4A4A4A; --ink-faint: #8A8A8A; --maple: #C8131A; --maple-deep: #A50211; --maple-soft:#E84A5F; --shadow-soft:0 14px 30px -18px rgba(42,37,34,.18); --shadow:0 30px 60px -25px rgba(42,37,34,.25); --font-display: 'Fraunces', 'Inter', serif; --font-body: 'Inter', system-ui, sans-serif; --font-script:'Caveat',cursive; }
+  *,*::before,*::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 1.05rem; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { color: var(--maple); text-decoration: none; transition: color .2s; }
+
+  .site-nav { position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 1.1rem clamp(1.25rem, 4vw, 2.5rem); background: rgba(255,255,255,0.95); backdrop-filter: blur(14px); border-bottom: 1px solid var(--paper-shade); }
+  .brand { display: flex; align-items: center; gap: 0.7rem; color: var(--ink); }
+  .brand-mark { width: 44px; height: 44px; flex-shrink: 0; filter: drop-shadow(0 4px 8px rgba(200,16,46,0.18)); }
+  .brand-text { display: flex; flex-direction: column; line-height: 1.05; }
+  .brand-line-2 { font-weight: 500; font-size: 1.15rem; color: var(--ink); font-family: var(--font-display); margin-top: 1px; }
+  .nav-links { display: flex; gap: 1.4rem; align-items: center; }
+  .nav-links a { color: var(--ink-soft); font-size: .95rem; font-weight: 500; }
+  .nav-cta { background: var(--maple); color: var(--paper) !important; padding: .6rem 1.1rem; border-radius: 999px; }
+  @media (max-width: 640px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+  .hero { padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 3rem); text-align: center; background: linear-gradient(180deg, var(--paper) 0%, var(--paper-deep) 100%); }
+  .eyebrow { display: inline-flex; align-items: center; gap: .6rem; margin: 0 0 1.5rem; font-size: .85rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); }
+  .eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--maple); box-shadow: 0 0 0 4px rgba(200,16,46,0.18); }
+  h1 { font-family: var(--font-display); font-size: clamp(2.3rem, 6vw, 4rem); line-height: 1.02; letter-spacing: -.025em; margin: 0 0 1.5rem; font-weight: 500; }
+  h1 em { font-style: italic; color: var(--maple); }
+  .lead { max-width: 60ch; margin: 0 auto; font-size: clamp(1.05rem, 1.5vw, 1.25rem); color: var(--ink-soft); font-weight: 400; line-height: 1.55; }
+
+  main { max-width: 720px; margin: 0 auto; padding: clamp(2rem, 5vw, 3.5rem) clamp(1.25rem, 4vw, 2.5rem); }
+
+  .form { display: flex; flex-direction: column; gap: 1.25rem; }
+  .field { display: flex; flex-direction: column; gap: .45rem; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
+  label { font-weight: 600; font-size: .92rem; color: var(--ink); }
+  .req { color: var(--maple); }
+  input, select, textarea { font-family: var(--font-body); font-size: 1rem; padding: .8rem .9rem; border: 1px solid var(--paper-shade); border-radius: 12px; background: var(--paper); color: var(--ink); width: 100%; transition: border-color .2s, box-shadow .2s; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--maple); box-shadow: 0 0 0 3px rgba(200,16,46,0.12); }
+  input[type=file] { padding: .6rem; background: var(--paper-deep); cursor: pointer; }
+  .hint { font-size: .82rem; color: var(--ink-faint); }
+  .consent { flex-direction: row; align-items: flex-start; gap: .6rem; }
+  .consent input { width: auto; margin-top: .3rem; }
+  .consent label { font-weight: 400; font-size: .9rem; line-height: 1.45; color: var(--ink-soft); }
+  .btn-primary { display: inline-flex; align-items: center; gap: .5rem; align-self: flex-start; background: var(--maple); color: var(--paper); border: none; padding: .95rem 1.6rem; border-radius: 999px; font-family: var(--font-body); font-size: 1rem; font-weight: 600; cursor: pointer; transition: background .2s, transform .2s; }
+  .btn-primary:hover:not(:disabled) { background: var(--maple-deep); transform: translateY(-2px); }
+  .btn-primary:disabled { opacity: .6; cursor: progress; }
+  .feedback { padding: 1rem 1.25rem; border-left: 3px solid var(--maple); background: var(--paper-deep); border-radius: 8px; font-family: 'Spectral', Georgia, serif; line-height: 1.55; }
+  .feedback.success { border-color: #2D4A3E; background: rgba(45,74,62,.08); }
+  .feedback strong.title { display:block; font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; margin-bottom: .5rem; }
+
+  .perks { max-width: 720px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 2.5rem) clamp(2rem,5vw,3.5rem); display: grid; gap: 1.25rem; }
+  .perk h3 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; margin: 0 0 .3rem; }
+  .perk p { color: var(--ink-soft); margin: 0; font-size: .98rem; }
+  .note { background: var(--paper-deep); border-radius: 16px; padding: 1.25rem 1.5rem; }
+  .note strong { display:block; margin-bottom:.35rem; }
+
+  .site-footer { background: var(--ink); color: var(--paper); padding: 2.5rem clamp(1.25rem, 4vw, 2.5rem); text-align: center; }
+  .site-footer p { margin: .25rem 0; font-size: .9rem; color: rgba(251,247,240,.7); }
+  .site-footer a { color: var(--maple-soft); }
+</style>
+
+<script src="/assets/consent.js" defer></script>
+</head>
+<body>
+
+<header class="site-nav">
+  <a href="/" class="brand" aria-label="Maple Bear Bento Gonçalves">
+    <img class="brand-mark" src="/assets/brand/logo-lockup-compact.png" alt="Maple Bear" width="120" height="60">
+    <span class="brand-text">
+      <span class="brand-line-2">Bento Gonçalves</span>
+    </span>
+  </a>
+  <nav class="nav-links">
+    <a href="/sobre/">Sobre</a>
+    <a href="/estagios/">Estágios</a>
+    <a href="/diario/">Diário</a>
+    <a href="/faq/">FAQ</a>
+    <a href="https://wa.me/5554999315480" class="nav-cta" target="_blank" rel="noopener">Agendar visita</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <p class="eyebrow"><span class="eyebrow-dot"></span> Faça parte da equipe</p>
+  <h1>Ensinar aqui é <em>transformar</em>.</h1>
+  <p class="lead">A Maple Bear Bento Gonçalves está sempre atenta a pessoas boas — educadores apaixonados e profissionais cuidadosos. Cadastre seu currículo no nosso banco de talentos: quando abrir uma vaga para o seu perfil, você é uma das primeiras pessoas que procuramos.</p>
+</section>
+
+<main>
+  <form class="form" id="cv-form" novalidate>
+    <div class="field-row">
+      <div class="field">
+        <label for="nome">Seu nome completo <span class="req">*</span></label>
+        <input type="text" name="nome" id="nome" required autocomplete="name" maxlength="120">
+      </div>
+      <div class="field">
+        <label for="cargo">Cargo de interesse <span class="req">*</span></label>
+        <select name="cargo" id="cargo" required>
+          <option value="">Selecione…</option>
+          <option>Professor(a) Bilíngue</option>
+          <option>Auxiliar de Classe</option>
+          <option>Coordenação / Pedagógico</option>
+          <option>Administrativo</option>
+          <option>Secretaria / Recepção</option>
+          <option>Serviços Gerais / Limpeza</option>
+          <option>Cozinha / Nutrição</option>
+          <option>Estágio</option>
+          <option>Outro</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label for="telefone">WhatsApp <span class="req">*</span></label>
+        <input type="tel" name="telefone" id="telefone" required autocomplete="tel" placeholder="(54) 99999-9999">
+      </div>
+      <div class="field">
+        <label for="email">E-mail</label>
+        <input type="email" name="email" id="email" autocomplete="email">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="linkedin">LinkedIn ou portfólio (opcional)</label>
+      <input type="url" name="linkedin" id="linkedin" placeholder="https://linkedin.com/in/...">
+    </div>
+
+    <div class="field">
+      <label for="cv">Currículo (PDF, DOC ou DOCX — até 3 MB)</label>
+      <input type="file" name="cv" id="cv" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+      <span class="hint">Não tem o arquivo agora? Pode enviar só seus dados e a mensagem — a gente entra em contato.</span>
+    </div>
+
+    <div class="field">
+      <label for="mensagem">Carta de apresentação / experiência</label>
+      <textarea name="mensagem" id="mensagem" rows="4" maxlength="2000" placeholder="Conte sua formação, experiência com educação/idiomas e por que quer fazer parte da Maple Bear."></textarea>
+    </div>
+
+    <div class="field consent">
+      <input type="checkbox" name="consentimento_lgpd" id="consentimento_lgpd" required>
+      <label for="consentimento_lgpd">
+        Autorizo a Maple Bear Bento Gonçalves a guardar meus dados e currículo no banco de talentos
+        por até 24 meses, para fins de recrutamento, conforme a
+        <a href="/privacidade/" style="text-decoration: underline;">Política de Privacidade</a> (LGPD). <span class="req">*</span>
+      </label>
+    </div>
+
+    <!-- Honeypot anti-bot -->
+    <div style="position:absolute;left:-9999px;opacity:0;" aria-hidden="true">
+      <label>Empresa <input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+    </div>
+
+    <button type="submit" class="btn-primary" id="cv-submit"><span class="label">Enviar currículo</span> <span aria-hidden="true">→</span></button>
+    <div id="cv-feedback" role="status" aria-live="polite"></div>
+    <p class="hint">Seu cadastro não é uma candidatura a uma vaga específica — é uma porta de entrada. Entramos em contato quando surgir uma oportunidade compatível.</p>
+  </form>
+</main>
+
+<section class="perks">
+  <div class="perk"><h3>Método canadense</h3><p>Você ensina dentro de uma metodologia consolidada mundialmente, com formação e material de apoio da rede Maple Bear.</p></div>
+  <div class="perk"><h3>Desenvolvimento contínuo</h3><p>Trilhas de formação, acompanhamento pedagógico e um plano de crescimento anual para a equipe.</p></div>
+  <div class="perk"><h3>Ambiente que cuida</h3><p>Time próximo e colaborativo. Aqui as pessoas se conhecem pelo nome — colegas, famílias e crianças.</p></div>
+  <div class="note"><strong>Não tem vaga aberta agora?</strong>Tudo bem — é exatamente para isso que existe o banco de talentos. Deixe seu cadastro e seja lembrado(a) assim que abrir uma oportunidade.</div>
+</section>
+
+<footer class="site-footer">
+  <p><strong>Maple Bear Bento Gonçalves</strong> — Em Bento desde 2025 · Year 1 em 2027</p>
+  <p><a href="https://wa.me/5554999315480">WhatsApp +55 54 9 9931-5480</a> · <a href="mailto:contato@maplebearbg.com.br">contato@maplebearbg.com.br</a></p>
+  <p style="margin-top:.5rem"><a href="/sobre/">Sobre</a> · <a href="/estagios/">Estágios</a> · <a href="/diario/">Diário</a> · <a href="/faq/">FAQ</a> · <a href="/trabalhe-conosco/">Trabalhe conosco</a> · <a href="/privacidade/">Privacidade</a> · <a href="/termos/">Termos</a></p>
+</footer>
+
+<script>
+  (function () {
+    const API = 'https://maplebearcaxiasdosul.com.br/api/curriculos';
+    const form = document.getElementById('cv-form');
+    const submit = document.getElementById('cv-submit');
+    const fb = document.getElementById('cv-feedback');
+    const submitLabel = submit.querySelector('.label');
+    const fileInput = document.getElementById('cv');
+    const MAX_BYTES = 3 * 1024 * 1024;
+
+    function showFeedback(kind, html) {
+      fb.className = 'feedback' + (kind === 'success' ? ' success' : '');
+      fb.style.marginTop = '1rem';
+      fb.innerHTML = html;
+    }
+    function readFileBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error('Não foi possível ler o arquivo.'));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      fb.innerHTML = ''; fb.className = '';
+
+      const fd = new FormData(form);
+      const data = { unidade: 'bg' };
+      fd.forEach((v, k) => { if (k !== 'cv') data[k] = v; });
+      data.consentimento_lgpd = form.consentimento_lgpd.checked;
+
+      if (!form.consentimento_lgpd.checked) {
+        showFeedback('error', 'Você precisa autorizar o uso dos seus dados (LGPD) para enviar.');
+        return;
+      }
+      const file = fileInput.files && fileInput.files[0];
+      if (file && file.size > MAX_BYTES) {
+        showFeedback('error', 'Seu currículo tem mais de 3 MB. Reduza o arquivo ou envie sem anexo.');
+        return;
+      }
+
+      submit.disabled = true;
+      submitLabel.textContent = 'Enviando...';
+
+      try {
+        if (file) { data.cv_base64 = await readFileBase64(file); data.cv_tipo = file.type; data.cv_nome = file.name; }
+        const r = await fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        const json = await r.json();
+        if (r.ok && json.ok) {
+          form.style.display = 'none';
+          showFeedback('success', '<strong class="title">Currículo recebido. ✦</strong>Obrigado pelo interesse em fazer parte da Maple Bear Bento Gonçalves. Guardamos seu cadastro no banco de talentos e vamos te procurar quando abrir uma vaga compatível com o seu perfil.<br><br>Enquanto isso, conheça mais a escola no <a href="/sobre/" style="text-decoration:underline;">Sobre</a>.');
+          if (window.gtag) gtag('event', 'curriculo_enviado', { event_category: 'rh', event_label: data.cargo || '' });
+        } else {
+          throw new Error((json.errors && json.errors.join(', ')) || json.error || 'erro desconhecido');
+        }
+      } catch (err) {
+        showFeedback('error', '<strong>Não conseguimos enviar seu currículo agora.</strong><br>' + (err.message || 'Tente novamente em instantes') + ' — ou nos chame no <a href="https://wa.me/5554999315480">WhatsApp</a>.');
+        submit.disabled = false;
+        submitLabel.textContent = 'Enviar currículo';
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>
