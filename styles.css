@@ -50,7 +50,7 @@
   /* Layout */
   --container:     1240px;
   --gutter:        clamp(1.25rem, 4vw, 2.5rem);
-  --section-pad:   clamp(4rem, 10vw, 8rem);
+  --section-pad:   clamp(3rem, 6vw, 5.25rem);
   --radius-sm:     6px;
   --radius-md:     14px;
   --radius-lg:     28px;
@@ -245,7 +245,7 @@ a:hover { color: var(--maple-deep); }
   min-height: calc(100vh - 80px);
   display: flex;
   align-items: center;
-  padding: clamp(3rem, 8vw, 6rem) var(--gutter) clamp(4rem, 10vw, 8rem);
+  padding: clamp(2.5rem, 6vw, 4.5rem) var(--gutter) clamp(3rem, 6vw, 5.25rem);
   overflow: hidden;
   isolation: isolate;
 }
@@ -545,7 +545,7 @@ a:hover { color: var(--maple-deep); }
    PROMISE — Acolhimento + Vínculo + Segurança
    ════════════════════════════════════════════════════════════════════ */
 .promise {
-  padding: clamp(4.5rem, 9vw, 8rem) var(--gutter);
+  padding: clamp(3rem, 6vw, 5.5rem) var(--gutter);
   background:
     radial-gradient(ellipse at 15% 20%, rgba(204,18,22,0.04) 0, transparent 55%),
     radial-gradient(ellipse at 85% 80%, rgba(184,136,74,0.08) 0, transparent 55%),
@@ -695,7 +695,7 @@ a:hover { color: var(--maple-deep); }
    CHINOOK BLOCK — Mascote oficial
    ════════════════════════════════════════════════════════════════════ */
 .chinook-block {
-  padding: clamp(4rem, 8vw, 7rem) var(--gutter);
+  padding: clamp(3rem, 6vw, 5rem) var(--gutter);
   background: var(--paper-deep);
   position: relative;
   overflow: hidden;
@@ -855,7 +855,7 @@ a:hover { color: var(--maple-deep); }
   font-size: var(--fs-body-l);
   color: var(--ink-soft);
   max-width: 60ch;
-  margin: 0 0 3rem;
+  margin: 0 0 1.75rem;
   font-weight: 300;
 }
 
