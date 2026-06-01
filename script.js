@@ -48,6 +48,20 @@
     onScroll();
   }
 
+  // ── Mobile nav toggle (hamburger) ──────────────────────────────────
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('mobile-open');
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navLinks.classList.remove('mobile-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
+  }
+
   // ── Video thumbnails: load YouTube embed on click ───────────────────
   document.querySelectorAll('.video-thumb').forEach(thumb => {
     thumb.addEventListener('click', () => {
