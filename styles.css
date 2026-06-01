@@ -758,6 +758,45 @@ a:hover { color: var(--maple-deep); }
 }
 
 /* ════════════════════════════════════════════════════════════════════
+   Mascot accents — Chinook em poses de atividade
+   ════════════════════════════════════════════════════════════════════ */
+.canada-band {
+  display: block;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  line-height: 0;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.14);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.canada-band:hover { transform: translateY(-3px); box-shadow: 0 24px 54px rgba(0,0,0,0.18); }
+.canada-band img { width: 100%; height: auto; display: block; }
+
+.mascot-peek-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(1rem, 5vw, 3rem);
+  flex-wrap: wrap;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+}
+.mascot-peek-row img {
+  height: clamp(5.5rem, 11vw, 8.5rem);
+  width: auto;
+  filter: drop-shadow(0 12px 16px rgba(0,0,0,0.08));
+  transition: transform 0.3s ease;
+}
+.mascot-peek-row img:hover { transform: translateY(-6px) rotate(-2deg); }
+
+/* mascote do capítulo final da jornada (sem foto) */
+.chapter-mascot {
+  width: clamp(8rem, 18vw, 13rem);
+  height: auto;
+  display: block;
+  margin: 1.5rem auto 0;
+  filter: drop-shadow(0 18px 28px rgba(0,0,0,0.12));
+}
+
+/* ════════════════════════════════════════════════════════════════════
    TRUST BAR
    ════════════════════════════════════════════════════════════════════ */
 .trust-bar {

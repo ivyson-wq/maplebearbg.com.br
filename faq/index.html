@@ -382,6 +382,11 @@
   }
   .site-footer p { margin: .25rem 0; font-size: .9rem; color: rgba(251,247,240,.7); }
   .site-footer a { color: var(--maple-soft); }
+
+  .mascot-peek-row { display: flex; justify-content: center; align-items: flex-end; gap: clamp(1rem, 5vw, 3rem); flex-wrap: wrap; margin-top: clamp(1.5rem,4vw,2.5rem); }
+  .mascot-peek-row picture { display: contents; }
+  .mascot-peek-row img { height: clamp(6rem, 12vw, 9rem); width: auto; filter: drop-shadow(0 12px 16px rgba(0,0,0,0.08)); transition: transform .3s ease; }
+  .mascot-peek-row img:hover { transform: translateY(-6px) rotate(-2deg); }
 </style>
 
 <!-- GA4 condicional ao consentimento LGPD -->
@@ -411,6 +416,12 @@
   <h1>Perguntas <em>frequentes</em>.</h1>
   <p class="lead">Tudo que pais perguntam sobre a Maple Bear Bento Gonçalves — faixas etárias, bilinguismo, metodologia, matrícula. Se sua dúvida não estiver aqui, <em>nos chame no WhatsApp</em>.</p>
   <p class="caveat">+20 perguntas respondidas com calma</p>
+  <div class="mascot-peek-row" aria-hidden="true">
+    <picture>
+      <source srcset="/assets/brand/chinook-pensando.webp" type="image/webp">
+      <img src="/assets/brand/chinook-pensando.png" alt="" loading="lazy" decoding="async">
+    </picture>
+  </div>
 </section>
 
 <main>
