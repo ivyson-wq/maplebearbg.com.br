@@ -9,6 +9,25 @@
   var API_ENDPOINT = 'https://maplebearcaxiasdosul.com.br/api/visit-lead';
   var WA_URL = 'https://wa.me/5554999315480';
 
+  // ── UTM/gclid: persiste atribuição de campanha entre páginas ───────
+  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'gclid'];
+  try {
+    var _p = new URLSearchParams(location.search);
+    var _found = {};
+    UTM_KEYS.forEach(function (k) { var v = _p.get(k); if (v) _found[k] = String(v).slice(0, 120); });
+    if (Object.keys(_found).length) sessionStorage.setItem('mb_utm', JSON.stringify(_found));
+  } catch (err) { /* sessionStorage indisponível */ }
+
+  function getUtm() {
+    var out = {};
+    try { out = JSON.parse(sessionStorage.getItem('mb_utm') || '{}') || {}; } catch (err) { out = {}; }
+    try {
+      var p = new URLSearchParams(location.search);
+      UTM_KEYS.forEach(function (k) { var v = p.get(k); if (v) out[k] = String(v).slice(0, 120); });
+    } catch (err) { /* noop */ }
+    return out;
+  }
+
   function el(tag, attrs, children) {
     var node = document.createElement(tag);
     if (attrs) Object.keys(attrs).forEach(function (k) {
@@ -140,6 +159,8 @@
 
     var data = { origem: origem, canal: 'whatsapp' };
     new FormData(form).forEach(function (v, k) { data[k] = v; });
+    var utm = getUtm();
+    Object.keys(utm).forEach(function (k) { if (!data[k]) data[k] = utm[k]; });
     if (data.company) { btn.disabled = true; return; } // honeypot
 
     btn.disabled = true;
