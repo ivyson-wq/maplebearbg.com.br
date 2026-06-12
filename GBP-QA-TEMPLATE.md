@@ -2,10 +2,17 @@
 
 Q&A do GBP é uma **alavanca enorme** pra escolas (já que reviews são restritas pela política do Google). Aparece no knowledge panel da busca + sinaliza relevância pro ranking local.
 
+> ⚠️ **Atualização 2026-06-12 (verificado ao vivo):** o Google REMOVEU a opção de fazer pergunta
+> pela web (desktop, busca mobile e Maps mobile web). Hoje a pergunta só pode ser plantada pelo
+> **app nativo do Google Maps no celular**: pesquisar a escola → rolar até "Perguntas e respostas"
+> → "Fazer uma pergunta". Já **responder como empresa funciona pela web**: logado como proprietário,
+> busca da escola → card "Sua empresa no Google" → botão "Perguntas e respostas" (módulo `#trex=m_t:pqaQ`).
+> Fluxo: Ivyson planta a pergunta pelo celular → o agente (Claude) responde como empresa pela web.
+
 ## 🎯 Como funciona
 
-1. Você **pergunta** (de uma conta Google pessoal — pode ser sua, da sua esposa, de um amigo, etc.)
-2. Imediatamente **responde como business** (logado no painel GBP da escola)
+1. Você **pergunta** (pelo app do Maps no celular — de conta pessoal; varie contas quando possível)
+2. Imediatamente **responde como business** (módulo de Q&A do proprietário na busca web)
 3. A pergunta + resposta aparece no perfil Google Maps + knowledge panel
 
 ## ✅ Estratégia
@@ -87,6 +94,34 @@ Q&A do GBP é uma **alavanca enorme** pra escolas (já que reviews são restrita
 **Pergunta:** A escola atende em inglês integral em algum estágio?
 
 **Resposta:** Trabalhamos em imersão balanceada (50/50 entre as línguas). Não temos estágio "só em inglês" — o português é igualmente valorizado em todos os estágios. Isso garante desenvolvimento robusto nas duas línguas.
+
+---
+
+### 11. (adjetivos de intenção — 2026-06)
+**Pergunta:** A escola é acolhedora? Como funciona a adaptação?
+
+**Resposta:** Acolhimento aqui é prática, não slogan: adaptação gradual no ritmo de cada criança (sem prazo rígido), colo sem cota e família avisada na hora nos dias difíceis. Guia completo: maplebearbg.com.br/diario/escola-infantil-acolhedora-bento-goncalves/
+
+---
+
+### 12.
+**Pergunta:** A Maple Bear é uma escola Montessori?
+
+**Resposta:** Não — seguimos a metodologia canadense Maple Bear. Compartilhamos princípios (criança no centro, autonomia, ambiente preparado) e somamos a imersão em inglês desde os 18 meses. Comparativo honesto: maplebearbg.com.br/diario/escola-infantil-montessori-bento-goncalves/
+
+---
+
+### 13.
+**Pergunta:** Como funciona a segurança da escola?
+
+**Resposta:** Segurança como sistema: controle de entrada e saída com registro de quem retira, protocolos escritos de febre/queda/alergia e ambiente projetado para crianças pequenas. Detalhes apresentados na visita — WhatsApp 54 99931-5480.
+
+---
+
+### 14.
+**Pergunta:** A escola atende crianças atípicas (autismo, TDAH)?
+
+**Resposta:** A matrícula de crianças com deficiência é direito garantido pela Lei Brasileira de Inclusão. O desenho do acompanhamento é construído em conversa individualizada entre família e coordenação, a partir da visita. WhatsApp 54 99931-5480.
 
 ---
 
