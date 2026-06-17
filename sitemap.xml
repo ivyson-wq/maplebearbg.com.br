@@ -43,21 +43,35 @@
 
   <url>
     <loc>https://maplebearbg.com.br/em-bento-goncalves/garibaldi/</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://maplebearbg.com.br/em-bento-goncalves/farroupilha/</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://maplebearbg.com.br/em-bento-goncalves/carlos-barbosa/</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maplebearbg.com.br/em-bento-goncalves/pinto-bandeira/</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://maplebearbg.com.br/em-bento-goncalves/monte-belo-do-sul/</loc>
+    <lastmod>2026-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -197,6 +211,17 @@
       <image:image>
       <image:loc>https://maplebearbg.com.br/diario/escola-infantil-montessori-bento-goncalves/cover.jpg</image:loc>
       <image:title>Escola Infantil Montessori em Bento Gonçalves: O Que Avaliar Antes de Escolher</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://maplebearbg.com.br/diario/montessori-vs-canadense-bento-goncalves/</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+      <image:image>
+      <image:loc>https://maplebearbg.com.br/diario/montessori-vs-canadense-bento-goncalves/cover.jpg</image:loc>
+      <image:title>Montessori vs Método Canadense em Bento Gonçalves: Comparativo Honesto</image:title>
     </image:image>
   </url>
 
@@ -615,6 +640,13 @@
     <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://maplebearbg.com.br/materiais/22-perguntas/</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
 </urlset>
