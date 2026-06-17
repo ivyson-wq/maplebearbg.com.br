@@ -17,6 +17,8 @@
     document.head.appendChild(s);
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
+    // Consent Mode v2: libera storage de analytics/ads ao consentir (default = denied no <head>)
+    window.gtag('consent', 'update', { 'ad_storage': 'granted', 'ad_user_data': 'granted', 'ad_personalization': 'granted', 'analytics_storage': 'granted' });
     window.gtag('js', new Date());
     window.gtag('config', GA_ID, { anonymize_ip: true });
     attachEvents();
