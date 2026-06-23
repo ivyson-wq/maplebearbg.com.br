@@ -684,4 +684,22 @@
     <priority>0.7</priority>
   </url>
 
+  <url>
+    <loc>https://maplebearbg.com.br/creche-bilingue-bento-goncalves/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maplebearbg.com.br/escola-infantil-bento-goncalves/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://maplebearbg.com.br/escola-particular-bento-goncalves/</loc>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
