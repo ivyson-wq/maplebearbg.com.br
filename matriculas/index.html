@@ -144,6 +144,13 @@
   .cta-box p { color: var(--ink-soft); font-size: 1.05rem; margin: 0 0 1.5rem; }
   .btn { display: inline-flex; align-items: center; gap: .55rem; padding: 1rem 1.8rem; background: var(--maple); color: var(--paper); border-radius: 999px; font-weight: 600; font-size: 1rem; box-shadow: 0 12px 26px -10px rgba(200,16,46,.55); transition: transform .2s, background .2s; }
   .btn:hover { background: var(--maple-deep); color: var(--paper); transform: translateY(-2px); }
+  .btn-ghost { background: transparent; color: var(--maple); box-shadow: none; border: 1.5px solid var(--maple); }
+  .btn-ghost:hover { background: var(--maple); color: var(--paper); }
+
+  .hero-cta { display: flex; gap: .8rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0 .5rem; }
+  .trust-line { display: flex; gap: .4rem 1.4rem; justify-content: center; flex-wrap: wrap; margin: 1.5rem auto 0; max-width: 60ch; font-size: .9rem; color: var(--ink-faint); }
+  .trust-line span { display: inline-flex; align-items: center; gap: .4rem; }
+  .trust-line span::before { content: "✓"; color: var(--maple); font-weight: 700; }
 
   .wa-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 60; width: 58px; height: 58px; border-radius: 50%; background: #25D366; color: #fff; display: grid; place-items: center; box-shadow: 0 10px 30px -8px rgba(37,211,102,.55); }
   .site-footer { background: var(--ink); color: var(--paper); padding: 2.5rem clamp(1.25rem, 4vw, 2.5rem); text-align: center; }
@@ -186,6 +193,16 @@ document.addEventListener('submit',function(e){try{var f=e.target,ud={},em=f.que
   <p class="eyebrow"><span class="eyebrow-dot"></span> Matrículas · Educação Infantil + Year 1 em 2027</p>
   <h1>Garanta a <em>vaga</em> do seu filho.</h1>
   <p class="lead">As turmas da Maple Bear Bento Gonçalves são <em>intencionalmente pequenas</em> — cada estágio tem um número limitado de vagas para que cada criança seja vista de verdade. Veja como funciona a matrícula e agende sua visita.</p>
+  <div class="hero-cta">
+    <a class="btn" href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20a%20matr%C3%ADcula%20e%20agendar%20uma%20visita%20%C3%A0%20Maple%20Bear%20Bento%20Gon%C3%A7alves." target="_blank" rel="noopener">Falar no WhatsApp · garantir vaga</a>
+    <a class="btn btn-ghost" href="/visite/">Agendar uma visita</a>
+  </div>
+  <p class="trust-line">
+    <span>Método canadense em +35 países</span>
+    <span>Inglês todos os dias</span>
+    <span>Turmas pequenas</span>
+    <span>Do berçário ao Year 1</span>
+  </p>
   <p class="caveat">vagas limitadas por turma</p>
 </section>
 
