@@ -203,7 +203,29 @@
   .btn-ghost { background: transparent; color: var(--maple); box-shadow: none; border: 1.5px solid var(--maple); }
   .btn-ghost:hover { background: var(--maple); color: var(--paper); }
 
-  .wa-float { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 60; width: 58px; height: 58px; border-radius: 50%; background: #25D366; color: #fff; display: grid; place-items: center; box-shadow: 0 10px 30px -8px rgba(37,211,102,.55); }
+  /* CTA flutuante de WhatsApp — pill com rótulo + pulso (desktop) */
+  .wa-float { position: fixed; bottom: 1.4rem; right: 1.4rem; z-index: 60; display: inline-flex; align-items: center; gap: .6rem; padding: .8rem 1.2rem .8rem 1rem; border-radius: 999px; background: #25D366; color: #fff; font-weight: 700; font-size: .97rem; box-shadow: 0 12px 30px -8px rgba(37,211,102,.6); transition: transform .2s, box-shadow .2s; }
+  .wa-float:hover { color: #fff; transform: translateY(-2px); box-shadow: 0 16px 38px -8px rgba(37,211,102,.72); }
+  .wa-float svg { flex-shrink: 0; }
+  .wa-float .wa-label { white-space: nowrap; }
+  .wa-float::after { content: ""; position: absolute; inset: 0; border-radius: 999px; animation: waPulse 2.6s infinite; pointer-events: none; }
+  @keyframes waPulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,.5); } 70% { box-shadow: 0 0 0 16px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+  @media (prefers-reduced-motion: reduce) { .wa-float::after { animation: none; } }
+  .wa-bar { display: none; }
+  @media (max-width: 680px) {
+    .wa-float { display: none; }
+    .wa-bar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 65; gap: .6rem; padding: .7rem .85rem calc(.7rem + env(safe-area-inset-bottom)); background: rgba(255,255,255,.97); backdrop-filter: blur(10px); border-top: 1px solid #EAE0D2; box-shadow: 0 -8px 24px -16px rgba(42,37,34,.4); }
+    .wa-bar a { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .95rem 1rem; border-radius: 999px; font-weight: 700; font-size: 1rem; text-decoration: none; }
+    .wa-bar .wa-bar-primary { background: #25D366; color: #fff; box-shadow: 0 10px 24px -10px rgba(37,211,102,.6); }
+    body { padding-bottom: 4.8rem; }
+  }
+  .trust-strip { max-width: 920px; margin: 0 auto; padding: 1.25rem clamp(1.25rem, 4vw, 2rem) 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .trust-item { text-align: center; padding: 1rem .6rem; background: #F7EBE0; border: 1px solid #EAE0D2; border-radius: 14px; }
+  .trust-item strong { display: block; font-size: 1.05rem; color: #C8131A; font-weight: 700; line-height: 1.1; }
+  .trust-item span { display: block; margin-top: .3rem; font-size: .82rem; color: #4A4A4A; line-height: 1.3; }
+  @media (max-width: 680px) { .trust-strip { grid-template-columns: repeat(2, 1fr); gap: .7rem; } }
+  .hero-assure { display: flex; justify-content: center; align-items: center; gap: .5rem; margin: 1.1rem 0 0; font-size: .9rem; font-weight: 500; color: #2D4A3E; }
+  .hero-assure .dot { width: 7px; height: 7px; border-radius: 50%; background: #25D366; box-shadow: 0 0 0 4px rgba(37,211,102,.18); }
 
   .site-footer { background: var(--ink); color: var(--paper); padding: 2.5rem clamp(1.25rem, 4vw, 2.5rem); text-align: center; }
   .site-footer p { margin: .25rem 0; font-size: .9rem; color: rgba(251,247,240,.7); }
@@ -312,9 +334,19 @@ Não. As crianças aprendem por <strong>imersão natural</strong> — quanto mai
 </article>
 </main>
 
-<a class="wa-float" href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Tenho%20interesse%20na%20creche%20bil%C3%ADngue%20da%20Maple%20Bear%20Bento%20Gon%C3%A7alves." target="_blank" rel="noopener" aria-label="WhatsApp">
-  <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 3C9.4 3 4 8.4 4 15c0 2.4.7 4.7 2 6.7L4 29l7.5-2c1.9 1 4.1 1.6 6.5 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3zm5.6 15.5c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.7-1.7c-.2-.5-.4-.4-.6-.4h-.4c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.7 4.3 3.8.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3z"/></svg>
+<!-- CTA flutuante de WhatsApp (desktop) -->
+<a class="wa-float" href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Tenho%20interesse%20na%20creche%20bil%C3%ADngue%20da%20Maple%20Bear%20Bento%20Gon%C3%A7alves." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M16 3C9.4 3 4 8.4 4 15c0 2.4.7 4.7 2 6.7L4 29l7.5-2c1.9 1 4.1 1.6 6.5 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3zm5.6 15.5c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.7-1.7c-.2-.5-.4-.4-.6-.4h-.4c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.7 4.3 3.8.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3z"/></svg>
+  <span class="wa-label">Agende sua visita</span>
 </a>
+
+<!-- Barra fixa de WhatsApp (mobile) -->
+<div class="wa-bar" role="region" aria-label="Agendar visita pelo WhatsApp">
+  <a class="wa-bar-primary" href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Tenho%20interesse%20na%20creche%20bil%C3%ADngue%20da%20Maple%20Bear%20Bento%20Gon%C3%A7alves." target="_blank" rel="noopener">
+    <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M16 3C9.4 3 4 8.4 4 15c0 2.4.7 4.7 2 6.7L4 29l7.5-2c1.9 1 4.1 1.6 6.5 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3zm5.6 15.5c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.6.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.7-1.7c-.2-.5-.4-.4-.6-.4h-.4c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.1 0 1.2.9 2.4 1 2.6.1.2 1.8 2.7 4.3 3.8.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.3-.2-.6-.3z"/></svg>
+    Falar no WhatsApp
+  </a>
+</div>
 
 <footer class="site-footer">
   <p><strong>Maple Bear Bento Gonçalves</strong> — Creche &amp; Escola Bilíngue Canadense · A partir de 18 meses · Year 1 em 2027</p>
