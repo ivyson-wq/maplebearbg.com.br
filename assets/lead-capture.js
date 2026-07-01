@@ -168,6 +168,10 @@
     btn.textContent = 'Enviando...';
 
     try {
+      // roteia o lead pro tenant do BG (o /api/visit-lead do Caxias resolve o
+      // tenant pelo slug) + liga a sessão do pixel (comportamento no site → score)
+      data.escola = 'maplebearbg';
+      try { data.sessao = sessionStorage.getItem('lumied_sessao') || undefined; } catch (e) {}
       var r = await fetch(API_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
