@@ -22,6 +22,40 @@
     window.gtag('js', new Date());
     window.gtag('config', GA_ID, { anonymize_ip: true });
     attachEvents();
+    lumiedPageview();
+  }
+
+  // ── Lumied: pageview do site → CRM (alimenta o score do lead pela mesma
+  // sessão). Chamado dentro de loadGA = só APÓS consentimento ('granted'),
+  // como o GA. Anônimo (só caminho + sessão), sem PII.
+  function lumiedPageview() {
+    try {
+      var LK = 'lumied_sessao';
+      var sid = sessionStorage.getItem(LK);
+      if (!sid) {
+        sid = (
+          (window.crypto && crypto.randomUUID && crypto.randomUUID()) ||
+          (String(Date.now()) + Math.random().toString(36).slice(2))
+        ).slice(0, 36);
+        sessionStorage.setItem(LK, sid);
+      }
+      var lutm = {};
+      var lq = new URLSearchParams(location.search);
+      ['source', 'medium', 'campaign', 'term', 'content'].forEach(function (p) {
+        var v = lq.get('utm_' + p);
+        if (v) lutm[p] = v.slice(0, 200);
+      });
+      var lpayload = JSON.stringify({
+        escola: 'maplebearbg',
+        path: (location.pathname || '/').slice(0, 300),
+        sessao: sid,
+        utm: lutm
+      });
+      var lurl = 'https://maplebearbg.lumied.com.br/api/track/pageview';
+      var lblob = new Blob([lpayload], { type: 'text/plain' });
+      if (navigator.sendBeacon) navigator.sendBeacon(lurl, lblob);
+      else fetch(lurl, { method: 'POST', body: lpayload, keepalive: true, mode: 'no-cors' });
+    } catch (e) { /* nunca quebra a página */ }
   }
 
   // ─────────── Custom GA4 events (medição de funil) ───────────
