@@ -2119,3 +2119,54 @@ a:hover { color: var(--maple-deep); }
 .testi figcaption small { font-family: var(--font-body); font-size: 0.8rem; color: var(--ink-soft); }
 .testi-all { text-align: center; margin: clamp(1.75rem, 3.5vw, 2.5rem) auto 0; max-width: 1100px; }
 .testi-all a { font-family: var(--font-body); font-weight: 600; color: var(--maple); }
+
+/* ════════════════════════════════════════════════════════════════════
+   FORMULÁRIO DE VISITA — LPs (/visite/, /matriculas/, /valores/)
+   ────────────────────────────────────────────────────────────────────
+   Até 25/08/2026 as três landing pages de campanha não tinham formulário
+   nenhum: a única captura do site era a newsletter da home. Reaproveita a
+   casca do .newsletter-block e muda só o grid, para acomodar os campos que
+   o /api/visit-lead exige na origem 'site-visite-bg' (nome, WhatsApp e
+   data de nascimento).
+   ════════════════════════════════════════════════════════════════════ */
+.newsletter-inner.is-visita form {
+  grid-template-columns: 1fr 1fr;
+  max-width: 640px;
+  text-align: left;
+}
+.newsletter-inner.is-visita .campo { display: grid; gap: 0.35rem; }
+.newsletter-inner.is-visita .campo-largo { grid-column: 1 / -1; }
+.newsletter-inner.is-visita label {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(246, 233, 225, 0.62);
+}
+.newsletter-inner.is-visita input,
+.newsletter-inner.is-visita select,
+.newsletter-inner.is-visita textarea {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid rgba(246, 233, 225, 0.3);
+  background: rgba(246, 233, 225, 0.08);
+  color: var(--paper);
+  border-radius: 14px;
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.newsletter-inner.is-visita input:focus,
+.newsletter-inner.is-visita select:focus,
+.newsletter-inner.is-visita textarea:focus {
+  outline: none;
+  border-color: var(--maple-bright);
+  background: rgba(246, 233, 225, 0.12);
+}
+/* O menu nativo herda o fundo do sistema; sem isto o texto some no claro. */
+.newsletter-inner.is-visita select option { color: #1a1814; }
+.newsletter-inner.is-visita textarea { resize: vertical; min-height: 88px; }
+.newsletter-inner.is-visita button { grid-column: 1 / -1; justify-self: center; }
+@media (max-width: 640px) {
+  .newsletter-inner.is-visita form { grid-template-columns: 1fr; }
+}

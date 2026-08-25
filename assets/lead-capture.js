@@ -123,8 +123,15 @@
   }
 
   // ── 3. Newsletter inline form (id=newsletter-form se presente) ────
-  var anchor = document.getElementById('newsletter-form');
-  if (anchor) anchor.addEventListener('submit', handleSubmit);
+  // Liga QUALQUER formulário declarado com data-origem: a newsletter da home
+  // e o formulário de visita das LPs. Antes só o #newsletter-form era ligado,
+  // então uma LP com formulário próprio ficaria sem handler — o submit
+  // recarregaria a página e o lead se perderia.
+  // (O pop-up de saída é criado depois e liga o seu próprio handler.)
+  Array.prototype.forEach.call(
+    document.querySelectorAll('form[data-origem]'),
+    function (f) { f.addEventListener('submit', handleSubmit); }
+  );
 
   // Procura o elemento de feedback dentro do form OU como irmão (newsletter-fb
   // costuma ficar fora do <form> no markup atual).
@@ -179,6 +186,9 @@
       });
       var json = await r.json();
       if (r.ok && json.ok) {
+        // Conversão do Ads + Enhanced Conversions, agora que a API confirmou.
+        // (Antes o disparo vinha de um listener em document, no submit.)
+        if (window.mbFormLead) window.mbFormLead(form, origem);
         if (window.trackLead) window.trackLead({ canal: 'form', origem: origem });
         form.style.display = 'none';
         var ok = el('strong', { text: 'Recebemos seu pedido. 🍁' });
