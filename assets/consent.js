@@ -45,6 +45,20 @@
         var v = lq.get('utm_' + p);
         if (v) lutm[p] = v.slice(0, 200);
       });
+      // Identificadores de clique pago. Sem eles a matricula nunca volta pro
+      // Google (o OCI precisa do gclid) e nem da pra saber se o trafego de
+      // Bento é pago: em 171 sessoes medidas ate 25/08/2026, ZERO tinham
+      // gclid — nao por falta de anuncio, por falta desta leitura, que
+      // Caxias ja fazia. Persistidos na sessao porque o parametro so existe
+      // na PRIMEIRA pagina da visita.
+      ['gclid', 'wbraid', 'gbraid'].forEach(function (p) {
+        var v = lq.get(p);
+        try {
+          if (v) sessionStorage.setItem('mb_' + p, v.slice(0, 512));
+          else v = sessionStorage.getItem('mb_' + p);
+        } catch (e) { /* modo privado */ }
+        if (v) lutm[p] = String(v).slice(0, 512);
+      });
       var lpayload = JSON.stringify({
         escola: 'maplebearbg',
         path: (location.pathname || '/').slice(0, 300),
