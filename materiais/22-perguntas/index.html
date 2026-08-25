@@ -369,7 +369,13 @@
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});
 gtag('js',new Date());gtag('config','AW-17559914719');gtag('config','G-TKKMQEQ29C');
-document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a[href*="wa.me/5554999315480"]'):null;if(a){gtag('event','conversion',{'send_to':'AW-17559914719/6YSqCKf5rr0cEN-RnLVB','transport_type':'beacon'});gtag('event','whatsapp_click',{'transport_type':'beacon'});}},true);
+// Marcador que SOBREVIVE ao pulo navegador->WhatsApp. gclid e utm morrem
+// no salto pro app: sem isto a conversa chega "limpa" e a matricula nunca
+// volta pro Google. Carimba os 8 primeiros do lumied_sessao no texto; o
+// Lumied refaz a ponte sessao->gclid em lib/ads/lp-atribuicao.ts. Caxias ja
+// fazia; Bento nao fazia, e por isso nenhuma conversa daqui era atribuivel.
+window.mbCarimbar=function(url){try{var s=sessionStorage.getItem('lumied_sessao');var ref=s?s.replace(/-/g,'').slice(0,8).toUpperCase():'';if(!ref||!url||url.indexOf('ref%3A')>-1||url.indexOf('(ref:')>-1)return url;var i=url.indexOf('text=');if(i<0)return url;var ini=i+5,fim=url.indexOf('&',ini);var valor=fim<0?url.slice(ini):url.slice(ini,fim);if(!valor)return url;return url.slice(0,ini)+valor+encodeURIComponent(' (ref: '+ref+')')+(fim<0?'':url.slice(fim));}catch(x){return url;}};
+document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a[href*="wa.me/5554999315480"]'):null;if(a){a.href=window.mbCarimbar(a.href);gtag('event','conversion',{'send_to':'AW-17559914719/6YSqCKf5rr0cEN-RnLVB','transport_type':'beacon'});gtag('event','whatsapp_click',{'transport_type':'beacon'});}},true);
 // Conversao de FORMULARIO: helper, nao listener cego. Ate 25/08/2026 um
 // listener em document capturava QUALQUER submit, na fase de captura —
 // antes da validacao e antes de saber se a API aceitou. Na pratica:
