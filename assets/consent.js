@@ -22,13 +22,19 @@
     window.gtag('js', new Date());
     window.gtag('config', GA_ID, { anonymize_ip: true });
     attachEvents();
-    lumiedPageview();
   }
 
-  // ── Lumied: pageview do site → CRM (alimenta o score do lead pela mesma
-  // sessão). Chamado dentro de loadGA = só APÓS consentimento ('granted'),
-  // como o GA. Anônimo (só caminho + sessão), sem PII.
+  // ── Lumied: sessão + pageview do site → CRM ────────────────────────
+  // Roda no CARREGAMENTO, antes do banner. Até 14/09/2026 só saía dentro
+  // de loadGA (após "Aceitar todos"): 506 cliques pagos em 30 dias viraram
+  // 90 sessões no Lumied e a matrícula nunca voltava pro Google (OCI).
+  // Anônimo e first-party: caminho, id de sessão aleatório (sessionStorage,
+  // morre com a aba) e parâmetros da própria URL (utm/gclid). Finalidade
+  // funcional — atribuir o contato que a família mesma inicia no WhatsApp
+  // via "(ref: XXXX)". GA4 (cookies) continua atrás do consentimento.
   function lumiedPageview() {
+    if (window.__mbbgLumied) return;
+    window.__mbbgLumied = true;
     try {
       var LK = 'lumied_sessao';
       var sid = sessionStorage.getItem(LK);
@@ -196,6 +202,40 @@
     banner.innerHTML = '<p>Usamos cookies analíticos (Google Analytics) pra entender como o site é usado e melhorar a experiência. Você pode aceitar ou usar só os essenciais. Veja a <a href="/privacidade/">Política de Privacidade</a>.</p><div class="row"><button class="accept" onclick="window.mbbgConsent(\'granted\')">Aceitar todos</button><button class="reject" onclick="window.mbbgConsent(\'denied\')">Apenas essenciais</button></div>';
     document.body.appendChild(banner);
   }
+
+  // ── Marcador que SOBREVIVE ao pulo navegador→WhatsApp ──────────────
+  // gclid e utm morrem no salto pro app; o código curto da sessão viaja
+  // DENTRO da mensagem e o Lumied resolve sessão → gclid no primeiro
+  // contato (lib/wa/chegada-origem.ts + lp-atribuicao.ts). Mesmo esquema
+  // do site de Caxias (analytics.js › carimbar). Só o número da escola.
+  var WA_NUMERO = '5554999315480';
+  function refSessao() {
+    try {
+      var sid = sessionStorage.getItem('lumied_sessao');
+      return sid ? sid.replace(/-/g, '').slice(0, 8).toUpperCase() : '';
+    } catch (e) { return ''; }
+  }
+  function carimbar(url) {
+    var ref = refSessao();
+    if (!ref || !url || url.indexOf('ref%3A') > -1 || url.indexOf('(ref:') > -1) return url;
+    var i = url.indexOf('text=');
+    if (i < 0) return url + (url.indexOf('?') > -1 ? '&' : '?') + 'text=' + encodeURIComponent('Olá! Vim do site da Maple Bear Bento Gonçalves. (ref: ' + ref + ')');
+    var ini = i + 5;
+    var fim = url.indexOf('&', ini);
+    var valor = fim < 0 ? url.slice(ini) : url.slice(ini, fim);
+    if (!valor) return url;
+    var novo = valor + encodeURIComponent(' (ref: ' + ref + ')');
+    return url.slice(0, ini) + novo + (fim < 0 ? '' : url.slice(fim));
+  }
+  window.mbbgCarimbar = carimbar;
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest && e.target.closest('a[href*="wa.me/' + WA_NUMERO + '"]');
+    if (!link) return;
+    // Mutar o href durante o clique vale para a navegação que vem a seguir.
+    link.href = carimbar(link.href);
+  }, true);
+
+  lumiedPageview();
 
   try {
     var saved = localStorage.getItem(STORAGE_KEY);
