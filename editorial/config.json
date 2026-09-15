@@ -1,0 +1,13 @@
+{
+  "base_url": "https://maplebearbg.com.br",
+  "pasta": "diario",
+  "fotos": "assets/photos",
+  "campos_extras": ["capitulo", "conclusao_h2", "conclusao", "cta_p"],
+  "schema_extras": {
+    "capitulo": {"type": "string", "description": "etiqueta curta do tema, 1 ou 2 palavras (ex.: Matrícula, Rotina, Bilinguismo)"},
+    "conclusao_h2": {"type": "string", "description": "título da conclusão, começa com 'Conclusão:'"},
+    "conclusao": {"type": "string", "description": "HTML: um ou dois <p> que fecham com a ação (visitar)"},
+    "cta_p": {"type": "string", "description": "1 frase para o botão de visita, com o endereço Alameda Fenavinho, 168"}
+  },
+  "instrucao_extra": "O título vai como h1 e como titulo (iguais). A marca curta do title_tag é 'Maple Bear BG'."
+}
