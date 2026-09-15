@@ -13,7 +13,9 @@ Regras: um tema por artigo; antes de escrever, conferir em /diario/ que não exi
 4. Berçário em Bento Gonçalves: o que muda aos 18 meses e como é o Bear Care (busca: "berçário bento gonçalves")
 5. Pré-escola em Bento: o que a criança de 4 e 5 anos precisa ter antes do Year 1 (busca: "pré escola bento gonçalves")
 6. Escola de tempo integral em Bento Gonçalves: como é a tarde de verdade (busca: "escola de tempo integral")
+7. Senior kindergarten: o que a família quer saber quando busca isso (busca: "senior kindergarten" — 91 impressões, posição 8, do Search Console)
+8. Escolas particulares em bento gonçalves: o que a família quer saber quando busca isso (busca: "escolas particulares em bento gonçalves" — 30 impressões, posição 5, do Search Console)
 
 ## Feitos
 - 2026-09-15 — /diario/inscricao-creche-bento-goncalves-como-funciona/ (inscrição creche bento gonçalves)
-- 2026-09-15 — /diario/escolas-educacao-infantil-bento-goncalves-visita/ (Escolas de educação infantil em Bento Gonçalves: as 6 perguntas que se)
+- 2026-09-15 — /diario/escolas-educacao-infantil-bento-goncalves-visita/ (Escolas de educação infantil em Bento Gonçalves: as 6 perguntas — PR #2)
