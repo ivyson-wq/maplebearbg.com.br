@@ -113,6 +113,23 @@ def gerar(c):
     if url not in sm:
         entry = f"  <url>\n    <loc>{url}</loc>\n    <lastmod>{c['data']}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>\n"
         open(sm_path, "w", encoding="utf-8", newline="\n").write(sm.replace("</urlset>", entry + "</urlset>"))
+    # Card no índice /diario/ — sem isto o artigo nasce órfão (só o sitemap o conhece)
+    idx_path = os.path.join(REPO, "diario", "index.html")
+    idx = open(idx_path, encoding="utf-8").read()
+    marca = '<main class="grid">\n'
+    if f'href="{c["slug"]}/"' not in idx and marca in idx:
+        minutos = max(3, round(palavras / 200))
+        card = (
+            f'<a href="{c["slug"]}/" class="card">\n'
+            f'  <div class="card-cover"><span class="card-tag">Novo</span>'
+            f'<img src="/diario/{c["slug"]}/cover.jpg" alt="{c["titulo"]}" loading="lazy"></div>\n'
+            f'  <div class="card-body">\n'
+            f'    <h2 class="card-title">{c["titulo"]}</h2>\n'
+            f'    <p class="card-desc">{c["descricao"]}</p>\n'
+            f'    <div class="card-meta"><span>{minutos} min de leitura</span><span class="read-more">Ler →</span></div>\n'
+            f'  </div>\n</a>\n'
+        )
+        open(idx_path, "w", encoding="utf-8", newline="\n").write(idx.replace(marca, marca + card, 1))
     print("ok", url, palavras, "palavras")
 
 
