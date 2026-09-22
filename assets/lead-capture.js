@@ -42,8 +42,13 @@
     return node;
   }
 
+  // Landing pages do Google Ads marcam <body data-sem-popups>: sem banner
+  // injetado no topo (empurrava a página depois do carregamento = CLS) e sem
+  // pop-up de saída (intersticial no celular pesa na experiência da página).
+  var semPopups = document.body && document.body.hasAttribute('data-sem-popups');
+
   // ── 1. Sticky banner topo (Matrículas 2027) ───────────────────────
-  if (!sessionStorage.getItem('mb_banner_closed')) {
+  if (!semPopups && !sessionStorage.getItem('mb_banner_closed')) {
     var banner = el('div', { class: 'sticky-banner' });
     var inner = el('div', { class: 'sticky-banner-inner' });
     inner.appendChild(el('span', { class: 'sticky-banner-dot', 'aria-hidden': 'true' }));
@@ -106,7 +111,7 @@
     requestAnimationFrame(function () { overlay.classList.add('is-open'); });
   }
 
-  if (!localStorage.getItem('mb_exit_seen')) {
+  if (!semPopups && !localStorage.getItem('mb_exit_seen')) {
     var triggered = false;
     function showExitPopup() {
       if (triggered) return;
@@ -163,9 +168,14 @@
     var btn = form.querySelector('button[type="submit"]');
     var fb = findFeedback(form);
     var origem = form.getAttribute('data-origem') || 'newsletter-bg';
+    // data-origem vai para a API (lista fechada lá; valor fora dela vira
+    // 'site-visite', que é de Caxias). data-origem-lp só distingue a página
+    // na medição (generate_lead/Lead), sem mexer no que a API grava.
+    var origemMedida = form.getAttribute('data-origem-lp') || origem;
 
     var data = { origem: origem, canal: 'whatsapp' };
     new FormData(form).forEach(function (v, k) { data[k] = v; });
+    if (origemMedida !== origem) data.pagina = location.pathname;
     var utm = getUtm();
     Object.keys(utm).forEach(function (k) { if (!data[k]) data[k] = utm[k]; });
     if (data.company) { btn.disabled = true; return; } // honeypot
@@ -188,8 +198,8 @@
       if (r.ok && json.ok) {
         // Conversão do Ads + Enhanced Conversions, agora que a API confirmou.
         // (Antes o disparo vinha de um listener em document, no submit.)
-        if (window.mbFormLead) window.mbFormLead(form, origem);
-        if (window.trackLead) window.trackLead({ canal: 'form', origem: origem });
+        if (window.mbFormLead) window.mbFormLead(form, origemMedida);
+        if (window.trackLead) window.trackLead({ canal: 'form', origem: origemMedida });
         form.style.display = 'none';
         var ok = el('strong', { text: 'Recebemos seu pedido. 🍁' });
         ok.style.color = 'var(--maple, #b8112e)';
