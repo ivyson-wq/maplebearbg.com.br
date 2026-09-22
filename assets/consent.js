@@ -177,6 +177,7 @@
     try { localStorage.setItem(STORAGE_KEY, value); } catch (e) {}
     var banner = document.getElementById('mbbg-consent');
     if (banner) banner.remove();
+    document.body.classList.remove('mbbg-consent-open');
     if (value === 'granted') loadGA();
   }
   window.mbbgConsent = setConsent;
@@ -187,12 +188,15 @@
     location.reload();
   };
 
-  // No celular o banner fica no TOPO: embaixo ele cobria o botão flutuante
-  // do WhatsApp (.wa-float), principal CTA das campanhas do Google Ads.
+  // No celular o banner é uma faixa compacta EMBAIXO. No topo ele cobria o
+  // H1 e os botões de WhatsApp/agendar das landing pages do Google Ads até a
+  // pessoa responder; embaixo cobria o botão flutuante do WhatsApp. Por isso,
+  // enquanto está aberto, o .wa-float sobe a altura do banner (--mbbg-consent-h)
+  // e o body ganha o mesmo espaço no fim, para nada ficar escondido.
   function showBanner() {
     if (document.getElementById('mbbg-consent')) return;
     var css = document.createElement('style');
-    css.textContent = '#mbbg-consent{position:fixed;bottom:1.5rem;left:1.5rem;right:1.5rem;max-width:440px;margin-right:auto;background:#2A2522;color:#FBF7F0;padding:1.25rem 1.5rem;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.25);font-family:Spectral,Georgia,serif;font-size:.92rem;line-height:1.5;z-index:9999;animation:mbbgSlide .4s cubic-bezier(.2,.8,.2,1)}@keyframes mbbgSlide{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}#mbbg-consent p{margin:0 0 .85rem;color:rgba(251,247,240,.85)}#mbbg-consent a{color:#E84A5F;text-decoration:underline}#mbbg-consent .row{display:flex;gap:.5rem;flex-wrap:wrap}#mbbg-consent button{border:0;border-radius:999px;padding:.6rem 1.1rem;font:inherit;font-weight:600;font-size:.85rem;cursor:pointer;transition:transform .2s}#mbbg-consent button:hover{transform:translateY(-1px)}#mbbg-consent .accept{background:#C8102E;color:#FBF7F0}#mbbg-consent .reject{background:transparent;color:rgba(251,247,240,.85);border:1px solid rgba(251,247,240,.3)}@media(max-width:600px){#mbbg-consent{top:.75rem;bottom:auto;left:.75rem;right:.75rem;max-width:none;padding:.85rem 1rem;font-size:.85rem;line-height:1.4;animation-name:mbbgSlideTop}#mbbg-consent p{margin-bottom:.6rem}#mbbg-consent button{padding:.5rem .9rem;font-size:.8rem;flex:1}}@keyframes mbbgSlideTop{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}';
+    css.textContent = '#mbbg-consent{position:fixed;bottom:1.5rem;left:1.5rem;right:1.5rem;max-width:440px;margin-right:auto;background:#2A2522;color:#FBF7F0;padding:1.25rem 1.5rem;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.25);font-family:Spectral,Georgia,serif;font-size:.92rem;line-height:1.5;z-index:9999;animation:mbbgSlide .4s cubic-bezier(.2,.8,.2,1)}@keyframes mbbgSlide{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}#mbbg-consent p{margin:0 0 .85rem;color:rgba(251,247,240,.85)}#mbbg-consent a{color:#E84A5F;text-decoration:underline}#mbbg-consent .row{display:flex;gap:.5rem;flex-wrap:wrap}#mbbg-consent button{border:0;border-radius:999px;padding:.6rem 1.1rem;font:inherit;font-weight:600;font-size:.85rem;cursor:pointer;transition:transform .2s}#mbbg-consent button:hover{transform:translateY(-1px)}#mbbg-consent .accept{background:#C8102E;color:#FBF7F0}#mbbg-consent .reject{background:transparent;color:rgba(251,247,240,.85);border:1px solid rgba(251,247,240,.3)}@media(max-width:600px){#mbbg-consent{bottom:0;left:0;right:0;max-width:none;border-radius:14px 14px 0 0;padding:.7rem .9rem calc(.7rem + env(safe-area-inset-bottom));font-size:.8rem;line-height:1.35}#mbbg-consent p{margin-bottom:.5rem}#mbbg-consent button{padding:.5rem .8rem;font-size:.8rem;flex:1}body.mbbg-consent-open{padding-bottom:var(--mbbg-consent-h,0px)}body.mbbg-consent-open .wa-float{bottom:calc(var(--mbbg-consent-h,0px) + 12px)!important}}';
     document.head.appendChild(css);
 
     var banner = document.createElement('div');
@@ -201,6 +205,10 @@
     banner.setAttribute('aria-label', 'Aviso de cookies');
     banner.innerHTML = '<p>Usamos cookies analíticos (Google Analytics) pra entender como o site é usado e melhorar a experiência. Você pode aceitar ou usar só os essenciais. Veja a <a href="/privacidade/">Política de Privacidade</a>.</p><div class="row"><button class="accept" onclick="window.mbbgConsent(\'granted\')">Aceitar todos</button><button class="reject" onclick="window.mbbgConsent(\'denied\')">Apenas essenciais</button></div>';
     document.body.appendChild(banner);
+    var medir = function () { document.documentElement.style.setProperty('--mbbg-consent-h', banner.offsetHeight + 'px'); };
+    medir();
+    window.addEventListener('resize', medir, { passive: true });
+    document.body.classList.add('mbbg-consent-open');
   }
 
   // ── Marcador que SOBREVIVE ao pulo navegador→WhatsApp ──────────────
