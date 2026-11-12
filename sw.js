@@ -12,12 +12,13 @@
 //     tem, mostra página de erro inline (não a home).
 //  3. Bump de CACHE força invalidação completa do v1.
 
-const CACHE = 'mb-bg-v6';
+const CACHE = 'mb-bg-v7';
 const PRECACHE = [
   '/',
   '/styles.css',
   '/script.js',
   '/assets/tracking.js',
+  '/assets/mb-lead.js',
   '/assets/lead-capture.js',
   '/assets/brand/logo-lockup-compact.png',
   '/assets/brand/chinook-reading-iconic.png',

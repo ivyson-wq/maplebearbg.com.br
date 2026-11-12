@@ -136,7 +136,7 @@ function rewriteCaxiasToBG(text, slug) {
     // whatsapp numbers
     .replace(/5554999396742/g, WA_BG)
     .replace(/54\s*99939[-\s]?6742/g, '54 99931-5480')
-    // lead endpoint — desativa por enquanto (BG não tem backend de captura)
+    // endpoint de lead do Caxias é descartado: o BG usa o assets/mb-lead.js
     .replace(/https:\/\/insta-publisher\.vercel\.app\/api\/blog\/lead/g, '#lead-disabled')
     // strings duras
     .replace(/Família de Caxias/g, 'Família de Bento Gonçalves')
@@ -737,14 +737,15 @@ ${meta.publishedISO ? `<meta property="article:published_time" content="${meta.p
   ${meta.bodyHTML}
 
   <div class="lead-form" id="leadForm">
-    <h3>Quer receber conteúdo como esse?</h3>
+    <h3>Quer conversar com a gente?</h3>
     <p>Deixe seu nome e WhatsApp — abrimos uma conversa direta com você sobre a Maple Bear Bento Gonçalves.</p>
     <form id="leadFormEl" novalidate>
       <input type="text" name="nome" placeholder="Seu nome" required minlength="2">
       <input type="tel" name="telefone" placeholder="WhatsApp com DDD (ex: 54 9 9999-9999)" required>
-      <button type="submit">Falar pelo WhatsApp →</button>
+      <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+      <button type="submit">Enviar e falar com a equipe →</button>
     </form>
-    <p class="trust">🔒 Não armazenamos nada. Abre direto no WhatsApp da escola.</p>
+    <p class="trust">🔒 Seus dados vão só para a equipe da escola. Veja nossa <a href="/privacidade/">política de privacidade</a>.</p>
   </div>
 
   <div class="cta-box">
@@ -792,22 +793,7 @@ ${meta.publishedISO ? `<meta property="article:published_time" content="${meta.p
   </div>
 </footer>
 
-<script>
-  // Lead form → abre WhatsApp BG com mensagem pré-preenchida (sem backend)
-  (function () {
-    var form = document.getElementById('leadFormEl');
-    if (!form) return;
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var nome = (form.nome.value || '').trim();
-      var tel  = (form.telefone.value || '').trim();
-      if (nome.length < 2) { form.nome.focus(); return; }
-      var msg = 'Olá! Sou ' + nome + ' (' + tel + '). ' +
-                'Li o artigo "${meta.title.replace(/"/g, '\\"').replace(/'/g, "\\'")}" no Diário e gostaria de saber mais sobre a Maple Bear Bento Gonçalves.';
-      window.open('https://wa.me/${WA_BG}?text=' + encodeURIComponent(msg), '_blank', 'noopener');
-    });
-  })();
-</script>
+<script src="/assets/mb-lead.js" defer></script>
 
 </body>
 </html>

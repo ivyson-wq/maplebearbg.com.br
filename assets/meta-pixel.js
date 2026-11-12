@@ -1,7 +1,7 @@
 // ════════════════════════════════════════════════════════════════════
 // Maple Bear Bento Gonçalves — Meta Pixel (somente Meta, SEM GA4)
 // Para páginas que já têm gtag inline próprio e precisam só do Pixel.
-// Dispara PageView + Lead (no clique de WhatsApp) — espelha tracking.js.
+// Dispara PageView + Contact (no clique de WhatsApp). Lead é só de formulário (mbLead.medir).
 // ════════════════════════════════════════════════════════════════════
 (function () {
   'use strict';
@@ -14,9 +14,9 @@
     document,'script','https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', PIXEL_ID);
   fbq('track', 'PageView');
-  // Lead no clique de WhatsApp (mesma lógica do tracking.js)
+  // Clique de WhatsApp é Contact, não Lead (Lead = formulário confirmado pela API)
   document.addEventListener('click', function (e) {
-    var a = e.target && e.target.closest ? e.target.closest('a[href*="wa.me"]') : null;
-    if (a && window.fbq) fbq('track', 'Lead', { content_name: a.getAttribute('data-origem') || location.pathname });
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="wa.me/5554999315480"]') : null;
+    if (a && window.fbq) fbq('track', 'Contact', { content_name: a.getAttribute('data-origem') || location.pathname });
   }, { passive: true });
 })();
