@@ -118,13 +118,8 @@
         }
       }, true);
 
-      // Lead form submit (form.lead-form ou form#leadFormEl)
-      var leadForm = document.querySelector('form#leadFormEl, form.lead-form-el');
-      if (leadForm) {
-        leadForm.addEventListener('submit', function () {
-          track('lead_submit', { page_path: location.pathname });
-        });
-      }
+      // Envio de formulário NÃO é medido aqui: generate_lead/lead_material saem
+      // do mbLead (assets/mb-lead.js) só depois da resposta ok da API.
 
       // Scroll depth — 25 / 50 / 75 / 100
       var milestones = [25, 50, 75, 100];

@@ -46,23 +46,34 @@
     fbq('track', 'PageView');
   }
 
-  // ── Helper público pra trackear conversões ────────────────────────
+  // ── Helper público de medição ─────────────────────────────────────
+  // Eventos distintos, de propósito (nunca misturar):
+  //   • clique no WhatsApp  -> `whatsapp_click` (GA4) + `Contact` (Meta).
+  //     A conversão do Ads de WhatsApp sai do script inline da página.
+  //   • formulário confirmado pela API -> `generate_lead` + `Lead`, disparados
+  //     por mbLead.medir / mbFormLead (não por este helper).
+  //   • material/newsletter -> `lead_material`, fora do generate_lead.
   window.trackLead = function (params) {
     var data = params || {};
-    if (window.gtag) {
-      gtag('event', 'generate_lead', {
-        method: data.canal || 'whatsapp',
-        origem: data.origem || 'unknown'
-      });
+    var origem = data.origem || 'unknown';
+    if (data.canal === 'whatsapp') {
+      if (window.gtag) gtag('event', 'whatsapp_click', { origem: origem });
+      if (window.fbq) fbq('track', 'Contact', { content_name: origem });
+      return;
     }
-    if (window.fbq) {
-      fbq('track', 'Lead', { content_name: data.origem || 'site' });
+    if (data.material) {
+      if (window.gtag) gtag('event', 'lead_material', { origem: origem });
+      if (window.fbq) fbq('trackCustom', 'LeadMaterial', { content_name: origem });
+      return;
     }
+    if (window.gtag) gtag('event', 'generate_lead', { method: data.canal || 'form', origem: origem });
+    if (window.fbq) fbq('track', 'Lead', { content_name: origem });
   };
 
   // ── Track de cliques em WhatsApp automaticamente ──────────────────
+  // Só o número da escola (os botões "compartilhar" usam wa.me/?text=).
   document.addEventListener('click', function (e) {
-    var link = e.target.closest('a[href*="wa.me"]');
+    var link = e.target.closest('a[href*="wa.me/5554999315480"]');
     if (!link) return;
     window.trackLead({ canal: 'whatsapp', origem: link.getAttribute('data-origem') || 'wa-click' });
   }, { passive: true });

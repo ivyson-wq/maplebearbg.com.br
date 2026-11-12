@@ -1,32 +1,13 @@
 // ════════════════════════════════════════════════════════════════════
 // Maple Bear Bento Gonçalves — Lead capture widgets
 // Sticky banner + Newsletter form + Exit-intent popup
+// Envio, validação e feedback ficam no assets/mb-lead.js (window.mbLead):
 // POST cross-origin pra /api/visit-lead do Caxias (CORS configurado)
 // ════════════════════════════════════════════════════════════════════
 
 (function () {
   'use strict';
-  var API_ENDPOINT = 'https://maplebearcaxiasdosul.com.br/api/visit-lead';
   var WA_URL = 'https://wa.me/5554999315480';
-
-  // ── UTM/gclid: persiste atribuição de campanha entre páginas ───────
-  var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'gclid'];
-  try {
-    var _p = new URLSearchParams(location.search);
-    var _found = {};
-    UTM_KEYS.forEach(function (k) { var v = _p.get(k); if (v) _found[k] = String(v).slice(0, 120); });
-    if (Object.keys(_found).length) sessionStorage.setItem('mb_utm', JSON.stringify(_found));
-  } catch (err) { /* sessionStorage indisponível */ }
-
-  function getUtm() {
-    var out = {};
-    try { out = JSON.parse(sessionStorage.getItem('mb_utm') || '{}') || {}; } catch (err) { out = {}; }
-    try {
-      var p = new URLSearchParams(location.search);
-      UTM_KEYS.forEach(function (k) { var v = p.get(k); if (v) out[k] = String(v).slice(0, 120); });
-    } catch (err) { /* noop */ }
-    return out;
-  }
 
   function el(tag, attrs, children) {
     var node = document.createElement(tag);
@@ -47,8 +28,10 @@
   // pop-up de saída (intersticial no celular pesa na experiência da página).
   var semPopups = document.body && document.body.hasAttribute('data-sem-popups');
 
+  function bannerFechado() { try { return !!sessionStorage.getItem('mb_banner_closed'); } catch (e) { return false; } }
+
   // ── 1. Sticky banner topo (Matrículas 2027) ───────────────────────
-  if (!semPopups && !sessionStorage.getItem('mb_banner_closed')) {
+  if (!semPopups && !bannerFechado()) {
     var banner = el('div', { class: 'sticky-banner' });
     var inner = el('div', { class: 'sticky-banner-inner' });
     inner.appendChild(el('span', { class: 'sticky-banner-dot', 'aria-hidden': 'true' }));
@@ -65,7 +48,7 @@
     var closeBtn = el('button', { class: 'sticky-banner-close', 'aria-label': 'Fechar banner', text: '×' });
     closeBtn.addEventListener('click', function () {
       banner.remove();
-      sessionStorage.setItem('mb_banner_closed', '1');
+      try { sessionStorage.setItem('mb_banner_closed', '1'); } catch (e) { /* bloqueado */ }
     });
     inner.appendChild(closeBtn);
     banner.appendChild(inner);
@@ -87,11 +70,7 @@
     }));
     box.appendChild(el('h3', { id: 'exit-popup-title', text: 'Antes de você ir...' }));
 
-    var p = el('p');
-    p.appendChild(document.createTextNode('Receba nosso guia '));
-    p.appendChild(el('strong', { text: '"22 perguntas pra fazer numa escola bilíngue"' }));
-    p.appendChild(document.createTextNode(' direto no seu WhatsApp. Sem custo, sem spam.'));
-    box.appendChild(p);
+    box.appendChild(el('p', { text: 'Deixe seu nome e WhatsApp e a equipe da Maple Bear Bento Gonçalves entra em contato.' }));
 
     var form = el('form', { class: 'exit-popup-form', 'data-origem': 'exit-intent-bg' });
     form.appendChild(el('input', { type: 'text', name: 'nome', placeholder: 'Seu nome', required: '', autocomplete: 'name' }));
@@ -100,7 +79,7 @@
     var honeypot = el('input', { type: 'text', name: 'company', tabindex: '-1', autocomplete: 'off', 'aria-hidden': 'true' });
     honeypot.style.cssText = 'position:absolute;left:-9999px';
     form.appendChild(honeypot);
-    form.appendChild(el('button', { type: 'submit', class: 'btn btn-primary', text: 'Quero receber o guia' }));
+    form.appendChild(el('button', { type: 'submit', class: 'btn btn-primary', text: 'Quero falar com a equipe' }));
     form.appendChild(el('p', { class: 'exit-popup-fb', role: 'status', 'aria-live': 'polite' }));
     form.addEventListener('submit', handleSubmit);
     box.appendChild(form);
@@ -111,20 +90,21 @@
     requestAnimationFrame(function () { overlay.classList.add('is-open'); });
   }
 
-  if (!semPopups && !localStorage.getItem('mb_exit_seen')) {
+  // Só em computador: no celular não existe "saída do mouse" e o gatilho de
+  // rolar para cima atrapalhava a leitura (intersticial no celular).
+  function jaViuSaida() { try { return !!localStorage.getItem('mb_exit_seen'); } catch (e) { return false; } }
+  var podeSaida = !semPopups && !jaViuSaida() && !(window.mbLead && window.mbLead.celular());
+  if (podeSaida) {
     var triggered = false;
-    function showExitPopup() {
+    var showExitPopup = function () {
       if (triggered) return;
       triggered = true;
-      localStorage.setItem('mb_exit_seen', String(Date.now()));
+      try { localStorage.setItem('mb_exit_seen', String(Date.now())); } catch (e) { /* bloqueado */ }
       buildExitPopup();
-    }
-    document.addEventListener('mouseleave', function (e) { if (e.clientY < 10) showExitPopup(); });
-    var maxScroll = 0;
-    window.addEventListener('scroll', function () {
-      maxScroll = Math.max(maxScroll, window.scrollY);
-      if (maxScroll > 800 && window.scrollY < 200) showExitPopup();
-    }, { passive: true });
+    };
+    document.addEventListener('mouseleave', function (e) {
+      if (e.clientY < 10 && !(window.mbLead && window.mbLead.celular())) showExitPopup();
+    });
   }
 
   // ── 3. Newsletter inline form (id=newsletter-form se presente) ────
@@ -138,83 +118,37 @@
     function (f) { f.addEventListener('submit', handleSubmit); }
   );
 
-  // Procura o elemento de feedback dentro do form OU como irmão (newsletter-fb
-  // costuma ficar fora do <form> no markup atual).
-  function findFeedback(form) {
-    return form.querySelector('.exit-popup-fb, .newsletter-fb')
-      || (form.parentNode && form.parentNode.querySelector('.exit-popup-fb, .newsletter-fb'))
-      || null;
-  }
+  // ── Handler compartilhado (mbLead.tratar) ──────────────────────────
+  // data-origem é o que vai para a API. Landings trazem data-origem-lp
+  // (lp-<pagina>), que passa a ser a origem detalhada. Home (newsletter) e
+  // pop-up de saída são "interesse" e não contam como conversão de formulário.
+  var MATERIAL = /^(newsletter|exit-intent)/;
+  var GUIA = '/materiais/22-perguntas/';
 
-  function showFeedbackBox(fb, kind, lines) {
-    if (!fb) return;
-    fb.textContent = '';
-    fb.style.cssText = 'margin-top:1rem;padding:0.9rem 1.1rem;border-left:3px solid '
-      + (kind === 'success' ? 'var(--maple, #b8112e)' : '#c00')
-      + ';background:' + (kind === 'success' ? 'rgba(184,17,46,0.08)' : 'rgba(204,0,0,0.06)')
-      + ';color:' + (kind === 'success' ? '#1a1814' : '#8a0d22')
-      + ';border-radius:4px;line-height:1.5;font-size:0.95rem;';
-    lines.forEach(function (line, i) {
-      if (i > 0) fb.appendChild(el('br'));
-      if (typeof line === 'string') fb.appendChild(document.createTextNode(line));
-      else fb.appendChild(line);
-    });
-  }
-
-  // ── Shared submit handler ──────────────────────────────────────────
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
+    var L = window.mbLead;
     var form = e.target;
-    var btn = form.querySelector('button[type="submit"]');
-    var fb = findFeedback(form);
-    var origem = form.getAttribute('data-origem') || 'newsletter-bg';
-    // data-origem vai para a API (lista fechada lá; valor fora dela vira
-    // 'site-visite', que é de Caxias). data-origem-lp só distingue a página
-    // na medição (generate_lead/Lead), sem mexer no que a API grava.
-    var origemMedida = form.getAttribute('data-origem-lp') || origem;
-
-    var data = { origem: origem, canal: 'whatsapp' };
-    new FormData(form).forEach(function (v, k) { data[k] = v; });
-    if (origemMedida !== origem) data.pagina = location.pathname;
-    var utm = getUtm();
-    Object.keys(utm).forEach(function (k) { if (!data[k]) data[k] = utm[k]; });
-    if (data.company) { btn.disabled = true; return; } // honeypot
-
-    btn.disabled = true;
-    var oldText = btn.textContent;
-    btn.textContent = 'Enviando...';
-
-    try {
-      // roteia o lead pro tenant do BG (o /api/visit-lead do Caxias resolve o
-      // tenant pelo slug) + liga a sessão do pixel (comportamento no site → score)
-      data.escola = 'maplebearbg';
-      try { data.sessao = sessionStorage.getItem('lumied_sessao') || undefined; } catch (e) {}
-      var r = await fetch(API_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-      var json = await r.json();
-      if (r.ok && json.ok) {
-        // Conversão do Ads + Enhanced Conversions, agora que a API confirmou.
-        // (Antes o disparo vinha de um listener em document, no submit.)
-        if (window.mbFormLead) window.mbFormLead(form, origemMedida);
-        if (window.trackLead) window.trackLead({ canal: 'form', origem: origemMedida });
-        form.style.display = 'none';
-        var ok = el('strong', { text: 'Recebemos seu pedido. 🍁' });
-        ok.style.color = 'var(--maple, #b8112e)';
-        showFeedbackBox(fb, 'success', [
-          ok,
-          'Vamos te chamar no WhatsApp em até um dia útil para conversar sem compromisso.'
-        ]);
-      } else { throw new Error(json.error || 'Erro'); }
-    } catch (err) {
-      btn.disabled = false;
-      btn.textContent = oldText;
-      showFeedbackBox(fb, 'error', [
-        'Não conseguimos enviar agora. Tente novamente ou nos chame direto no WhatsApp.'
-      ]);
+    if (!L) return;
+    var bruta = form.getAttribute('data-origem') || 'newsletter-bg';
+    var lp = form.getAttribute('data-origem-lp');
+    var origem = lp || bruta;
+    if (!lp && bruta === 'site-visite-bg') {
+      var pag = location.pathname.split('/').filter(Boolean)[0];
+      if (pag) origem = 'lp-' + pag.replace(/[^a-z0-9-]/gi, '').toLowerCase();
     }
+    var material = MATERIAL.test(bruta);
+    L.tratar(form, {
+      origem: origem,
+      material: material,
+      extras: material ? function (box) {
+        box.appendChild(document.createTextNode(' Enquanto isso, veja o checklist '));
+        var a = el('a', { href: GUIA, text: '22 perguntas para visitar uma escola bilíngue' });
+        a.style.cssText = 'text-decoration:underline;color:inherit;';
+        box.appendChild(a);
+        box.appendChild(document.createTextNode('.'));
+      } : null
+    });
   }
 
 })();
