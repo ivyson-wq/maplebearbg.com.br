@@ -389,6 +389,18 @@ document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e
 window.mbFormLead=function(f,origem){try{var ud={},em=f&&f.querySelector&&f.querySelector('input[type="email"],input[name="email"]'),tel=f&&f.querySelector&&f.querySelector('input[type="tel"],input[name="telefone"],input[name="tel"]');if(em&&em.value)ud.email=em.value.trim().toLowerCase();if(tel&&tel.value){var d=tel.value.replace(/\D/g,'').replace(/^0+/,'');if(d.length>=10){if(d.indexOf('55')===0&&d.length>11)d=d.slice(2);ud.phone_number='+55'+d;}}if(ud.email||ud.phone_number)gtag('set','user_data',ud);}catch(x){}gtag('event','conversion',{'send_to':'AW-17559914719/LNWXCK-zlb0cEN-RnLVB','transport_type':'beacon'});gtag('event','generate_lead',{'transport_type':'beacon','origem':origem||'form'});};
 </script>
   <script src="/assets/meta-pixel.js" defer></script>
+<style id="lp-cta-band-css">
+.lp-cta-band{margin:2.5rem 0;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;background:#fff;border:1px solid rgba(204,18,22,.14);border-left:6px solid var(--maple);border-radius:14px;padding:clamp(1.25rem,1rem + 1.5vw,2rem);box-shadow:var(--shadow-soft)}
+.lp-cta-band-title{font-family:var(--font-display);font-size:clamp(1.4rem,1.2rem + 1vw,1.9rem);line-height:1.15;margin:0;color:var(--ink)}
+.lp-cta-band-text{margin:.5rem 0 0;color:var(--ink-soft);font-size:1rem;line-height:1.55}
+.lp-cta-band-actions{display:flex;flex-direction:column;gap:.6rem;flex-shrink:0}
+.lp-cta-band-actions .btn{justify-content:center;white-space:nowrap}
+.lp-cta-band--forte{background:linear-gradient(135deg,var(--maple-deep),var(--maple));border-color:transparent}
+.lp-cta-band--forte .lp-cta-band-title,.lp-cta-band--forte .lp-cta-band-text{color:#fff}
+.lp-cta-band--forte .btn-primary{background:#fff;color:var(--maple-deep)}
+.lp-cta-band--forte .btn-ghost{color:#fff;border-color:rgba(255,255,255,.75)}
+@media (max-width:760px){.lp-cta-band{flex-direction:column;align-items:stretch}.lp-cta-band-actions .btn{width:100%;white-space:normal}}
+</style>
 </head>
 <body data-sem-popups>
 
@@ -411,10 +423,10 @@ window.mbFormLead=function(f,origem){try{var ud={},em=f&&f.querySelector&&f.quer
   <h1>Escola infantil em Bento Gonçalves, <em>bilíngue e acolhedora</em></h1>
   <p class="lead">Procurando uma escola infantil em Bento Gonçalves? A Maple Bear recebe crianças de 18 meses a 5 anos numa escola infantil particular e bilíngue, com método canadense, turmas pequenas e uma equipe que chama cada criança pelo nome.</p>
   <div class="hero-cta">
-    <a href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Quero%20saber%20sobre%20a%20escola%20infantil%20da%20Maple%20Bear%20Bento%20Gon%C3%A7alves." class="btn" target="_blank" rel="noopener">Falar no WhatsApp</a>
-    <a href="#agendar" class="btn btn-ghost">Agendar visita</a>
+    <a href="#agendar" class="btn btn-primary">Agendar minha visita →</a>
+    <a href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20de%20escola%20infantil%20no%20site%20e%20quero%20agendar%20uma%20visita." class="btn btn-ghost" target="_blank" rel="noopener">Tirar dúvidas no WhatsApp</a>
   </div>
-  <p class="hero-assure"><span class="dot" aria-hidden="true"></span> Atendimento de segunda a sexta, das 8h às 19h</p>
+  <p class="hero-assure"><span class="dot" aria-hidden="true"></span> Visita sem compromisso, num dia comum de aula · Matrículas 2027 abertas</p>
   <figure class="hero-photo"><picture><source type="image/webp" srcset="/assets/photos/welcome-entrance-480.webp 480w, /assets/photos/welcome-entrance-800.webp 800w" sizes="(max-width: 800px) calc(100vw - 2rem), 760px"><img src="/assets/photos/welcome-entrance.jpg" width="800" height="533" alt="Professora e crianças de uniforme Maple Bear na entrada da escola, em Bento Gonçalves" decoding="async"></picture></figure>
 </section>
 
@@ -447,6 +459,17 @@ window.mbFormLead=function(f,origem){try{var ud={},em=f&&f.querySelector&&f.quer
 <h3>Segurança</h3>
 <p>Portaria controlada com identificação de quem entra e quem sai, CFTV monitorado e um ambiente projetado para crianças pequenas, com cantos arredondados, materiais não tóxicos e espaços abertos para a equipe ver tudo.</p>
 
+
+<aside class="lp-cta-band" aria-label="Agendar visita">
+  <div class="lp-cta-band-copy">
+    <p class="lp-cta-band-title">O jeito mais seguro de escolher é ver a rotina acontecendo.</p>
+    <p class="lp-cta-band-text">Venha num dia comum de aula: veja as turmas, os espaços e converse com a equipe pedagógica.</p>
+  </div>
+  <div class="lp-cta-band-actions">
+    <a href="#agendar" class="btn btn-primary">Quero agendar minha visita →</a>
+    <a href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20de%20escola%20infantil%20no%20site%20e%20quero%20agendar%20uma%20visita." class="btn btn-ghost" target="_blank" rel="noopener">Perguntar no WhatsApp</a>
+  </div>
+</aside>
 <h2>Escola bilíngue infantil: <em>inglês como meio, não como matéria</em></h2>
 <p>Numa escola infantil bilíngue de verdade, o inglês não é uma aula na semana. Na Maple Bear, metade do dia acontece em inglês e metade em português, desde os 18 meses. A criança aprende as duas línguas do mesmo jeito que aprendeu a primeira: vivendo. O currículo é canadense, desenvolvido para a primeira infância, e cumpre integralmente a BNCC.</p>
 <p>A Maple Bear é a maior rede de escolas canadenses do mundo, presente em mais de 30 países e com mais de 1.100 escolas no Brasil, onde está há 25 anos. Em Bento Gonçalves, a escola funciona desde 2025.</p>
@@ -482,6 +505,17 @@ window.mbFormLead=function(f,origem){try{var ud={},em=f&&f.querySelector&&f.quer
 <figure class="testi"><blockquote>A coordenação conhece meu filho pelo nome, sabe do que ele gosta, e me chama quando precisa conversar.</blockquote><figcaption><strong>Família Maple Bear</strong> · Mãe de aluno · Senior Kindergarten</figcaption></figure>
 </div>
 
+
+<aside class="lp-cta-band lp-cta-band--forte" aria-label="Agendar visita">
+  <div class="lp-cta-band-copy">
+    <p class="lp-cta-band-title">Matrículas 2027 abertas, com vagas limitadas.</p>
+    <p class="lp-cta-band-text">Conheça a escola num dia comum de aula e tire todas as dúvidas com a equipe. Sem compromisso.</p>
+  </div>
+  <div class="lp-cta-band-actions">
+    <a href="#agendar" class="btn btn-primary">Quero agendar minha visita →</a>
+    <a href="https://wa.me/5554999315480?text=Ol%C3%A1!%20Vi%20a%20p%C3%A1gina%20de%20escola%20infantil%20no%20site%20e%20quero%20agendar%20uma%20visita." class="btn btn-ghost" target="_blank" rel="noopener">Perguntar no WhatsApp</a>
+  </div>
+</aside>
 <section class="faq" aria-labelledby="faq-title">
 <h2 id="faq-title">Dúvidas de quem busca <em>escola infantil</em></h2>
 <details><summary>A partir de que idade a escola infantil atende?</summary><p>A partir de <strong>18 meses</strong>, no Bear Care, até o Senior Kindergarten (5 anos).</p></details>
