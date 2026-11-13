@@ -145,9 +145,15 @@
   </url>
   <url>
     <loc>https://maplebearbg.com.br/diario/</loc>
-    <lastmod>2026-11-10</lastmod>
+    <lastmod>2026-11-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://maplebearbg.com.br/diario/matematica-bilingue-stem-criancas/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://maplebearbg.com.br/diario/autonomia-crianca-educacao-bilingue/</loc>
